@@ -1,4 +1,4 @@
-use <../threads/isothreads.scad>
+use <../threads/threads.scad>
 //Global rendering vars
 $fa = 1;
 $fs = 0.4;
@@ -31,11 +31,14 @@ threadStart=1;
 //number of ridges on cap
 ridges=25;
 //number of facets on thread and ridges
-smoothness=(precision==1)?4:((precision==2)?6:20); 
+smoothness=(precision==1)?4:((precision==2)?6:50); 
 //number of thread segments in asingle turn
 facets=(precision==1)?6:((precision==10)?20:50);
 segments=facets*threadTurns;
-$fn=max(20,facets);
+
+//Do not use $fn
+//$fn=max(20,facets);
+$fn=0;
 
 topThickness = 20;
 
