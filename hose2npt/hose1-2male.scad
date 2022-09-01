@@ -1,4 +1,4 @@
-use <../threads/threads.scad>
+use <../threads/isothreads.scad>
 //Global rendering vars
 $fa = 1;
 $fs = 0.4;
@@ -11,7 +11,7 @@ difference () {
   union () {
     // Hex outside
     translate([0,0,0.01]) // For no fake ceiling
-      cylinder(d=40, h=9.25+3.175+3, $fn=6); 
+      cylinder(d=40, h=9.25+3.175+3, $fn=6);
     translate([0,0,9.25+3.175+3])
       // Tapered.  Example -- pipe size 1/2" -- per:
       // http://www.engineeringtoolbox.com/npt-national-pipe-taper-threads-d_750.html
@@ -25,11 +25,10 @@ difference () {
   // https://pickhose.com/garden-hose-thread-vs-npt/
   translate([0,0,0])
    english_thread (diameter=1+1/16+1/32, threads_per_inch=11.5, length=3/8);
-  
+
   translate([0,0,0])
     cylinder(d=12,h=9.25+3.175+3+19.05+0.01);
-        
+
   // mask out most stuff...to create a test nut
   //cube([50,50,2*(19.05+3.175)],center=true);
 }
-

@@ -1,4 +1,4 @@
-use <threads.scad>
+use <isothreads.scad>
 
 // Tapered.  Example -- pipe size 1/2" -- per:
 // http://www.engineeringtoolbox.com/npt-national-pipe-taper-threads-d_750.html

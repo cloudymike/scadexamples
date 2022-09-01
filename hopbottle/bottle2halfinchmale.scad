@@ -1,4 +1,4 @@
-use <../threads/threads.scad>
+use <../threads/isothreads.scad>
 //Global rendering vars
 $fa = 1;
 $fs = 0.4;
@@ -9,29 +9,29 @@ echo (str ("Overextrusion in inch: ", OE_inch));
 
 
 //1=rough, 2=test; 3=final
-precision=3; 
+precision=3;
 //thickness of the cap
-wallThickness=2; 
+wallThickness=2;
 //inner diameter of cap, excluding thread (i.e. outer diameter of neck plus threads)
-innerDiameter=28; 
+innerDiameter=28;
 //inner depth of cap
-innerDepth=9.78; 
+innerDepth=9.78;
 //thread pitch (inter-thread pitch if multiple)
-threadPitch=3; 
+threadPitch=3;
 //thread depth
-threadDepth=1.5; 
+threadDepth=1.5;
 //thread width
-threadWidth=1.5; 
+threadWidth=1.5;
 //number of turns per thread
-threadTurns=2; 
+threadTurns=2;
 //number of threads
-threads=1; 
+threads=1;
 //start of thread from cap bottom
-threadStart=1; 
+threadStart=1;
 //number of ridges on cap
 ridges=25;
 //number of facets on thread and ridges
-smoothness=(precision==1)?4:((precision==2)?6:50); 
+smoothness=(precision==1)?4:((precision==2)?6:50);
 //number of thread segments in asingle turn
 facets=(precision==1)?6:((precision==10)?20:50);
 segments=facets*threadTurns;
@@ -78,7 +78,7 @@ module cap () {
 union()
 {
   capThread();
-  
+
   difference()
   {
     //cap body
@@ -87,8 +87,8 @@ union()
       //outside
       translate([0,0,innerDepth/2+wallThickness])
       cylinder(h=innerDepth,r=(innerDiameter)/2+wallThickness,center=true);
-      
-      
+
+
       //top edge
       translate([0,0,wallThickness])
       rotate_extrude(convexity = 10)
@@ -109,8 +109,8 @@ union()
     circle(r = wallThickness/2, $fn = smoothness);
   }
 
-  
-  //top 
+
+  //top
   translate([0,0,wallThickness/2])cylinder(h=wallThickness,r=innerDiameter/2,center=true);
   //translate([0,0,-topThickness/2])cylinder(h=topThickness,r=innerDiameter/2,center=true);
   //ridges
@@ -131,7 +131,7 @@ union()
 difference () {
     union () {
         cap();
-    
+
         rotate([180,0,0])
           // Tapered.  Example -- pipe size 1/2" -- per:
           // http://www.engineeringtoolbox.com/npt-national-pipe-taper-threads-d_750.html
@@ -139,6 +139,4 @@ difference () {
     }
     translate([0,0,-50])
         cylinder(d=12,h=100);
-}           
-
-        
+}
