@@ -1,0 +1,5 @@
+*.stl
+*.gcode
+*.cx3d
+*.tmp
+dumplicate.csv
