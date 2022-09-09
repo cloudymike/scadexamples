@@ -1,0 +1,3 @@
+ECHO: "baseplate size:", 104.9, 68.1, 5
+ECHO: "PCB standoff distance:", 73.7
+ECHO: "PCP standoff from edge:", 15.6

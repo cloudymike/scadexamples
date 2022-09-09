@@ -1,0 +1,13 @@
+ECHO: "topbox size:", 104.9, 68.1, 33
+ECHO: "Inside size:", 99.9, 63.1, 28
+ECHO: "Side wall width:", 2.5
+ECHO: "Top wall width:", 7.5
+ECHO: "OLED center", 22.73, -5.05
+ECHO: "OLED left edge from box edge", 61.48
+ECHO: "OLED bottom edge from box edge", 31.6
+ECHO: "Looking at outside, plate at bottom"
+ECHO: "usb right edge from box edge", 29.32
+ECHO: "usb bottom edge from bottom edge", 17
+ECHO: "Looking at outside, plate at bottom"
+ECHO: "jack center from box right edge", 46.12
+ECHO: "jack center from bottom edge", 12
