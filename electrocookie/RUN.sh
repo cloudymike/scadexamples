@@ -4,11 +4,11 @@
 #    poor mans diff
 set -e
 echo "=========== Base plate ==========="
-openscad -o baseplate.stl baseplate.scad |& tee baseplate.tmp
-diff baseplate.ref baseplate.tmp
+openscad -o baseplate_example.stl baseplate_example.scad |& tee baseplate_example.tmp
+diff baseplate_example.ref baseplate_example.tmp
 
 echo "=========== Top box ==========="
-openscad -o topbox.stl topbox.scad |& tee topbox.tmp
-diff topbox.ref topbox.tmp
+openscad -o topbox_example.stl topbox_example.scad |& tee topbox_example.tmp
+diff topbox_example.ref topbox_example.tmp
 
 echo Rendering OK
