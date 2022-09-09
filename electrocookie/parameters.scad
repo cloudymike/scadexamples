@@ -1,12 +1,4 @@
-// Case for Halfsize Electrocookie board
-// Parameters for include to keep them same for top and bottom.
-// Provide parameters for different electrocookie boards
-// Default to halfsize.
 // All sizes in mm (even though it is mostly inch based board)
-
-//TODO, this should be modulerized
-//For now keep the vars in an include file
-
 
 //Global rendering vars
 $fa = 1;

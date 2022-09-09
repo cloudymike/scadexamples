@@ -4,7 +4,10 @@ use <knurlpocket.scad>
 use <MCAD/boxes.scad>
 
 
-
+//================Variables=========================
+//Define type of electrocookie board
+// full, half, mini
+//=======================================================
 module baseplate(
     board_version
     )
