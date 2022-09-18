@@ -28,8 +28,8 @@ module canning_jar_lid (jar_size="narrow") {
                             
     //d_nominal = 83.2;     // Estimate for wide mouth, *slightly* snug but works fine.
     
-    d_wide = 83.3;     //  *** USE THIS ONE FOR WIDE ***
-                       //         Wide mouth, if I were going to do it again.
+    //d_wide = 83.3;     //  *** USE THIS ONE FOR WIDE ***
+    d_wide = 83.4;     //         Wide mouth, if I were going to do it again.
     
     d_nominal = jar_size == "narrow" ? d_narrow : d_wide;
      
