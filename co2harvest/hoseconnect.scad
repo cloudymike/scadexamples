@@ -20,7 +20,7 @@ Hose_Adaptor(
     // Length (top)
     length_2 = 11,
     // Middle Diameter
-    mid_diameter = 14,
+    mid_diameter = 12,
     // Middle Length
     mid_length = 3
 );
