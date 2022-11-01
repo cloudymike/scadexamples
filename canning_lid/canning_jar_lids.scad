@@ -15,6 +15,8 @@ use <round_threads.scad>
 
 module canning_jar_lid (jar_size="narrow") {
     
+    fast_computer = false;   // Simplify to save compute time
+    
     thread = 3;             // Thread diameter
     
     // According to Wikipedia, the outside diameter is 70 mm (86 mm for wide mouth) 
@@ -29,7 +31,8 @@ module canning_jar_lid (jar_size="narrow") {
     //d_nominal = 83.2;     // Estimate for wide mouth, *slightly* snug but works fine.
     
     //d_wide = 83.3;     //  *** USE THIS ONE FOR WIDE ***
-    d_wide = 83.4;     //         Wide mouth, if I were going to do it again.
+    //d_wide = 83.4;     // Wide mouth, if I were going to do it again.
+    d_wide = 83.8;       // Wide mout
     
     d_nominal = jar_size == "narrow" ? d_narrow : d_wide;
      
@@ -38,8 +41,9 @@ module canning_jar_lid (jar_size="narrow") {
     pitch = 0.25 * 25.4;  // Thread pitch
     thread_length = 16;   // Length of threaded section
     thickness = 1;        // Wall thickness 
+    top_thickness = 1;        // Wall thickness 
     rounding = 3;         // Bevel radius 
-    total_height = thread_length + thickness;
+    total_height = thread_length + top_thickness;
     
     rotate([180,0,0])
     translate([0,0,-total_height])
@@ -50,9 +54,32 @@ module canning_jar_lid (jar_size="narrow") {
                 sphere(r = rounding, $fa=5, $fs=0.2);
                 translate([0, 0, rounding])
                     // The default faceting works nicely for making the lid easy to grip
-                    cylinder(r = d * 0.5 + thickness, h = thread_length + thickness - 2* rounding);
+                    cylinder(r = d * 0.5 + thickness, h = thread_length + top_thickness - 2* rounding);
             }
             round_threads(diam = d, thread_diam = thread, pitch = pitch, thread_length = thread_length, groove = true, num_starts = 1);
+        }
+    }
+    
+    // ridges
+    // It will take a lot of CPU to calculate, so only use if you have the power
+    if (fast_computer) {
+        ridges = 25;
+        ridge_diameter = 2 * thickness;
+        Diameter = d+2*ridge_diameter+2*thickness;
+        wallThickness = thickness;
+        innerDepth = thread_length + top_thickness - 2 * rounding;
+        smoothness = 20;
+        for(ridge=[0:ridges-1])
+        {
+            hull()
+            {
+              rotate([0,0,360/ridges*ridge])
+              translate([Diameter/2,0,rounding+ridge_diameter/2])
+              sphere(r=ridge_diameter,$fn=smoothness);
+              rotate([0,0,360/ridges*ridge])
+              translate([Diameter/2,0,innerDepth+rounding-ridge_diameter/2])
+              sphere(r=ridge_diameter,$fn=smoothness);
+            }
         }
     }
 }  
