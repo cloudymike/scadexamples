@@ -11,4 +11,5 @@ difference() {
     }
     translate([hole_offset,0,-0.1]) cylinder(d=10,h=900);
     translate([-hole_offset,0,-0.1]) cylinder(d=13.5,h=900);
+    translate([-hole_offset,0,2.5]) cylinder(d=22,h=900);
 }

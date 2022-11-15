@@ -6,7 +6,7 @@ $fs = 0.4;
 hole_offset = 20;
 difference() {
     union () {
-        canning_jar_lid("wide");
+        sealed_lid("wide");
         translate([hole_offset,0,0]) cylinder(d=14,h=150);
         translate([-hole_offset,0,0]) cylinder(d=14,h=10);
     }
