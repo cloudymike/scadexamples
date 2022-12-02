@@ -17,8 +17,12 @@ module stake(h=100,b=10,w=2) {
 }
 
 thread_depth=10;
+disk_depth = 3;
+disk_radius = 14;
+
 stakethread(thread_depth);
-translate([0,0,thread_depth]) stake(100,8,2);
+translate([0,0,thread_depth]) cylinder(r=disk_radius,h=disk_depth);
+translate([0,0,thread_depth+disk_depth]) stake(100,disk_radius,2);
 
 
 
