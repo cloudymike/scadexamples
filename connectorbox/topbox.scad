@@ -61,7 +61,7 @@ module plug093tile()
     translate([0,0,0]) cube([5,10,wall_depth+0.01],center=true);
   }
   // Connectors
-  translate([0,-3,-14.0]) rotate([0,0,90]) plug();
+  rotate([0,0,180]) translate([0,-3,-14.0]) rotate([0,0,90]) plug();
 }
 
 
@@ -71,7 +71,7 @@ module topbox(
     )
 {
     top_height = 25;
-    top_length = wall_depth*2 + fancount*tilesize + coolercount*tilesize + tilesize;
+    top_length = wall_depth*2 + fancount*tilesize + coolercount*tilesize + 3*tilesize;
     
     top_width = tilesize+2*wall_depth;
     echo("topbox size:",top_length,top_width,top_height);
@@ -81,10 +81,6 @@ module topbox(
     inside_width = top_width-2*wall_depth;
     inside_height = top_height-wall_depth;
     inside_offset = wall_depth/2+0.01;
-    echo("Inside size:",inside_length,inside_width,inside_height);
-    echo("Side wall width:",(top_length-inside_length)/2);
-    echo("Top wall width:",top_height - inside_height);
-
 
     difference() {
     union() {
@@ -100,9 +96,21 @@ module topbox(
     }
 
     // Connector tiles
-    fan_start = tile_start;
+    input_start = tile_start;
+    
+    translate([-input_start,0,-(top_height-wall_depth)/2])
+      rotate([180,0,0]) 
+        plug062tile();
+   
+    translate([-input_start+tilesize,0,-(top_height-wall_depth)/2])
+      rotate([180,0,0]) 
+        plug093tile();
+   
+    fan_start = input_start-2*tilesize;
     for (tile=[0:fancount-1]) {
-      translate([tile*tilesize-fan_start,0,-(top_height-wall_depth)/2]) rotate([180,0,0]) recep062tile();
+      translate([tile*tilesize-fan_start,0,-(top_height-wall_depth)/2])
+        rotate([180,0,0]) 
+          recep062tile();
     }
 
     cooler_start = fan_start-fancount*tilesize;
