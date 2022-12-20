@@ -18,8 +18,8 @@
 // preview[view:north, tilt:top diagonal]
 
 // Customizer parameters
-switch                          = "noswitch";   // [noswitch:No Switch, switch:With Switch]
-tealight_diameter               = 37.5;         // [33.0:0.5:100.0]
+switch                          = "switch";   // [noswitch:No Switch, switch:With Switch]
+tealight_diameter               = 33;         // [33.0:0.5:100.0]
 tealight_height                 = 14.65;        // [14.65:0.05:35.0]
 led_holder_outer_diameter       = 8.0;          // [8.0:0.1:13]
 nozzle_diameter                 = 0.4;          // [0.05:0.05:2.0];
