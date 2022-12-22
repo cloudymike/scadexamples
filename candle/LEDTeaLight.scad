@@ -41,9 +41,9 @@ switchRetainerBlockDimensions	= [ switchMainBodyDimensions[0] + switchRetainerBo
 
 topRingThickness				= switchMainBodyDimensions[1];
 baseHeight						= tealight_height - topRingThickness;
-cr2032HolderDiameter			= 22.5;
-cr2032HolderBlockWidth			= 8.0;
-cr2032HolderBlockDepth			= 2.5;
+cr2032HolderDiameter			= 23.5;
+cr2032HolderBlockWidth			= 6.5;
+cr2032HolderBlockDepth			= 5.2;
 cr2032HolderLeadDiameter		= 1.8;
 cr2032HolderLead1Pos			= [-(cr2032HolderDiameter / 2 - 2.75), 0, 0];
 cr2032HolderLead2Pos			= [cr2032HolderLead1Pos[0] + 20, cr2032HolderLead1Pos[1], cr2032HolderLead1Pos[2]];
