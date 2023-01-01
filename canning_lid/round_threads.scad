@@ -36,7 +36,7 @@ if (groove == false) {
     difference() {
         cylinder(r = 0.5*diam, h = thread_length, $fa = 5, $fs = 0.2*thread_diam);
         helix(diam = diam, thread_diam = thread_diam, pitch = pitch, thread_length = thread_length, num_starts = num_starts);   
-    }
+    }canning_jar_lid("narrow");
 } 
 
 // Create the helical thread by combining multiple stubby cylinders
@@ -71,3 +71,5 @@ module helix(diam, thread_diam , pitch, thread_length, num_starts) {
 }
 
 }
+
+round_threads();
