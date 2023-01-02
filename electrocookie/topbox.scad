@@ -166,3 +166,10 @@ include <parameters.scad>
 //Size of electrocookie board for testing
 //Do not include in design
 //roundedBox(size=[board_length,board_width,1],radius=5.1,sidesonly=true);
+
+topbox(
+    board_version="half",
+    display_pin1_row = 23,
+    jack_pin1_row = 16,
+    ESP32_pin1_column = "B"
+);
