@@ -18,7 +18,7 @@ include <parameters.scad>
     base_length = box_length;
     base_width = box_width;
     echo("baseplate size:",base_length,base_width,base_height);
-    
+
     //base plate
     difference() {
       //cube([base_length,base_width,base_height],center=true);
@@ -39,13 +39,13 @@ include <parameters.scad>
         -base_width/2+corner_screw_distance,
         0.001])
         m3knurl_pocket();
-    
+
     }
-    
-    
+
+
     //top knurdle holder for PCB standoff
     echo("PCB standoff distance:",m3_hole_distance);
-    if (m3_hole_distance * 2 < base_length) { 
+    if (m3_hole_distance * 2 < base_length) {
         translate([(m3_hole_distance),0,5])
             m3knurl_ring();
         translate([-(m3_hole_distance),0,5])
@@ -53,8 +53,8 @@ include <parameters.scad>
         translate([0,0,5])
             m3knurl_ring();
         echo("PCP standoff from edge:", (base_length-2*m3_hole_distance)/2);
-        
-    } 
+
+    }
     else {
         translate([(m3_hole_distance/2),0,5])
             m3knurl_ring();
@@ -64,3 +64,7 @@ include <parameters.scad>
     }
 }
 
+// Example instantiation
+baseplate(
+    board_version="full"
+);

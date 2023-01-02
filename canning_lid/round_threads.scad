@@ -71,3 +71,5 @@ module helix(diam, thread_diam , pitch, thread_length, num_starts) {
 }
 
 }
+
+round_threads();
