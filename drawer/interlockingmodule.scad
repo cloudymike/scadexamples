@@ -180,5 +180,32 @@ union(){
   }
 }
 
+// Cutout to make sure the actual box with groves is properly printed
+// Use this with difference() to remove trim internal to fit the box.
+module negativeBox(
+    //Box Width in units
+    BoxWidthUnits = 3,
+    //Box Length in units
+    BoxLengthUnits = 3,
+    //Box Height in mm
+    BoxHeight = 120,
+    //Box unit size in mm. This defines the size of 1 'unit' for your box.
+    BoxUnits = 40,
+)
+{
+    difference () {
+        translate([-5,-3,0])
+        cube([BoxLengthUnits*BoxUnits+8,BoxWidthUnits*BoxUnits+8,BoxHeight]);
 
-interlockingbox(2,2,40);
+    translate([0.5,2,0])
+        cube([BoxLengthUnits*BoxUnits-2.5,BoxWidthUnits*BoxUnits-2.5,BoxHeight]);
+    }
+}
+
+interlockingbox(2,3,40);
+
+// This will create a sliver of a wall if working properly
+//difference() {
+//    interlockingbox(2,3,40);
+//    negativeBox(2,3,40);
+//}
