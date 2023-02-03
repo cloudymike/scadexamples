@@ -28,10 +28,10 @@ translate([BoxLengthUnits*BoxUnits/2,0,0])
             length=BoxLengthUnits*BoxUnits, 
             heigth=BoxHeight, 
             width=BoxWidthUnits*BoxUnits, 
-            windings=5, 
+            windings=4, 
             steps=10, 
-            wireDiameter=0.7, 
-            fn=4
+            wireDiameter=1, 
+            fn=40
         );
 
 /**
