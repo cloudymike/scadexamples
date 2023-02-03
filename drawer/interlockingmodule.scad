@@ -18,7 +18,13 @@ module interlockingbox(
     //Box Length in units
     BoxLengthUnits = 3,
     //Box Height in mm
-    BoxHeight = 120
+    BoxHeight = 120,
+    //Box Floor Thickness in mm
+    BoxFloor = 2,
+    //North Wall open or closed
+    NorthWallOpen = 0, // [0:Closed, 1:Open]
+    //South Wall open or closed
+    SouthWallOpen = 0 // [0:Closed, 1:Open]
 )
 {
 echo(version=version(2.0));
@@ -30,18 +36,12 @@ BoxWidth = BoxWidthUnits * BoxUnits;
 BoxLength = BoxLengthUnits * BoxUnits;
 //Box Wall Thickness in mm
 BoxWall = 1;
-//Box Floor Thickness in mm
-BoxFloor = 2;
 //Fit Factor. Greater factor = looser fit
 FitFactor = 0.18;  // [0:0.05:0.4]
 //RoundedBottom = "EW"; // [EW:East-West, NS:North-South]
 RoundedBottom = ""; // [EW:East-West, NS:North-South]
 
 /* [Walls] */
-//North Wall open or closed
-NorthWallOpen = 0; // [0:Closed, 1:Open]
-//South Wall open or closed
-SouthWallOpen = 0; // [0:Closed, 1:Open]
 
 /* [Dovetail] */
 //Dovetail inside length in mm
@@ -169,11 +169,11 @@ union(){
         cube([BoxLength-(2*BoxWall)-DTWidth, (BoxWidth-(2*BoxWall)-DTWidth), BoxHeight]);
 
     if (NorthWallOpen)
-        translate([-DTWidth*(1+FitFactor+FitFactor),BoxWall+DTWidth,BoxFloor], center=false)
+        translate([-DTWidth*(1+FitFactor+FitFactor),BoxWall+DTWidth,BoxFloor])
             cube([BoxWall+(DTWidth*(1+FitFactor+FitFactor)), (BoxWidth-(2*BoxWall)-DTWidth), BoxHeight]);    
 
     if (SouthWallOpen)
-        translate([BoxLength-(BoxWall)-DTWidth,BoxWall+DTWidth,BoxFloor], center=false)
+        translate([BoxLength-(BoxWall)-DTWidth,BoxWall+DTWidth,BoxFloor])
             cube([BoxWall+DTWidth, (BoxWidth-(2*BoxWall)-DTWidth), BoxHeight]);
 
     }
