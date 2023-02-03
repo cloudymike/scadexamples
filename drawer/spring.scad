@@ -1,7 +1,7 @@
 use <interlockingmodule.scad>
 use <applesocket.scad>
 
-BoxHeight=10;
+BoxHeight=20;
 
 BoxUnits=40;
 BoxWidthUnits=1;
@@ -22,12 +22,12 @@ interlockingbox(
     SouthWallOpen = 1 // [0:Closed, 1:Open]
 );
 
-translate([BoxLengthUnits*BoxUnits/2,0,0])
+translate([BoxLengthUnits*BoxUnits/2,2.2,0])
     rotate([0,0,90]) 
         springSine3D(
-            length=BoxLengthUnits*BoxUnits, 
+            length=BoxLengthUnits*BoxUnits-2.7, 
             heigth=BoxHeight, 
-            width=BoxWidthUnits*BoxUnits, 
+            width=BoxWidthUnits*BoxUnits-2, 
             windings=4, 
             steps=10, 
             wireDiameter=1, 
