@@ -2,7 +2,8 @@
 // http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode
 //
 // Author: Jetty, 10th December, 2015
-// Parametric Candle Hat For LED Tea Light
+// Parametric Candle Hat For LED Tea Light (https://www.thingiverse.com/thing:1188098)
+// Updated by cloudymike for https://www.thingiverse.com/thing:525799
 //
 
 // preview[view:north, tilt:top diagonal]
