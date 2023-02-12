@@ -1,5 +1,4 @@
 use <interlockingmodule.scad>
-use <acsocketbox.scad>
 
 // AA battery holder
 // Tries to pack as many as possible based on tile size

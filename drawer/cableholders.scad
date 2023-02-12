@@ -1,5 +1,7 @@
 use <interlockingmodule.scad>
 
+$fn=120;
+
 height=75;
 
 BoxUnits=40;
@@ -23,18 +25,18 @@ module cabletile(x=38,y=38,z=75) {
   newZ=max(z,20);
   difference() {
     cube([x,y,newZ],center=true);
-    translate([-9,-9,0])
+    translate([-9,-10,0])
       cylinder(r=8,h=newZ,center=true);
-    translate([9,-9,0])
+    translate([9,-10,0])
       cylinder(r=8,h=newZ,center=true);
-    translate([0,9,0])
+    translate([0,10,0])
       cube([16,16,newZ],center=true);
 
-    translate([-9,9,0])
+    translate([-9,10,0])
       cylinder(r=8,h=newZ,center=true);
-    translate([9,9,0])
+    translate([9,10,0])
       cylinder(r=8,h=newZ,center=true);
-    translate([0,-9,0])
+    translate([0,-10,0])
       cube([16,16,newZ],center=true);
 
  }
