@@ -5,7 +5,7 @@ height=13;
 
 BoxUnits=40;
 BoxWidthUnits=3;
-BoxLengthUnits=5;
+BoxLengthUnits=3;
 
 interlockingbox(BoxWidthUnits,BoxLengthUnits,height);
 
