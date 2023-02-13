@@ -4,12 +4,15 @@ IGNOREFILES="./electrocookie/parameters.scad"
 
 for FILE in $(find -name \*.scad)
 do
+    DIR="$(dirname "${FILE}")"  
+    BASE="$(basename "${FILE}")"
+    pushd ${DIR} &> /dev/null
     if echo $IGNOREFILES | grep -wq $FILE
     then
       echo "Skipping $FILE"
     else
-      echo "Testing $FILE"
-      STLFILE="${FILE%.*}.stl"
+      echo "Testing $BASE in $DIR"
+      STLFILE="${BASE%.*}.stl"
       openscad -o $STLFILE $FILE
       if [ "$?" != "0" ]
       then
@@ -17,5 +20,6 @@ do
           exit 1
       fi
     fi
+    popd &> /dev/null
 done
 echo "All file passed"
