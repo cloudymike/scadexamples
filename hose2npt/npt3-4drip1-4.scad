@@ -1,5 +1,5 @@
 use <../threads/isothreads.scad>
-use <../Hose_Adaptor/Hose_Adaptor_Module.scad>
+use <../Hose_Adaptor/hose_adaptor_module.scad>
 
 //Global rendering vars
 //$fa = 1;
