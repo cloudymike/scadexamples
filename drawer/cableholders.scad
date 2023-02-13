@@ -2,7 +2,7 @@ use <interlockingmodule.scad>
 
 $fn=120;
 
-height=75;
+height=120;
 
 BoxUnits=40;
 BoxWidthUnits=1;
