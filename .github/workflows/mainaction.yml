@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Show version
-        run: echo 4
+        run: echo 5
 
       - name: Show info
         run: |
@@ -41,4 +41,4 @@ jobs:
           sudo apt-get install openscad
 
       - name: Run test
-        run: source minitest.sh
+        run: source test.sh
