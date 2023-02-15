@@ -33,5 +33,5 @@ jobs:
       - name: Install stuff
         run: |
           lsb_release -a
-          apt-get update
-          apt-get install openscad
+          sudo apt-get update
+          sudo apt-get install openscad
