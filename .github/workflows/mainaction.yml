@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Show version
-        run: echo 3
+        run: echo 4
 
       - name: Show info
         run: |
@@ -41,4 +41,4 @@ jobs:
           sudo apt-get install openscad
 
       - name: Run test
-        run: openscad -o /tmp/tmp.stl potfoot/smallcrockpot.scad
+        run: source minitest.sh
