@@ -1,5 +1,4 @@
 use <interlockingmodule.scad>
-use <applesocket.scad>
 
 BoxHeight=20;
 
@@ -23,14 +22,14 @@ interlockingbox(
 );
 
 translate([BoxLengthUnits*BoxUnits/2,2.2,0])
-    rotate([0,0,90]) 
+    rotate([0,0,90])
         springSine3D(
-            length=BoxLengthUnits*BoxUnits-2.7, 
-            heigth=BoxHeight, 
-            width=BoxWidthUnits*BoxUnits-2, 
-            windings=4, 
-            steps=10, 
-            wireDiameter=1, 
+            length=BoxLengthUnits*BoxUnits-2.7,
+            heigth=BoxHeight,
+            width=BoxWidthUnits*BoxUnits-2,
+            windings=4,
+            steps=10,
+            wireDiameter=1,
             fn=40
         );
 
@@ -39,21 +38,21 @@ translate([BoxLengthUnits*BoxUnits/2,2.2,0])
 */
 module line3D(start, end,d=1,h=10, fn=4) {
   hull() {
-    translate(start) cylinder(h=h, d=d, $fn = fn);    
-    translate(end) cylinder(h=h, d=d, $fn = fn);    
-  }      
+    translate(start) cylinder(h=h, d=d, $fn = fn);
+    translate(end) cylinder(h=h, d=d, $fn = fn);
+  }
 }
 
 /**
 * 3d Spring with a sinusoidal shape
-*/ 
+*/
 module springSine3D(length=20, heigth=10, width=10, windings=4, steps=10, wireDiameter=0.7, fn=4){
     dx = length / (360 * windings);
     for(i = [steps : steps : 360 * windings]){
         x0 = (i-steps) * dx;
         y0 = sin(i-steps) * width/2;
         x = i * dx;
-        y = sin(i) * width/2;        
-        line3D([x0,y0,0],[x,y,0],d=wireDiameter,h=heigth, fn=fn);  
+        y = sin(i) * width/2;
+        line3D([x0,y0,0],[x,y,0],d=wireDiameter,h=heigth, fn=fn);
     }
 }
