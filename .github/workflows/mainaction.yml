@@ -26,11 +26,19 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Show version
+        run: echo 5
+
+      - name: Show info
+        run: |
+          lsb_release -a
+          pwd
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Install stuff
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          sudo apt-get update
+          sudo apt-get install openscad
+
+      - name: Run test
+        run: source test.sh

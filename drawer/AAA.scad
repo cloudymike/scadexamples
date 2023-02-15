@@ -1,5 +1,4 @@
 use <interlockingmodule.scad>
-use <acsocketbox.scad>
 
 // AAA battery holder
 // Tries to pack as many as possible based on tile size
@@ -29,7 +28,7 @@ interlockingbox(
     //Box Floor Thickness in mm
     BoxFloor = height+0.01
 );
-  
+
 for (x=[interval/2:interval:BoxUnits*BoxLengthUnits-diameter/2-WallAdjust])
     for (y=[interval/2+2*WallAdjust:interval:BoxUnits*BoxWidthUnits-diameter/2])
         translate([x,y,height/2+2]) cylinder(d=diameter,h=height+2,center=true);

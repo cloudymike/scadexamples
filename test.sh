@@ -4,7 +4,7 @@ IGNOREFILES="./electrocookie/parameters.scad"
 
 for FILE in $(find -name \*.scad)
 do
-    DIR="$(dirname "${FILE}")"  
+    DIR="$(dirname "${FILE}")"
     BASE="$(basename "${FILE}")"
     pushd ${DIR} &> /dev/null
     if echo $IGNOREFILES | grep -wq $FILE
@@ -13,7 +13,7 @@ do
     else
       echo "Testing $BASE in $DIR"
       STLFILE="${BASE%.*}.stl"
-      openscad -o $STLFILE $BASE
+      openscad -o $STLFILE --hardwarnings $BASE
       if [ "$?" != "0" ]
       then
           echo "FAIL: $FILE"
