@@ -27,11 +27,18 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Show version
-        run: echo 2
+        run: echo 3
+
+      - name: Show info
+        run: |
+          lsb_release -a
+          pwd
 
       # Runs a set of commands using the runners shell
       - name: Install stuff
         run: |
-          lsb_release -a
           sudo apt-get update
           sudo apt-get install openscad
+
+      - name: Run test
+        run: source minitest.sh
