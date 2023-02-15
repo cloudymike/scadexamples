@@ -41,4 +41,4 @@ jobs:
           sudo apt-get install openscad
 
       - name: Run test
-        run: source minitest.sh
+        run: openscad -o /tmp/tmp.stl potfoot/smallcrockpot.scad
