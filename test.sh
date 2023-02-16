@@ -13,7 +13,7 @@ do
     else
       echo "Testing $BASE in $DIR"
       STLFILE="${BASE%.*}.stl"
-      openscad -o $STLFILE --hardwarnings $BASE
+      openscad -o $STLFILE --hardwarnings -D '$fn=2' $BASE
       if [ "$?" != "0" ]
       then
           echo "FAIL: $FILE"
