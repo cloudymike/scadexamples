@@ -12,8 +12,8 @@ interval = 12.5;
 diameter=10.2+2*OverExtrusion;
 
 BoxUnits=40;
-BoxWidthUnits=3;
-BoxLengthUnits=3;
+BoxWidthUnits=1;
+BoxLengthUnits=1;
 
 WallAdjust = 1;
 
