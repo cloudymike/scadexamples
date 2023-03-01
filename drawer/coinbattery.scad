@@ -53,4 +53,4 @@ module BatteryHole(y,count, HoleDiameter, HoleHeight) {
 }
 
 
-CoinBatteryTile("CR1632");
+CoinBatteryTile("CR2025");
