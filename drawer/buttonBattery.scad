@@ -7,7 +7,7 @@ use <interlockingmodule.scad>
 $fn=120;
 OverExtrusion = 0.2;
 
-height=14;
+height=8;
 interval = 16.5;
 diameter=14.2+2*OverExtrusion;
 
@@ -29,15 +29,17 @@ difference () {
     //Box Floor Thickness in mm
     BoxFloor = height+0.01
 );
-  for (count = [0:6])
-     CR2032cell(count*5+5,count);
+  for (count = [0:4])
+     buttoncell(count*7+6);
 
 }
-translate([1,3,height ]) linear_extrude(1) text("CR2032",size=3,font="Liberation Sans:style=Bold");
+translate([16.5,3,height ]) linear_extrude(1) text("357",size=3,font="Liberation Sans:style=Bold");
 
 
-module CR2032cell(y=0,count=0) {
-  x = (count % 2 == 1 ) ? 12:28;
-  translate([x,y,11]) rotate([90,0,0]) cylinder(d=20.4,h=3.65,center=true);
-  translate([x,y,13]) rotate([90,0,0]) cube([20.4,4,3.65],center=true);
+module buttoncell(y=0)
+{
+  translate([10,y,7]) rotate([90,0,0]) cylinder(d=12,h=5.8,center=true);
+  translate([10,y,7]) rotate([90,0,0]) cube([12,2,5.8],center=true);
+  translate([30,y,7]) rotate([90,0,0]) cylinder(d=12,h=5.8,center=true);
+  translate([30,y,7]) rotate([90,0,0]) cube([12,2,5.8],center=true);
 }
