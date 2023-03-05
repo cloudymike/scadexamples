@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IGNOREFILES="./electrocookie/parameters.scad"
+IGNOREFILES="./electrocookie/parameters.scad ./drawer/TOUL.scad"
 
 for FILE in $(find -name \*.scad)
 do
