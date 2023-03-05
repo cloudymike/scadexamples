@@ -1,5 +1,6 @@
 #!/bin/bash
 LIBRARYDIR=$HOME/.local/share/OpenSCAD/libraries
+mkdir -p ${LIBRARYDIR}
 
 
 # Install BOLS library
