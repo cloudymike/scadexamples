@@ -60,9 +60,11 @@
 //   metric_thread (diameter=34, pitch=1, length=10, internal=true, n_starts=6);
 //}
 
-
+// If $fn is 0 use $fs 50
+// If $fn is set for testing use $fn for resolution
+echo("$fn:",$fn);
 // ----------------------------------------------------------------------------
-function segments (diameter) = min ($fs, ceil (diameter*6));
+function segments (diameter) = min (($fn < 0.01) ? 50 : 2, ceil (diameter*6));
 
 
 // ----------------------------------------------------------------------------
