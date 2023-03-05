@@ -39,9 +39,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install openscad
+          sudo apt-get install parallel
 
       - name: Setup libraries
         run: source librarysetup.sh
 
       - name: Run test
-        run: source test.sh
+        run: source testparallel.sh
