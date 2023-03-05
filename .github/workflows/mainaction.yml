@@ -40,5 +40,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install openscad
 
+      - name: Setup libraries
+        run: source librarysetup.sh
+
       - name: Run test
         run: source test.sh
