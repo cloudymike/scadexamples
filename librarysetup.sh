@@ -11,11 +11,12 @@ tar xvzf v${BOSLVERSION}.tar.gz
 rm -f v${BOSLVERSION}.tar.gz
 rm -rf BOSL
 mv BOSL-${BOSLVERSION} BOSL
-
+popd
 
 #Debugging info
 echo "Home is ${HOME}"
+echo "OPENSCAD library directory:"
 ls -l ${LIBRARYDIR}
 echo "OPENSCAD directory:"
 ls -l $HOME/.local/share/OpenSCAD
-openscad --info
+#openscad --info
