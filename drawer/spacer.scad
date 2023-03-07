@@ -5,7 +5,7 @@ use <interlockingmodule.scad>
 $fn=120;
 OverExtrusion = 0.2;
 
-height=2;
+height=5;
 interval = 12.5;
 diameter=10.2+2*OverExtrusion;
 
