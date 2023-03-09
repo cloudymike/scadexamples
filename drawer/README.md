@@ -18,21 +18,21 @@ The idea is simple, just make something fit into one (or several) tiles. Please 
 This section is a description of the differnt tiles that (so far) I have created. The headlines
 refer to scad files, just add .scad to the name.
 
-##9v
+## 9v
 For 9 volt batteries. Each 40mmx40mm tile can hold 2 batteries.
 
-#AA
+## AA
 This tile is for AA batteries. The layout algoritm is done to pack as many batteries as possible
 into a tile. Thus a 3x3 tiles (120x120mm) may have more batteries than 9 1x1 tiles.
 
-#AAA
+##  AAA
 Same as AA but, you guessed it, for AAA batteries.
 
-##applepower
+## applepower
 Apple provides a slide in power plug for their power supply and it if you travel you can get 
 a collection of these for different counties. This tile allow you to save the plugs on a tile.
 
-##bigcableholders
+## bigcableholders
 A 40x40mm tile that has a big hole to hold a fairly large USB (or other) cable. The holder is 120mm high, that worked for me and my drawer but is customizable.
 
 ## buttonBattery
@@ -60,6 +60,9 @@ Uses threads module: https://www.thingiverse.com/thing:1938150
 
 ## phones.scad
 This provides slots for something like an iphone or an ipad, based on the with of the tile you create.
+
+## plugconverter
+This is for my collection of international converter plugs. The tile is a US standard plug, that all my converter plugs has as a "socket". I can put my converters nicely upside down into this tile.
 
 ## spacer
 Most likely you will not be able to tile things out perfectly in your drawer. Thus the spacers.  They allow you to create an inexpensive (5mm tall) tile that will fill up the space, and thus hold in place, your other tiles.
