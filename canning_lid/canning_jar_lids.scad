@@ -1,3 +1,4 @@
+
 // A threaded lid for a standard narrow mouth home canning jar (Ball, Mason, etc.)
 // Dependency:  round_threads.scad
 
@@ -105,3 +106,4 @@ module sealed_lid(jar_size="wide")
         }
     }
 }
+canning_jar_lid ();
