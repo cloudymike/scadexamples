@@ -4,7 +4,7 @@ $fn = 100*1;
 
 Hose_Adaptor(
     // Outer Diameter (bottom)
-    outer_diameter_1 = 9.6,
+    outer_diameter_1 = 9.8,
     // Wall Thickness (bottom)
     wall_thickness_1 = 2,
     // Rib Thickness (bottom), set to Zero to remove
