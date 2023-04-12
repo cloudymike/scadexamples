@@ -4,17 +4,25 @@ use<interlockingmodule.scad>
 //  - try newer version of (2021) of opensca
 //  - Problem is in lenscap model, find another
 
+$fn=64;
+$fa=1;
+
+height = 16.6;
+
 difference() {
-  interlockingbox(2,2,12.5,12.5);
-  translate([40,40,1])cylinder(d=50,h=12);
+  interlockingbox(2,2,height,height);
+  translate([40,40,1])cylinder(d=60,h=height);
 }
 
 
 
-translate([40,40,11.1]) 
+translate([10,10,0]) 
 import(
-  "/home/mikael/3dprint/LensCaps/Pentax_K_Rear_Cap.stl",
+  "/home/mikael/3dprint/LensCaps/PK-mount_rear_lenscap.STL",
   convexity=3,
-  $fn=120
+  $fa=1
 );
 
+bump_radius=2;
+translate([6,56,height-bump_radius/3])
+sphere(r=bump_radius);
