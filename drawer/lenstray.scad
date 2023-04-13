@@ -11,7 +11,7 @@ height = 16.6;
 
 difference() {
   interlockingbox(2,2,height,height);
-  translate([40,40,1])cylinder(d=60,h=height);
+  translate([41,41,1])cylinder(d=50,h=height);
 }
 
 
