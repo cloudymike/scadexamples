@@ -1,5 +1,9 @@
 use <interlockingmodule.scad>
-use <../batterytravelcase/battery_holder_quad_aa.scad>
+
+// Using the battery travel case simplified model
+// Adding 0.4 mm
+// Creating a diff with a standard tile 
+
 
 $fn=120;
 
