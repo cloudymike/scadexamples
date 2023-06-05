@@ -3,14 +3,14 @@
 // (c) December 2014 
 // please refer the complete license here: http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode
 
-use <write/Write.scad>
+use <../write/Write.scad>
 
 /* [Size] */
 // unit of measurement 
 unit=1.0; // [1.0:ml, 16.387064:cubic inch (international inch), 28.4130625:imperial fluid ounce (Imp.fl.oz.), 29.5735295625: US fluid ounce (US fl.oz.)]
 
 // capacity of the cup
-volume=100;
+volume=15;
 
 
 label1_text="";
