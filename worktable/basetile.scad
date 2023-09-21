@@ -1,26 +1,18 @@
 
+// Current data: 22h and 240g of PLA
 
-//this section defines a module for creating a "rounded" bottom to the box, useful when storing small parts
-module RoundBottom(width, length, height){    
-    translate([0,length,0])rotate([90,0,0])
-    linear_extrude(length, center=false)
-    
-    difference() {
-        translate([-width/2,0,0])square([width,height/2],center=false);
-        translate([0,height/2,0])resize([width,height]) circle(d=width*10);
-    }
-}
+$fa = 1;
+$fs = 0.4;
 
-
-module interlockingbox(
+module dovetile(
     //Box Width in units
-    BoxWidthUnits = 3,
+    BoxWidthUnits = 2,
     //Box Length in units
-    BoxLengthUnits = 3,
+    BoxLengthUnits = 2,
     //Box Height in mm
-    BoxHeight = 120,
+    BoxHeight = 16,
     //Box Floor Thickness in mm
-    BoxFloor = 2,
+    BoxFloor = 16,
     //North Wall open or closed
     NorthWallOpen = 0, // [0:Closed, 1:Open]
     //South Wall open or closed
@@ -31,7 +23,7 @@ echo(version=version(2.0));
 //comments: Version 2 adds anti-"elephant foot" scaling at bottom of dovetail sections
 /* [Size] */
 //Box unit size in mm. This defines the size of 1 'unit' for your box.
-BoxUnits = 40;
+BoxUnits = 100;
 BoxWidth = BoxWidthUnits * BoxUnits;
 BoxLength = BoxLengthUnits * BoxUnits;
 //Box Wall Thickness in mm
@@ -45,11 +37,11 @@ RoundedBottom = ""; // [EW:East-West, NS:North-South]
 
 /* [Dovetail] */
 //Dovetail inside length in mm
-DTInsideLength = 1.1;
+DTInsideLength = 10.5;
 //Dovetail angle in degrees
 DTAngle = 45;
 //Dovetail width in mm
-DTWidth = 1.5;
+DTWidth = 7.5;
 
 /* [Hidden] */
 //This helps calculate the length of the 'long' side of the dovetail
@@ -60,19 +52,6 @@ DTShape = [[0,0],[DTInsideLength/2,0],[DTInsideLength/2+DTx,DTWidth],[-DTInsideL
 
 
 union(){
-    //creates and transforms rounded bottom
-    if (RoundedBottom=="EW") {
-    translate([0,(BoxWidth/2)+BoxWall,BoxFloor])
-    rotate([0,0,-90])
-    RoundBottom(BoxWidth-DTWidth-(BoxWall),BoxLength-DTWidth-BoxWall,2*(BoxHeight-BoxFloor));
-    }
-
-    //creates rounded bottom oriented North-South
-    if (RoundedBottom=="NS") {
-    translate([(BoxLength/2)-BoxWall,DTWidth+BoxWall/2,BoxFloor])
-    rotate([0,0,0])
-    RoundBottom(BoxLength-DTWidth-(BoxWall),BoxWidth-DTWidth-BoxWall,2*(BoxHeight-BoxFloor));
-    }
 
     //Creates main box,without round bottom
     difference(){
@@ -180,32 +159,36 @@ union(){
   }
 }
 
-// Cutout to make sure the actual box with groves is properly printed
-// Use this with difference() to remove trim internal to fit the box.
-module negativeBox(
-    //Box Width in units
-    BoxWidthUnits = 3,
-    //Box Length in units
-    BoxLengthUnits = 3,
-    //Box Height in mm
-    BoxHeight = 120,
-    //Box unit size in mm. This defines the size of 1 'unit' for your box.
-    BoxUnits = 40,
-)
-{
-    difference () {
-        translate([-5,-3,0])
-        cube([BoxLengthUnits*BoxUnits+8,BoxWidthUnits*BoxUnits+8,BoxHeight]);
+module basetile() {
+  
+  //This needs to be broken out as variables
+  tilecountx=2;
+  tilecounty=2;
+  tilez=16;
+  
+  tilex = tilecountx * 105;
+  tiley = tilecounty * 105;
+  
+  //Fit the rod
+  holediameter=6.7;
+  
+  //For enough strength, and also matching Cura wall
+  //Start with cura wall size
+  curawalltopbottom=0.8;
+  curainternalwall=0.4;
+  wallmin=curawalltopbottom+curainternalwall;
+  
+  tileheight=tilez;
+  
+  //Offset holes to match wallmin from top/bottom wall
+  holeoffset=tileheight/2-holediameter/2-wallmin;
 
-    translate([0.5,2,0])
-        cube([BoxLengthUnits*BoxUnits-2.5,BoxWidthUnits*BoxUnits-2.5,BoxHeight]);
-    }
+  
+  difference () {
+    dovetile(tilecountx,tilecounty,tilez);
+    translate([tilex/2,tiley/2,tilez/2+holeoffset]) rotate([90,0,0]) cylinder(d=holediameter,h=tilex,center=true);
+    translate([tilex/2,tiley/2,tilez/2-holeoffset]) rotate([90,0,90]) cylinder(d=holediameter,h=tiley,center=true);
+  }
 }
 
-interlockingbox(2,3,40);
-
-// This will create a sliver of a wall if working properly
-//difference() {
-//    interlockingbox(2,3,40);
-//    negativeBox(2,3,40);
-//}
+basetile();
