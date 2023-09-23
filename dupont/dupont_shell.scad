@@ -6,12 +6,12 @@
 // change the 4 settings below to customize your connector]
 
 //number of connector rows
-rows = 2;  // [1, 2]
-pins = 10;  // number of pins per row
+rows = 1;  // [1, 2]
+pins = 3;  // number of pins per row
 show_pin1 = true; // show the triangle indicator for pin 1
-triangle_height = 1.5;
+triangle_height = 1.0;
 pin1_triangle = show_pin1?triangle_height:0;
-keys = [3,9]; // slots to be filled solid for keying the connector
+keys = []; // slots to be filled solid for keying the connector
 
 spacing = 2.54; // pin to pin spacing 2.54mm
 wall = 0.54;    // shell wall thickness
@@ -66,7 +66,7 @@ module add_shell(pin, row, filled_position, p1_triangle_height, sp, w, l, c, sh)
         // add the tab
         translate([0, tab_pos,
                    pos_neg[row]*(c+w)/2])
-        cube([0.9*c - w, tab_length, w], center = true);
+        cube([0.9*c - 1.5*w, tab_length, w], center = true);
         
         // if the top row, make a break-away support for the tab
         if (row == 1){
@@ -121,5 +121,8 @@ module dupont_connector_solid(r,p,k,p1_t=1,sp=2.54,w=0.54,l=14){
         triangle(p1_t, sh);
   }
 }
+
+
+//difference() {dupont_connector(rows,pins,keys,pin1_triangle,spacing,wall,length); cube([20,20,2]);}
 
 dupont_connector(rows,pins,keys,pin1_triangle,spacing,wall,length);
