@@ -72,9 +72,10 @@ module honeycomb_layer(inner_diameter = inner_diameter,
     diameter = inner_diameter+inner_width*2+comb_width*2;
     od_unit = diameter*PI / comb_cells * sqrt(3) / 2;
     translate([0, 0, od_unit / 4]) {
-        honeycomb_row(diameter = diameter, wall_width = wall_width, comb_cells = comb_cells);
+        //honeycomb_row(diameter = diameter, wall_width = wall_width, comb_cells = comb_cells);
         difference() {
-            for (layer = [2*od_unit:2*od_unit:height]) {
+ //           for (layer = [2*od_unit:2*od_unit:height]) {
+            for (layer = [0:2*od_unit:height]) {
                 translate([0, 0, layer])
                 honeycomb_row(diameter = diameter, wall_width = wall_width, comb_cells = comb_cells);
             }

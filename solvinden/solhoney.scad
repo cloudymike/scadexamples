@@ -5,7 +5,7 @@ use <ring.scad>
 inner_diameter = 90; 
 
 // Height (mm)
-height = 120;
+height = 140;
 
 // Inner width of translucent wall - should be no less than nozzle width (mm)
 inner_width = 0.4;
