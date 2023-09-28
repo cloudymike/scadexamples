@@ -18,7 +18,7 @@ difference() {
 
 translate([10,10,0]) 
 import(
-  "/home/mikael/3dprint/LensCaps/PK-mount_rear_lenscap.STL",
+  "PK-mount_rear_lenscap.STL",
   convexity=3,
   $fa=1
 );
