@@ -3,7 +3,7 @@
 // (c) December 2014 
 // please refer the complete license here: http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode
 
-use <../write/Write.scad>
+use <../Write.scad/Write.scad>
 
 /* [Size] */
 // unit of measurement 
