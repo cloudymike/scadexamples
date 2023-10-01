@@ -32,7 +32,16 @@ module cablehook() {
 }
 
 
+//difference () {
+//union () {
 lampbase();
 translate([0,0,14.5]) lampholder();
 translate([18,-2,6]) cablehook();
 translate([38,-2,6]) cablehook();
+  
+//}
+//translate([0,0,0]) cube([100,100,100],center=true);
+//translate([0,-70,0]) cube([100,100,100],center=true);
+//translate([75,0,0]) cube([100,100,100],center=true);
+//translate([-70,0,0]) cube([100,100,100],center=true);
+//}
