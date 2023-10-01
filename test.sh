@@ -1,15 +1,19 @@
 #!/bin/bash
 
 IGNOREFILES="./electrocookie/parameters.scad ./drawer/TOUL.scad"
+IGNOREDIRS="./.git ./.git/modules ./Write.scad ./scad-utils"
 
 for FILE in $(find -name \*.scad)
 do
-    DIR="$(dirname "${FILE}")"
+    DIR="$(dirname "${FILE}")" 
     BASE="$(basename "${FILE}")"
     pushd ${DIR} &> /dev/null
     if echo $IGNOREFILES | grep -wq $FILE
     then
-      echo "Skipping $FILE"
+      echo "Skipping file $FILE"
+    elif echo $IGNOREDIRS | grep -wq $DIR
+    then  
+      echo "Skipping directory $DIR"
     else
       echo "Testing $BASE in $DIR"
       STLFILE="${BASE%.*}.stl"
