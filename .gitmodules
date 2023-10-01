@@ -1,3 +1,6 @@
 [submodule "scad-utils"]
 	path = scad-utils
 	url = https://github.com/openscad/scad-utils.git
+[submodule "Write.scad"]
+	path = Write
+	url = https://github.com/rohieb/Write.scad.git
