@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IGNOREFILES="./electrocookie/parameters.scad ./drawer/TOUL.scad"
-IGNOREDIRS="./.git ./.git/modules ./Write.scad ./scad-utils"
+IGNOREDIRS="./Write.scad ./scad-utils"
 
 for FILE in $(find -name \*.scad)
 do
@@ -14,6 +14,9 @@ do
     elif echo $IGNOREDIRS | grep -wq $DIR
     then  
       echo "Skipping directory $DIR"
+    elif echo $DIR | grep '.git'
+    then
+        echo "Skipping git hidden files"
     else
       echo "Testing $BASE in $DIR"
       STLFILE="${BASE%.*}.stl"
