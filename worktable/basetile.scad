@@ -1,6 +1,9 @@
 
 // Current data: 22h and 240g of PLA
 
+use <../threads/isothreads.scad>
+use <phillips.scad>
+
 $fa = 1;
 $fs = 0.4;
 
@@ -195,12 +198,36 @@ module basetile(north=true,east=true,south=true,west=true) {
   //Offset holes to match wallmin from top/bottom wall
   holeoffset=tileheight/2-holediameter/2-wallmin;
 
-  
+  thread_size=1;
+  pitch = 4;
+  screwlength = 16;
+
   difference () {
     dovetile(tilecountx,tilecounty,tileheight,tileheight,0,0,north,east,south,west);
     translate([tilex/2,tiley/2,tilez/2+holeoffset]) rotate([90,0,0]) cylinder(d=holediameter,h=tilex,center=true);
     translate([tilex/2,tiley/2,tilez/2-holeoffset]) rotate([90,0,90]) cylinder(d=holediameter,h=tiley,center=true);
+    if (!south) {
+      translate([tilex/2,screwlength*2,tilez/2+holeoffset]) rotate([90,0,0]) metric_thread(diameter=holediameter+thread_size,pitch=pitch,length=tileheight*2,internal=true);
+    }
+    if (!north) {
+      translate([tilex/2,tiley+6-screwlength,tilez/2+holeoffset]) rotate([90,0,0]) metric_thread(diameter=holediameter+thread_size,pitch=pitch,length=tileheight*2,internal=true);
+    }
+    if (!east) {
+      translate([tilex/2,screwlength*2,tilez/2+holeoffset]) rotate([90,0,0]) metric_thread(diameter=holediameter+thread_size,pitch=pitch,length=tileheight*2,internal=true);
+    }
+    if (!west) {
+      translate([tilex/2,tiley+6-screwlength,tilez/2+holeoffset]) rotate([90,0,0]) metric_thread(diameter=holediameter+thread_size,pitch=pitch,length=tileheight*2,internal=true);
+    }
   }
 }
 
-basetile(true,true,false,true);
+
+
+module screwrod () {
+  difference () {
+    metric_thread(diameter=holediameter+thread_size,thread_size=thread_size, pitch=4,length=screwlength/2,internal=false);
+    translate([0,0,4.5]) phillipsDrive(2);
+  }
+}
+
+basetile(true,true,true,true);
