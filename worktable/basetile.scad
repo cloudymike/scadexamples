@@ -16,7 +16,9 @@ module dovetile(
     //North Wall open or closed
     NorthWallOpen = 0, // [0:Closed, 1:Open]
     //South Wall open or closed
-    SouthWallOpen = 0 // [0:Closed, 1:Open]
+    SouthWallOpen = 0, // [0:Closed, 1:Open]
+    //Add dove tails to side
+    north=true,east=true,south=true,west=true
 )
 {
 echo(version=version(2.0));
@@ -60,7 +62,9 @@ union(){
         //main box
     cube([BoxLength,BoxWidth,BoxHeight], center=false);
 
-        //male dovetails
+    //male dovetails
+    if (north)
+    {
     for (i=[1:BoxLengthUnits])
     translate([(i-1)*BoxUnits+(BoxUnits/2),BoxWidth,0])
         //in 2 sections. first section is slightly scaled down to counter "elephant foot"
@@ -86,7 +90,9 @@ union(){
                     polygon(DTShape);
                     };
         }        
-
+      }
+    if (west)
+    {
     for (i=[1:BoxWidthUnits])
     translate([0,(i-1)*BoxUnits+(BoxUnits/2),0])
         //in 2 sections. first section is slightly scaled down to counter "elephant foot"
@@ -114,7 +120,10 @@ union(){
                 };
         }
     }
+  }
     //female dovetails
+    if (south)
+    {
     for (i=[1:BoxLengthUnits])
         union(){
             translate([(i-1)*BoxUnits+(BoxUnits/2),0,0])
@@ -128,7 +137,9 @@ union(){
                 linear_extrude(height=1, center=false)
                 polygon(DTShape);					
         }
-
+      }
+    if (east)
+    {
     for (i=[1:BoxWidthUnits])
         union(){
             translate([BoxLength,(i-1)*BoxUnits+(BoxUnits/2),0])
@@ -143,6 +154,7 @@ union(){
                         linear_extrude(height=1, center=false)
                             polygon(DTShape);	
         }
+      }
     //carves out main box
     translate([BoxWall,DTWidth+BoxWall,BoxFloor])
         cube([BoxLength-(2*BoxWall)-DTWidth, (BoxWidth-(2*BoxWall)-DTWidth), BoxHeight]);
@@ -159,7 +171,7 @@ union(){
   }
 }
 
-module basetile() {
+module basetile(north=true,east=true,south=true,west=true) {
   
   //This needs to be broken out as variables
   tilecountx=2;
@@ -185,10 +197,10 @@ module basetile() {
 
   
   difference () {
-    dovetile(tilecountx,tilecounty,tilez);
+    dovetile(tilecountx,tilecounty,tileheight,tileheight,0,0,north,east,south,west);
     translate([tilex/2,tiley/2,tilez/2+holeoffset]) rotate([90,0,0]) cylinder(d=holediameter,h=tilex,center=true);
     translate([tilex/2,tiley/2,tilez/2-holeoffset]) rotate([90,0,90]) cylinder(d=holediameter,h=tiley,center=true);
   }
 }
 
-basetile();
+basetile(true,true,false,true);
