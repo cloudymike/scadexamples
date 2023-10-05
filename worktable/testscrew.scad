@@ -44,5 +44,5 @@ module screwrod () {
   }
 }
 
-screwrod();
-//testcube();
+translate([20,0,0]) screwrod();
+translate([0,0,8]) testcube();
