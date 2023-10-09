@@ -174,12 +174,12 @@ union(){
   }
 }
 
-module basetile(north=true,east=true,south=true,west=true) {
+module basetile(north=true,east=true,south=true,west=true,height=16) {
   
   //This needs to be broken out as variables
   tilecountx=2;
   tilecounty=2;
-  tilez=16;
+  tilez=height;
   
   tilex = tilecountx * 105;
   tiley = tilecounty * 105;
