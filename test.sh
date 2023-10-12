@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IGNOREFILES="./electrocookie/parameters.scad ./drawer/TOUL.scad"
+IGNOREFILES="./worktable/dimple_vectors.scad ./electrocookie/parameters.scad ./drawer/TOUL.scad"
 IGNOREDIRS="./Write.scad ./scad-utils"
 
 for FILE in $(find -name \*.scad)
