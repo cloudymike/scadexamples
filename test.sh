@@ -25,6 +25,8 @@ do
       then
           echo "FAIL: $FILE"
           exit 1
+      else
+          rm -f $STLFILE
       fi
     fi
     popd &> /dev/null
