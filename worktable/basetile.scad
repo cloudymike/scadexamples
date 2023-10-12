@@ -70,93 +70,50 @@ union(){
     {
     for (i=[1:BoxLengthUnits])
     translate([(i-1)*BoxUnits+(BoxUnits/2),BoxWidth,0])
-        //in 2 sections. first section is slightly scaled down to counter "elephant foot"
-        union(){
-            linear_extrude(height=1, center=false)
-                scale([1-(2*FitFactor),1-(2*FitFactor),1])
-                union(){        
-                    //this adds a slight offset to the male dovetail for a looser fit
-                    translate([-DTInsideLength/2,0,0])
-                    square([DTInsideLength,DTWidth]);
-                    //main dovetail shape
-                    translate([0,DTWidth*FitFactor*2,0])
-                    polygon(DTShape);
+        linear_extrude(height=BoxHeight, center=false)
+                union(){
+                //this adds a slight offset to the male dovetail for a looser fit
+                translate([-DTInsideLength/2,0,0])
+                square([DTInsideLength,DTWidth]);
+                //main dovetail shape
+                translate([0,DTWidth*FitFactor*2,0])
+                polygon(DTShape);
                 };
-            translate([0,0,1])
-            linear_extrude(height=BoxHeight-1, center=false)
-                    union(){
-                    //this adds a slight offset to the male dovetail for a looser fit
-                    translate([-DTInsideLength/2,0,0])
-                    square([DTInsideLength,DTWidth]);
-                    //main dovetail shape
-                    translate([0,DTWidth*FitFactor*2,0])
-                    polygon(DTShape);
-                    };
-        }        
       }
     if (west)
     {
     for (i=[1:BoxWidthUnits])
     translate([0,(i-1)*BoxUnits+(BoxUnits/2),0])
-        //in 2 sections. first section is slightly scaled down to counter "elephant foot"
         rotate([0,0,90])
-        union(){
-            linear_extrude(height=1, center=false)				//1mm high anti-elephant foot section
-                scale([1-(2*FitFactor),1-(2*FitFactor),1])
-                union(){        
-                    //this adds a slight offset to the male dovetail for a looser fit
-                    translate([-DTInsideLength/2,0,0])
-                    square([DTInsideLength,DTWidth]);
-                    //main dovetail shape
-                    translate([0,DTWidth*FitFactor*2,0])
-                    polygon(DTShape);
-                };
-            translate([0,0,1])
-            linear_extrude(height=BoxHeight-1, center=false)
-                union(){
-                    //male dovetail offset
-                    translate([-DTInsideLength/2,0,0])
-                    square([DTInsideLength,DTWidth]);
-                    //main dovetail shape
-                    translate([0,DTWidth*FitFactor*2,0])
-                    polygon(DTShape);
-                };
-        }
+          linear_extrude(height=BoxHeight, center=false)
+              union(){
+                  //male dovetail offset
+                  translate([-DTInsideLength/2,0,0])
+                  square([DTInsideLength,DTWidth]);
+                  //main dovetail shape
+                  translate([0,DTWidth*FitFactor*2,0])
+                  polygon(DTShape);
+              };
     }
   }
     //female dovetails
     if (south)
     {
     for (i=[1:BoxLengthUnits])
-        union(){
-            translate([(i-1)*BoxUnits+(BoxUnits/2),0,0])
-                scale([1+FitFactor,1+FitFactor,1])
-                linear_extrude(height=BoxHeight, center=false)
-                polygon(DTShape);
-        
-            //added a second dovetail cutout at the bottom, scaled up to counter "elephant foot" when printed
-            translate([(i-1)*BoxUnits+(BoxUnits/2),0,0])
-                scale([1+(3*FitFactor),1+(3*FitFactor),1])
-                linear_extrude(height=1, center=false)
-                polygon(DTShape);					
-        }
+        translate([(i-1)*BoxUnits+(BoxUnits/2),0,0])
+            scale([1+FitFactor,1+FitFactor,1])
+            linear_extrude(height=BoxHeight, center=false)
+            polygon(DTShape);
+    
       }
     if (east)
     {
     for (i=[1:BoxWidthUnits])
-        union(){
-            translate([BoxLength,(i-1)*BoxUnits+(BoxUnits/2),0])
-                rotate([0,0,90])
-                    scale([1+FitFactor,1+FitFactor,1])
-                        linear_extrude(height=BoxHeight, center=false)
-                            polygon(DTShape);
-            //added a second dovetail cutout at the bottom, scaled up to counter "elephant foot" when printed
-            translate([BoxLength,(i-1)*BoxUnits+(BoxUnits/2),0])
-                rotate([0,0,90])
-                    scale([1+(3*FitFactor),1+(3*FitFactor),1])
-                        linear_extrude(height=1, center=false)
-                            polygon(DTShape);	
-        }
+        translate([BoxLength,(i-1)*BoxUnits+(BoxUnits/2),0])
+            rotate([0,0,90])
+                scale([1+FitFactor,1+FitFactor,1])
+                    linear_extrude(height=BoxHeight, center=false)
+                        polygon(DTShape);
       }
     //carves out main box
     translate([BoxWall,DTWidth+BoxWall,BoxFloor])
@@ -230,4 +187,4 @@ module screwrod () {
   }
 }
 
-basetile(false,true,true,true);
+basetile(true,true,true,true);
