@@ -180,11 +180,16 @@ module basetile(north=true,east=true,south=true,west=true,height=16) {
 
 
 
-module screwrod () {
+module screwrod (screwlength=10,rodlength=30) {
+  thread_size=1;
+  holediameter=6.7;
+  roddiameter=holediameter-0.2;
+  cylinder(d=roddiameter,h=rodlength);
   difference () {
-    metric_thread(diameter=holediameter+thread_size,thread_size=thread_size, pitch=4,length=screwlength/2,internal=false);
+    metric_thread(diameter=holediameter+thread_size,thread_size=thread_size, pitch=4,length=screwlength,internal=false);
     translate([0,0,4.5]) phillipsDrive(2);
   }
 }
 
-basetile(true,true,true,true);
+//basetile(true,true,true,true);
+screwrod();
