@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Show version
-        run: echo 5
+        run: echo 6
 
       - name: Show info
         run: |
