@@ -3,7 +3,7 @@
 // Version 1.0 (c) February 2015
 // please refer the complete license here: http://creativecommons.org/licenses/by-nc-sa/3.0/legalcoe
 
-use <write/Write.scad>
+use <../Write/Write.scad>
 
 /* [Spoon] */
 spoon_shape = 3; // [0: flat (classic), 1: conical, 2: cylindrical, 3: cylindrical (short), 4: cylindrical (long), 5: spherical (experimental)]  
