@@ -179,7 +179,6 @@ module basetile(north=true,east=true,south=true,west=true,height=16) {
 }
 
 
-
 module screwrod (screwlength=10,rodlength=25) {
   thread_size=1;
   holediameter=6.7;
@@ -192,7 +191,3 @@ module screwrod (screwlength=10,rodlength=25) {
 }
 
 basetile(true,true,true,true);
-
-
-//longrod
-//screwrod(0,240);
