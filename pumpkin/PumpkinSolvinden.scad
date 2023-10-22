@@ -14,7 +14,7 @@ module spacerring(outsidediameter=87, height=2) {
 }
 
 difference() {
-  translate([0,0,68]) scale([2,2,2]) pumpkin4scale();
+  translate([0,0,68]) scale([2,2,2]) pumpkinBottom();
   cylinder(h=30,d=87,center=true);
   //translate([0,0,107]) cylinder(h=200, d=300, center=true); // testcut
 }

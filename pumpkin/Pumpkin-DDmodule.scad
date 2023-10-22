@@ -151,88 +151,98 @@ Mouth_Expression = 1;
         }
     }
     
-module pumpkin4scale() {
+module pumpkinTop() {
   color("orange")
   {
-      if(Parts == 1)
-      {
-              difference()
-              {
-                  Pumpkin();
-                  scale([0.9,0.9,0.9])
-                  {
-                      Pumpkin();
-                  }
-                  Eye();
-                  mirror([1,0,0])
-                  {   
-                      Eye();
-                  }    
-                  if (Has_Nose == 1)
-                  {
-                      Nose();
-                  }
-                  if (Mouth_Expression == 1)
-                  {
-                      Mouth();
-                  }
-                  if (Mouth_Expression == 2)
-                  {
-                      translate([0,0,-35])
-                      {
-                          rotate([0,180,0])
-                          {
-                              Mouth();
-                          }
-                      }
-                  }
-                  translate([0,0,40*(Size)])
-                  {
-                      sphere(r=30*Size);
-                  }   
-              }
-      }
-      if (Parts == 2)
-      {
-          translate([0,0,18*Size])
-          {
-              cylinder(r1=24*Size,r2=26*Size,h=8*Size);
-          }
-              intersection()
-          {
-              difference()
-              {
-                  scale([0.95,0.95,0.95])
-                  {
-                      Pumpkin();
-                  }
-                  cube([100,100,40],true);
-              }    
-              translate([0,0,Size*40])
-              {
-              sphere(r=Size*30);
-              }
-              
-          }
-          translate([1*Size,3*Size,0])
-          {
-              difference()
-              {
-                      linear_extrude(height = 100*Size, center = true, convexity = 10, twist = 1000,$fn=100)
-                      translate([4*Size, 0, 0])
-                      {
-                      circle(r = 5*Size);
-                      }
-                  translate([0,0,-22*Size])
-                  {
-                      cube([1000*Size,1000*Size,100*Size],true);
-                  }
-                  translate([0,0,94*Size])
-                  {
-                      cube([50*Size,50*Size,100*Size],true);
-                  }
-              }
-          }
-      }
+    translate([0,0,18*Size])
+    {
+        cylinder(r1=24*Size,r2=26*Size,h=8*Size);
+    }
+        intersection()
+    {
+        difference()
+        {
+            scale([0.95,0.95,0.95])
+            {
+                Pumpkin();
+            }
+            cube([100,100,40],true);
+        }    
+        translate([0,0,Size*40])
+        {
+        sphere(r=Size*30);
+        }
+        
+    }
   }
 }
+
+module pumpkinStem() {
+  color("green")
+  {
+    translate([1*Size,3*Size,0])
+    {
+        difference()
+        {
+                linear_extrude(height = 100*Size, center = true, convexity = 10, twist = 1000,$fn=100)
+                translate([4*Size, 0, 0])
+                {
+                circle(r = 5*Size);
+                }
+            translate([0,0,-22*Size])
+            {
+                cube([1000*Size,1000*Size,100*Size],true);
+            }
+            translate([0,0,94*Size])
+            {
+                cube([50*Size,50*Size,100*Size],true);
+            }
+        }
+    }
+  }
+}
+
+
+module pumpkinBottom() {
+  color("orange")
+  {
+    difference()
+    {
+        Pumpkin();
+        scale([0.9,0.9,0.9])
+        {
+            Pumpkin();
+        }
+        Eye();
+        mirror([1,0,0])
+        {   
+            Eye();
+        }    
+        if (Has_Nose == 1)
+        {
+            Nose();
+        }
+        if (Mouth_Expression == 1)
+        {
+            Mouth();
+        }
+        if (Mouth_Expression == 2)
+        {
+            translate([0,0,-35])
+            {
+                rotate([0,180,0])
+                {
+                    Mouth();
+                }
+            }
+        }
+        translate([0,0,40*(Size)])
+        {
+            sphere(r=30*Size);
+        }   
+    }
+  }
+ }
+
+
+pumpkinTop();
