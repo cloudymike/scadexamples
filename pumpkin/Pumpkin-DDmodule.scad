@@ -152,28 +152,31 @@ Mouth_Expression = 1;
     }
     
 module pumpkinTop() {
-  color("orange")
-  {
-    translate([0,0,18*Size])
+  difference () {
+    color("orange")
     {
-        cylinder(r1=24*Size,r2=26*Size,h=8*Size);
+      translate([0,0,18*Size])
+      {
+          cylinder(r1=24*Size,r2=26*Size,h=8*Size);
+      }
+          intersection()
+      {
+          difference()
+          {
+              scale([0.95,0.95,0.95])
+              {
+                  Pumpkin();
+              }
+              cube([100,100,40],true);
+          }    
+          translate([0,0,Size*40])
+          {
+          sphere(r=Size*30);
+          }
+          
+      }
     }
-        intersection()
-    {
-        difference()
-        {
-            scale([0.95,0.95,0.95])
-            {
-                Pumpkin();
-            }
-            cube([100,100,40],true);
-        }    
-        translate([0,0,Size*40])
-        {
-        sphere(r=Size*30);
-        }
-        
-    }
+    scale([1.01,1.01,1]) pumpkinStem();
   }
 }
 
