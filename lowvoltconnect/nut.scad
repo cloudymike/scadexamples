@@ -1,7 +1,7 @@
 use <../threads/isothreads.scad>
 
 module lowpowernut(
-    threadDiameter = 19.5,
+    threadDiameter = 17.7,
     cableHole = 14,
     outsideHeight = 10    
 ) {
@@ -23,10 +23,11 @@ module lowpowernut(
         
         metric_thread (
             diameter=threadDiameter, 
-            pitch=2.5, 
+            pitch=1.8, 
             length=thread_length, 
             internal=true, 
-            n_starts=1
+            n_starts=1,
+            thread_size=0.8
         );
         
         cylinder(d=cableHole,h=outsideHeight, $fn=100); 
@@ -56,4 +57,4 @@ module lowpowernut(
 
 }
 
-lowpowernut();
+rotate([180,0,0]) lowpowernut();
