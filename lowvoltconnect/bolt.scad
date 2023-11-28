@@ -1,9 +1,9 @@
 use <../threads/isothreads.scad>
 
 module lowvoltagebolt(
-    threadDiameter = 19.1,
+    threadDiameter = 17.7-0.4,
     cableHole = 14,
-    outsideHeight = 11
+    outsideHeight = 12
 )
 {
     ridges = 5;
@@ -21,10 +21,11 @@ module lowvoltagebolt(
     difference () {
         metric_thread (
             diameter=threadDiameter, 
-            pitch=2.5, 
+            pitch=1.8, 
             length=thread_length, 
             internal=false, 
-            n_starts=1
+            n_starts=1,
+            thread_size=1.5
         );
         
         cylinder(d=cableHole,h=outsideHeight, $fn=100); 
