@@ -98,7 +98,7 @@ module connectfemalepin(
          translate([contactCenterToCenter/2,0,recepBodyHeight/2])
            difference(){ 
             cylinder(d=femaleDiameter,h=recepBodyHeight,center=true);
-            rotate([0,0,90])translate([-femaleDiameter/2,0,recepBodyHeight/2-slotheight/2]) cube([3,femaleDiameter,slotheight],center=true);
+            rotate([0,0,90])translate([-femaleDiameter/2,0,recepBodyHeight/2-slotheight/2]) cube([4,femaleDiameter,slotheight],center=true);
             }
          
          translate([contactCenterToCenter/2,0,recepBodyHeight-boltedgetocontacttop])
