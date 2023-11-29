@@ -33,7 +33,7 @@ union() { receptacle();  translate([0,0,42]) rotate([180,0,0]) plug();
     } 
 
 */
-difference() {
+//difference() {
 connectfemalepin(
     recepBodyHeight = 26.1, // height of overall body
     femaleDepth=8,
@@ -43,8 +43,8 @@ connectfemalepin(
     boltedgetocontacttop=5,
     cylinderhole=14
 );
-translate([3,-10,0])cube([20,20,50]);
-}
+//translate([3,-10,0])cube([20,20,50]);
+//}
 module connectfemalepin(
     recepBodyHeight = 26.1, // height of overall body
     femaleDepth=8,
