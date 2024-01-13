@@ -9,7 +9,9 @@ use <MCAD/boxes.scad>
 // full, half, mini
 //=======================================================
 module baseplate(
-    board_version
+    board_version,
+    bottom_holes=[],
+    top_holes=[]
     )
 {
 include <parameters.scad>
@@ -17,6 +19,7 @@ include <parameters.scad>
     base_height = 2 * wall_depth;
     base_length = box_length;
     base_width = box_width;
+    cablehole_radius = 2.5;
     echo("baseplate size:",base_length,base_width,base_height);
 
     //base plate
@@ -40,6 +43,24 @@ include <parameters.scad>
         0.001])
         m3knurl_pocket();
 
+        // cable holes, below card
+        for (pin = bottom_holes)
+        {
+            center_y=10-base_width/2;
+            board_x = first_row + (pin + 1) * row_spacing;
+            center_x = board_x - board_length/2;
+            translate([center_x, center_y, 0])
+                cylinder(r=cablehole_radius,h=4*wall_depth, center=true);
+        }
+        // cable holes, above card
+        for (pin = top_holes)
+        {
+            center_y=-10+base_width/2;
+            board_x = first_row + (pin + 1) * row_spacing;
+            center_x = board_x - board_length/2;
+            translate([center_x, center_y, 0])
+                cylinder(r=cablehole_radius,h=4*wall_depth, center=true);
+        }
     }
 
 
@@ -62,9 +83,12 @@ include <parameters.scad>
             m3knurl_ring();
         echo("PCP standoff from edge:", (base_length-m3_hole_distance)/2);
     }
+    
 }
 
 // Example instantiation
 baseplate(
-    board_version="full"
+    board_version="full",
+    bottom_holes=[1,2],
+    top_holes=[40,43]
 );
