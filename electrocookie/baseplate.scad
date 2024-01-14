@@ -20,6 +20,7 @@ include <parameters.scad>
     base_length = box_length;
     base_width = box_width;
     cablehole_radius = 2.5;
+    cable_y_offset = wall_depth + cablehole_radius + 1;
     echo("baseplate size:",base_length,base_width,base_height);
 
     //base plate
@@ -46,8 +47,8 @@ include <parameters.scad>
         // cable holes, below card
         for (pin = bottom_holes)
         {
-            center_y=10-base_width/2;
-            board_x = first_row + (pin + 1) * row_spacing;
+            center_y=cable_y_offset-base_width/2;
+            board_x = first_row + (pin - 1) * row_spacing;
             center_x = board_x - board_length/2;
             translate([center_x, center_y, 0])
                 cylinder(r=cablehole_radius,h=4*wall_depth, center=true);
@@ -55,8 +56,8 @@ include <parameters.scad>
         // cable holes, above card
         for (pin = top_holes)
         {
-            center_y=-10+base_width/2;
-            board_x = first_row + (pin + 1) * row_spacing;
+            center_y=-cable_y_offset+base_width/2;
+            board_x = first_row + (pin - 1) * row_spacing;
             center_x = board_x - board_length/2;
             translate([center_x, center_y, 0])
                 cylinder(r=cablehole_radius,h=4*wall_depth, center=true);
@@ -89,6 +90,6 @@ include <parameters.scad>
 // Example instantiation
 baseplate(
     board_version="full",
-    bottom_holes=[1,2],
-    top_holes=[40,43]
+    bottom_holes=[1,31,32,33,63],
+    top_holes=[32]
 );
