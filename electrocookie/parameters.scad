@@ -66,3 +66,5 @@ oled_display_height = 15;
 oled_bottom_space = 8;
 oled_pin1 = 10;
 oled_pin_from_top = 2;
+display_indent=12;
+display_frame = 10;

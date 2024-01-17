@@ -53,8 +53,6 @@ include <parameters.scad>
     echo("Side wall width:",(top_length-inside_length)/2);
     echo("Top wall width:",top_height - inside_height);
 
-    display_indent=12;
-    display_frame = 10;
 
 
     difference() {
@@ -107,6 +105,7 @@ include <parameters.scad>
             
         }
  
+
     }
 
     //screw holes
@@ -145,8 +144,32 @@ include <parameters.scad>
             echo("OLED bottom edge from box edge",box_width/2 - oled_center_y - oled_display_height/2);
             translate([oled_center_x, oled_center_y, 0])
                 cube([oled_display_width,oled_display_height,top_height+1],center=true);
-            translate([oled_center_x, oled_center_y, -top_height/2+display_indent/2])
-                cube([oled_display_width+display_frame*2-1,oled_display_height+display_frame*2-1,display_indent+2*wall_depth-1],center=true);
+//            translate([oled_center_x, oled_center_y, -top_height/2+display_indent/2])
+//                cube([oled_display_width+display_frame*2-1,oled_display_height+display_frame*2-1,display_indent+2*wall_depth-1],center=true);
+
+
+       trappoints = [
+        [-(oled_display_width+display_frame*2-1)/2,-(oled_display_height+display_frame*2-1)/2,-(display_indent+2*wall_depth-1)/2],  //0
+        [(oled_display_width+display_frame*2-1)/2,-(oled_display_height+display_frame*2-1)/2,-(display_indent+2*wall_depth-1)/2],   //1
+        [(oled_display_width+display_frame*2-1)/2,(oled_display_height+display_frame*2-1)/2,-(display_indent+2*wall_depth-1)/2],  //2
+        [-(oled_display_width+display_frame*2-1)/2,(oled_display_height+display_frame*2-1)/2,-(display_indent+2*wall_depth-1)/2], //3
+        [-(oled_display_width)/2,-(oled_display_height)/2,(display_indent+2*wall_depth-1)/2],  //4
+        [(oled_display_width)/2,-(oled_display_height)/2,(display_indent+2*wall_depth-1)/2],   //5
+        [(oled_display_width)/2,(oled_display_height)/2,(display_indent+2*wall_depth-1)/2],    //6
+        [-(oled_display_width)/2,(oled_display_height)/2,(display_indent+2*wall_depth-1)/2],   //7
+        ];
+        
+       trapfaces = [
+       [0,1,2,3], //bottom
+       [4,5,1,0], //front
+       [7,6,5,4], //top
+       [5,6,2,1], //right
+       [6,7,3,2], //back
+       [7,4,0,3]]; //left
+
+       translate([oled_center_x, oled_center_y, -top_height/2+display_indent/2]) polyhedron(points=trappoints,faces=trapfaces);
+
+
         }
 
     // USB hole if ESP32 exist
@@ -194,14 +217,14 @@ include <parameters.scad>
 //Size of electrocookie board for testing
 //Do not include in design
 //roundedBox(size=[board_length,board_width,1],radius=5.1,sidesonly=true);
-difference() {
+//difference() {
 topbox(
     board_version="half",
     display_pin1_row = 20,
     jack_pin1_row = 16,
     ESP32_pin1_column = "B"
 );
-    cube([50,80,100],center=true);
-    translate([60,0,0]) cube([40,80,100],center=true);
-    translate([-40,0,0]) cube([40,80,100],center=true);
-}
+ //   cube([50,80,100],center=true);
+ //   translate([60,0,0]) cube([40,80,100],center=true);
+ //   translate([-40,0,0]) cube([40,80,100],center=true);
+//}
