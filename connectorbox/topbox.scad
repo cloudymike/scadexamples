@@ -67,11 +67,15 @@ module plug093tile()
 
 module topbox(
     fancount=3,
-    coolercount=1
+    coolercount=1,
+    faninput=true,
+    coolerinput=true
     )
 {
     top_height = 25;
-    top_length = wall_depth*2 + fancount*tilesize + coolercount*tilesize + 3*tilesize;
+    infancount = (faninput) ? 1:0;
+    incoolercount = (coolerinput) ? 1:0;
+    top_length = wall_depth*2+fancount*tilesize+coolercount*tilesize+infancount*tilesize+incoolercount*tilesize+tilesize;
     
     top_width = tilesize+2*wall_depth;
     echo("topbox size:",top_length,top_width,top_height);
@@ -97,25 +101,34 @@ module topbox(
 
     // Connector tiles
     input_start = tile_start;
-    
-    translate([-input_start,0,-(top_height-wall_depth)/2])
-      rotate([180,0,0]) 
-        plug062tile();
-   
-    translate([-input_start+tilesize,0,-(top_height-wall_depth)/2])
-      rotate([180,0,0]) 
-        plug093tile();
-   
-    fan_start = input_start-2*tilesize;
-    for (tile=[0:fancount-1]) {
-      translate([tile*tilesize-fan_start,0,-(top_height-wall_depth)/2])
+    if (faninput)
+    {
+      translate([-input_start,0,-(top_height-wall_depth)/2])
         rotate([180,0,0]) 
-          recep062tile();
+          plug062tile();
+    }
+    if (coolerinput)
+    {
+      translate([-input_start+infancount*tilesize,0,-(top_height-wall_depth)/2])
+        rotate([180,0,0]) 
+          plug093tile();
+    }
+    fan_start = input_start-(infancount+incoolercount)*tilesize;
+    if (fancount>0)
+    {
+        for (tile=[0:fancount-1]) {
+          translate([tile*tilesize-fan_start,0,-(top_height-wall_depth)/2])
+            rotate([180,0,0]) 
+              recep062tile();
+        }
     }
 
     cooler_start = fan_start-fancount*tilesize;
-    for (tile=[0:coolercount-1]) {
-      translate([tile*tilesize-cooler_start,0,-(top_height-wall_depth)/2]) rotate([180,0,0]) recep093tile();
+    if (coolercount>0)
+    {
+       for (tile=[0:coolercount-1]) {
+          translate([tile*tilesize-cooler_start,0,-(top_height-wall_depth)/2]) rotate([180,0,0]) recep093tile();
+       }
     }
 
     // screw columns
@@ -161,4 +174,9 @@ module topbox(
     }
 }
 
-topbox();
+topbox(
+    fancount=0,
+    coolercount=2,
+    faninput=false,
+    coolerinput=false
+    );
