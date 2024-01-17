@@ -217,6 +217,8 @@ include <parameters.scad>
 //Size of electrocookie board for testing
 //Do not include in design
 //roundedBox(size=[board_length,board_width,1],radius=5.1,sidesonly=true);
+// difference is for useful cuts to see internal. Do not use in final form
+
 //difference() {
 topbox(
     board_version="half",
@@ -224,7 +226,7 @@ topbox(
     jack_pin1_row = 16,
     ESP32_pin1_column = "B"
 );
- //   cube([50,80,100],center=true);
- //   translate([60,0,0]) cube([40,80,100],center=true);
- //   translate([-40,0,0]) cube([40,80,100],center=true);
+//    cube([50,80,100],center=true);
+//    translate([60,0,0]) cube([40,80,100],center=true);
+//    translate([-40,0,0]) cube([40,80,100],center=true);
 //}
