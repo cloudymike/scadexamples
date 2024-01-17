@@ -53,8 +53,8 @@ include <parameters.scad>
     echo("Side wall width:",(top_length-inside_length)/2);
     echo("Top wall width:",top_height - inside_height);
 
-    display_indent=5;
-    display_frame = 15;
+    display_indent=12;
+    display_frame = 10;
 
 
     difference() {
@@ -101,10 +101,12 @@ include <parameters.scad>
             echo("OLED left edge from box edge",box_length/2 + oled_center_x - oled_display_width/2);
             echo("OLED bottom edge from box edge",box_width/2 - oled_center_y - oled_display_height/2);
             translate([oled_center_x, oled_center_y, -top_height/2+wall_depth+display_indent/2])
-                cube([oled_display_width+display_frame,oled_display_height+display_frame,display_indent],center=true);
+                cube([oled_display_width+display_frame*2,oled_display_height+display_frame*2,display_indent],center=true);
+            
+            
+            
         }
-
-
+ 
     }
 
     //screw holes
@@ -144,7 +146,7 @@ include <parameters.scad>
             translate([oled_center_x, oled_center_y, 0])
                 cube([oled_display_width,oled_display_height,top_height+1],center=true);
             translate([oled_center_x, oled_center_y, -top_height/2+display_indent/2])
-                cube([oled_display_width+display_frame-1,oled_display_height+display_frame-1,display_indent+2*wall_depth-1],center=true);
+                cube([oled_display_width+display_frame*2-1,oled_display_height+display_frame*2-1,display_indent+2*wall_depth-1],center=true);
         }
 
     // USB hole if ESP32 exist
@@ -195,11 +197,11 @@ include <parameters.scad>
 difference() {
 topbox(
     board_version="half",
-    display_pin1_row = 21,
+    display_pin1_row = 20,
     jack_pin1_row = 16,
     ESP32_pin1_column = "B"
 );
-    cube([55,80,100],center=true);
+    cube([50,80,100],center=true);
     translate([60,0,0]) cube([40,80,100],center=true);
     translate([-40,0,0]) cube([40,80,100],center=true);
 }
