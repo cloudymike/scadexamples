@@ -53,6 +53,9 @@ include <parameters.scad>
     echo("Side wall width:",(top_length-inside_length)/2);
     echo("Top wall width:",top_height - inside_height);
 
+    display_indent=5;
+    display_frame = 15;
+
 
     difference() {
     union() {
@@ -81,6 +84,27 @@ include <parameters.scad>
         -(top_width/2-corner_screw_distance),
         0])
         cylinder(r=screw_radius + wall_depth,h=top_height, center=true);
+
+    // display hole if exist
+        if (display_pin1_row != 0) {
+            // Assume it is in column J
+            oled_center_from_top = first_column+(oled_height/2-oled_pin_from_top);
+            oled_top_space = oled_height - oled_display_height - oled_bottom_space;
+            y_offset = oled_bottom_space - oled_top_space;
+            display_center_from_top = oled_center_from_top - y_offset;
+            oled_center_y = - (board_width/2 - display_center_from_top);
+            // Use display_row
+            oled_pin1_from_left = first_row + (display_pin1_row-1)*row_spacing;
+            oled_center_from_pin1 = oled_width/2 - oled_pin1;
+            oled_center_x = (oled_pin1_from_left + oled_center_from_pin1) - board_length/2;
+            echo("OLED center",oled_center_x, oled_center_y);
+            echo("OLED left edge from box edge",box_length/2 + oled_center_x - oled_display_width/2);
+            echo("OLED bottom edge from box edge",box_width/2 - oled_center_y - oled_display_height/2);
+            translate([oled_center_x, oled_center_y, -top_height/2+wall_depth+display_indent/2])
+                cube([oled_display_width+display_frame,oled_display_height+display_frame,display_indent],center=true);
+        }
+
+
     }
 
     //screw holes
@@ -119,6 +143,8 @@ include <parameters.scad>
             echo("OLED bottom edge from box edge",box_width/2 - oled_center_y - oled_display_height/2);
             translate([oled_center_x, oled_center_y, 0])
                 cube([oled_display_width,oled_display_height,top_height+1],center=true);
+            translate([oled_center_x, oled_center_y, -top_height/2+display_indent/2])
+                cube([oled_display_width+display_frame-1,oled_display_height+display_frame-1,display_indent+2*wall_depth-1],center=true);
         }
 
     // USB hole if ESP32 exist
@@ -166,10 +192,14 @@ include <parameters.scad>
 //Size of electrocookie board for testing
 //Do not include in design
 //roundedBox(size=[board_length,board_width,1],radius=5.1,sidesonly=true);
-
+difference() {
 topbox(
     board_version="half",
-    display_pin1_row = 23,
+    display_pin1_row = 21,
     jack_pin1_row = 16,
     ESP32_pin1_column = "B"
 );
+    cube([55,80,100],center=true);
+    translate([60,0,0]) cube([40,80,100],center=true);
+    translate([-40,0,0]) cube([40,80,100],center=true);
+}
