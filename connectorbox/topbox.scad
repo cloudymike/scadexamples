@@ -116,9 +116,13 @@ module topbox(
         }
     }
 
+    echo(fancount);
     cooler_start = fan_start-fancount*tilesize;
-    for (tile=[0:coolercount-1]) {
-      translate([tile*tilesize-cooler_start,0,-(top_height-wall_depth)/2]) rotate([180,0,0]) recep093tile();
+    if (coolercount>0)
+    {
+       for (tile=[0:coolercount-1]) {
+          translate([tile*tilesize-cooler_start,0,-(top_height-wall_depth)/2]) rotate([180,0,0]) recep093tile();
+       }
     }
 
     // screw columns
@@ -166,5 +170,5 @@ module topbox(
 
 topbox(
     fancount=0,
-    coolercount=1
+    coolercount=0
     );
