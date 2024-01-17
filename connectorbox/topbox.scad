@@ -75,7 +75,6 @@ module topbox(
     top_height = 25;
     infancount = (faninput) ? 1:0;
     incoolercount = (coolerinput) ? 1:0;
-    echo(inplugcount);
     top_length = wall_depth*2+fancount*tilesize+coolercount*tilesize+infancount*tilesize+incoolercount*tilesize+tilesize;
     
     top_width = tilesize+2*wall_depth;
@@ -179,5 +178,5 @@ topbox(
     fancount=0,
     coolercount=2,
     faninput=false,
-    coolerinput=true
+    coolerinput=false
     );
