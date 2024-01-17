@@ -107,10 +107,13 @@ module topbox(
         plug093tile();
    
     fan_start = input_start-2*tilesize;
-    for (tile=[0:fancount-1]) {
-      translate([tile*tilesize-fan_start,0,-(top_height-wall_depth)/2])
-        rotate([180,0,0]) 
-          recep062tile();
+    if (fancount>0)
+    {
+        for (tile=[0:fancount-1]) {
+          translate([tile*tilesize-fan_start,0,-(top_height-wall_depth)/2])
+            rotate([180,0,0]) 
+              recep062tile();
+        }
     }
 
     cooler_start = fan_start-fancount*tilesize;
@@ -161,4 +164,7 @@ module topbox(
     }
 }
 
-topbox();
+topbox(
+    fancount=0,
+    coolercount=1
+    );
