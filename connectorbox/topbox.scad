@@ -172,8 +172,8 @@ module topbox(
 
     // cable holes
     cable_radius=2;
-    translate([cable_radius,top_width/2,top_height/2-cable_radius-1])rotate([90,0,0]) cylinder(r=cable_radius,h=10,center=true);
-    translate([-cable_radius,top_width/2,top_height/2-cable_radius-1])rotate([90,0,0]) cylinder(r=cable_radius,h=10,center=true);
+    translate([cable_radius-0.5,top_width/2,top_height/2-cable_radius-1])rotate([90,0,0]) cylinder(r=cable_radius,h=10,center=true);
+    translate([-cable_radius+0.5,top_width/2,top_height/2-cable_radius-1])rotate([90,0,0]) cylinder(r=cable_radius,h=10,center=true);
 
 
     }
