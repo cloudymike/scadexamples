@@ -69,13 +69,16 @@ module topbox(
     fancount=3,
     coolercount=1,
     faninput=true,
-    coolerinput=true
+    coolerinput=true,
+    cablehole=true
     )
 {
     top_height = 25;
     infancount = (faninput) ? 1:0;
     incoolercount = (coolerinput) ? 1:0;
     top_length = wall_depth*2+fancount*tilesize+coolercount*tilesize+infancount*tilesize+incoolercount*tilesize+tilesize;
+
+    cable_radius=2;
     
     top_width = tilesize+2*wall_depth;
     echo("topbox size:",top_length,top_width,top_height);
@@ -171,10 +174,11 @@ module topbox(
         cylinder(r=screw_radius,h=top_height+0.01, center=true);
 
     // cable holes
-    cable_radius=2;
-    translate([cable_radius-0.5,top_width/2,top_height/2-cable_radius-1])rotate([90,0,0]) cylinder(r=cable_radius,h=10,center=true);
-    translate([-cable_radius+0.5,top_width/2,top_height/2-cable_radius-1])rotate([90,0,0]) cylinder(r=cable_radius,h=10,center=true);
-
+    if (cablehole)
+    {
+      translate([cable_radius-0.5,top_width/2,top_height/2-cable_radius-1])rotate([90,0,0]) cylinder(r=cable_radius,h=10,center=true);
+      translate([-cable_radius+0.5,top_width/2,top_height/2-cable_radius-1])rotate([90,0,0]) cylinder(r=cable_radius,h=10,center=true);
+    }
 
     }
 }
@@ -183,5 +187,6 @@ topbox(
     fancount=0,
     coolercount=2,
     faninput=false,
-    coolerinput=false
+    coolerinput=false,
+    cablehole=true
     );
