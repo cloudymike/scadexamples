@@ -11,7 +11,8 @@ use <MCAD/boxes.scad>
 module baseplate(
     board_version,
     bottom_holes=[],
-    top_holes=[]
+    top_holes=[],
+    lightswitch_holes=true // add mounting holes for lightswitch size and distance
     )
 {
 include <parameters.scad>
@@ -62,6 +63,13 @@ include <parameters.scad>
             translate([center_x, center_y, 0])
                 cylinder(r=cablehole_radius,h=4*wall_depth, center=true);
         }
+        
+        //mounting holes on lightswitch disance
+        if (lightswitch_holes)
+        {
+          translate([96.5/2,0,0]) cylinder(d=3.5,h=base_height*2,center=true);
+          translate([-96.5/2,0,0]) cylinder(d=3.5,h=base_height*2,center=true);
+        }
     }
 
 
@@ -91,5 +99,6 @@ include <parameters.scad>
 baseplate(
     board_version="full",
     bottom_holes=[1,31,32,33,63],
-    top_holes=[32]
+    top_holes=[32],
+    lightswitch_holes=true
 );
