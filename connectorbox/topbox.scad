@@ -13,6 +13,7 @@ $fa = 1;
 $fs = 0.4;
 board_buffer = 3;
 wall_depth = 2.5;
+top_depth = 14;
 corner_radius=5;
 knurl_depth = 5;
 screw_radius = 1.75;
@@ -25,7 +26,7 @@ tilesize = 15;
 module plug062tile()
 {
   difference () {
-    cube([tilesize,tilesize,wall_depth],center=true);
+    cube([tilesize,tilesize,top_depth],center=true);
     translate([0,0,0]) cube([3,7,wall_depth+0.01],center=true);
   }
   // Connectors
@@ -35,7 +36,7 @@ module plug062tile()
 module recep062tile()
 {
   difference () {
-    cube([tilesize,tilesize,wall_depth],center=true);
+    cube([tilesize,tilesize,top_depth],center=true);
     translate([0,0,0]) cube([3,7,wall_depth+0.01],center=true);
   }
   // Connectors
@@ -46,8 +47,8 @@ module recep093tile()
 {
   
   difference () {
-    cube([tilesize,tilesize,wall_depth],center=true);
-    translate([0,0.2,0]) cube([4,10.4,wall_depth+0.01],center=true);
+    translate([0,0,-top_depth/2+0.25]) cube([tilesize,tilesize,top_depth+2],center=true);
+    translate([0,0.2,0]) cube([6,12.4,100],center=true);
   }
   // Connectors
   rotate([0,0,180]) translate([0,-3,-14.8]) rotate([0,0,90]) receptacle();
@@ -57,7 +58,7 @@ module recep093tile()
 module plug093tile()
 {
   difference () {
-    cube([tilesize,tilesize,wall_depth],center=true);
+    cube([tilesize,tilesize,top_depth],center=true);
     translate([0,0,0]) cube([5,10,wall_depth+0.01],center=true);
   }
   // Connectors
@@ -100,6 +101,7 @@ module topbox(
       //Connector Holes
       //translate([0,2,0])cube([4,8,2*top_height],center=true);
       cube([top_length-4*corner_radius,top_width-2*wall_depth,top_height*10], center=true);
+      
     }
 
     // Connector tiles
@@ -134,6 +136,11 @@ module topbox(
        }
     }
 
+   //Support walls
+      cube([top_length,0.8,top_height],center=true);
+      translate([top_length/2-corner_screw_distance-screw_radius-wall_depth,0,0]) cube([wall_depth,top_width,top_height],center=true);
+      translate([-(top_length/2-corner_screw_distance-screw_radius-wall_depth),0,0]) cube([wall_depth,top_width,top_height],center=true);
+ 
     // screw columns
       translate([(top_length/2-corner_screw_distance),
         (top_width/2-corner_screw_distance),
@@ -176,8 +183,8 @@ module topbox(
     // cable holes
     if (cablehole)
     {
-      translate([cable_radius-0.5,top_width/2,top_height/2-cable_radius-1])rotate([90,0,0]) cylinder(r=cable_radius,h=10,center=true);
-      translate([-cable_radius+0.5,top_width/2,top_height/2-cable_radius-1])rotate([90,0,0]) cylinder(r=cable_radius,h=10,center=true);
+      translate([cable_radius-0.5,top_width/2,top_height/2-cable_radius-1])rotate([90,0,0]) cylinder(r=cable_radius,h=top_width,center=true);
+      translate([-cable_radius+0.5,top_width/2,top_height/2-cable_radius-1])rotate([90,0,0]) cylinder(r=cable_radius,h=top_width/2,center=true);
     }
 
     }
