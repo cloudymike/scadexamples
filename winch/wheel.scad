@@ -2,10 +2,10 @@
 $fn=64;
 
 wheelWidth=12;
-coreRadius=10;
-flangesRadius=30;
+coreRadius=5;
+flangesRadius=10;
 axelLength=8.86;
-axelRadius=1.5;
+axelRadius=1.6;
 axelCutout=0.56;
 tieHoleRadius=0.5;
 
