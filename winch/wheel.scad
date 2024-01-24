@@ -5,9 +5,9 @@ wheelWidth=12;
 coreRadius=5;
 flangesRadius=10;
 axelLength=8.86;
-axelRadius=1.6;
+axelRadius=1.65;
 axelCutout=0.56;
-tieHoleRadius=0.5;
+tieHoleRadius=1;
 
 difference ()
 {
