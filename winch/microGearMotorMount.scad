@@ -28,6 +28,8 @@
 //  motor after inserting the motor into the holder.
 //===============================
 
+
+
 //this is motor length without the gearbox
 motor_length = 15;
 //dimension for rounded sides on micro motor
@@ -51,6 +53,7 @@ tab_height = plate_thickness+2;
 tab_width = 5;
 tab_thickness = 1.5;
 
+
 module MicroGearMotorMount()
 {
 	//backplate()
@@ -62,9 +65,7 @@ module MicroGearMotorMount()
 	//add ons in areas that were erased...
 	
 	//back plate
-	translate([plate_length/2-motor_length/2,0,-(motor_height/2+plate_thickness/2)]) backplate();
-	//gearbox tab ... stops motor from sliding forward
-	translate([-motor_length/2+plate_length+tab_thickness/2,0,-motor_height+tab_height-.5]) cube([tab_thickness,tab_width,tab_height], center=true);
+	translate([plate_length/2-motor_length/2,0,-(motor_height/2+plate_thickness/2)]) BackPlate();
 
 	module positives()
 	{
@@ -75,6 +76,7 @@ module MicroGearMotorMount()
 
 		translate([0,0,-motor_height/2+plate_thickness]) 
             cube([motor_length,motor_width+2*housing_thickness,motor_height-plate_thickness], center=true);
+
 	}
 
 	module negatives()
@@ -109,48 +111,59 @@ module MicroGearMotorMount()
             translate([motor_height+tolerance,0,motor_length/2+tolerance]) cube([motor_height,motor_width,motor_length+2],center=true);
         }
     }
-	module backplate()
+  }
+    module BackPlate(tab=true,screw_radius=1.75)
 	{
-		difference()
-		{
-			positives();
-			negatives();
-		}
+      difference()
+      {
+        positives();
+        negatives();
+      }
         
-        module positives()
-        {
-            cube([plate_length,plate_width,plate_thickness],center=true);
-        }
-        module negatives()
-        {
-            mount_holes();
-			tab_slots();
-        }
+      module positives()
+      {
+          cube([plate_length,plate_width,plate_thickness],center=true);
+      }
+      module negatives()
+      {
+          mount_holes();
+        if (tab) {tab_slots();}
+      }
         
-		module mount_holes()
-		{
-			rotate([0,0,0]) 
-                translate([plate_length/2-4,plate_width/2-4,0]) 
-                cylinder(r=1.5, h=plate_thickness+1, $fn=20, center=true);
-			rotate([0,0,0])
-                translate([plate_length/2-4,-(plate_width/2-4),0]) 
-                cylinder(r=1.5, h=plate_thickness+1, $fn=20, center=true);
-			rotate([0,0,0])
-                translate([-(plate_length/2-4),plate_width/2-4,0]) 
-                cylinder(r=1.5, h=plate_thickness+1, $fn=20, center=true);
-			rotate([0,0,0])
-                translate([-(plate_length/2-4),-(plate_width/2-4),0]) 
-                cylinder(r=1.5, h=plate_thickness+1, $fn=20, center=true);
-			
-		}
-		module tab_slots()
-		{
-			translate([0.4*plate_length,tab_width/2, 0]) cube([plate_length,1,plate_thickness+1], center=true);
-			translate([0.4*plate_length,-tab_width/2, 0]) cube([plate_length,1,plate_thickness+1], center=true);
-		}
-	}
-
+      module mount_holes()
+      {
+        rotate([0,0,0]) 
+                  translate([plate_length/2-4,plate_width/2-4,0]) 
+                  cylinder(r=screw_radius, h=plate_thickness+1, $fn=40, center=true);
+        rotate([0,0,0])
+                  translate([plate_length/2-4,-(plate_width/2-4),0]) 
+                  cylinder(r=screw_radius, h=plate_thickness+1, $fn=40, center=true);
+        rotate([0,0,0])
+                  translate([-(plate_length/2-4),plate_width/2-4,0]) 
+                  cylinder(r=screw_radius, h=plate_thickness+1, $fn=40, center=true);
+        rotate([0,0,0])
+                  translate([-(plate_length/2-4),-(plate_width/2-4),0]) 
+                  cylinder(r=screw_radius, h=plate_thickness+1, $fn=40, center=true);
+        
+      }
+      
+      module tab_slots()
+      {
+        translate([0.4*plate_length,tab_width/2, 0]) cube([plate_length,1,plate_thickness+1], center=true);
+        translate([0.4*plate_length,-tab_width/2, 0]) cube([plate_length,1,plate_thickness+1], center=true);
+        
+        // If the tongue needs to be thinner
+        //translate([0.4*plate_length,0, -plate_thickness/2]) cube([plate_length,tab_width,2], center=true);
+      }
 	
+
+	   //gearbox tab ... stops motor from sliding forward
+      if (tab)
+      {
+        translate([plate_length/2+tab_thickness/2,0,(tab_height-plate_thickness)/2]) cube([tab_thickness,tab_width,tab_height], center=true);
+      }
 }
 
-MicroGearMotorMount();
+
+BackPlate(tab=false, screw_radius=2.5);
+//MicroGearMotorMount();
