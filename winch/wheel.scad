@@ -2,12 +2,12 @@
 $fn=64;
 
 wheelWidth=12;
-coreRadius=5;
-flangesRadius=10;
+coreRadius=3;
+flangesRadius=7;
 axelLength=8.86;
 axelRadius=1.65;
 axelCutout=0.56;
-tieHoleRadius=1;
+tieHoleRadius=0.5;
 
 difference ()
 {
