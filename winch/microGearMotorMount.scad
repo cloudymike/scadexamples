@@ -46,15 +46,13 @@ housing_thickness = 3;
 //this will reduce the effective housing thickness above
 tolerance = 0.25;
 
-plate_thickness = 3;
-plate_width = 35;
+plate_width = 40;
+
 plate_length = motor_length+gearbox_length;
-tab_height = plate_thickness+2;
-tab_width = 5;
-tab_thickness = 1.5;
 
-
-module MicroGearMotorMount()
+module MicroGearMotorMount(
+  plate_thickness = 3
+)
 {
 	//backplate()
 	difference()
@@ -65,7 +63,7 @@ module MicroGearMotorMount()
 	//add ons in areas that were erased...
 	
 	//back plate
-	translate([plate_length/2-motor_length/2,0,-(motor_height/2+plate_thickness/2)]) BackPlate();
+	translate([plate_length/2-motor_length/2,0,-(motor_height/2+plate_thickness/2)]) BackPlate(plate_thickness);
 
 	module positives()
 	{
@@ -112,8 +110,14 @@ module MicroGearMotorMount()
         }
     }
   }
-    module BackPlate(tab=true,screw_radius=1.75)
+
+
+module BackPlate(plate_thickness=3,tab=true,screw_radius=1.75)
 	{
+      tab_height = plate_thickness+2;
+      tab_width = 5;
+      tab_thickness = 1.5;
+
       difference()
       {
         positives();
@@ -153,7 +157,7 @@ module MicroGearMotorMount()
         translate([0.4*plate_length,-tab_width/2, 0]) cube([plate_length,1,plate_thickness+1], center=true);
         
         // If the tongue needs to be thinner
-        //translate([0.4*plate_length,0, -plate_thickness/2]) cube([plate_length,tab_width,2], center=true);
+        translate([0.4*plate_length,0, -plate_thickness/2]) cube([plate_length,tab_width,2], center=true);
       }
 	
 
@@ -165,5 +169,5 @@ module MicroGearMotorMount()
 }
 
 
-BackPlate(tab=false, screw_radius=2.5);
+BackPlate(plate_thickness=5, tab=true, screw_radius=2.5);
 //MicroGearMotorMount();
