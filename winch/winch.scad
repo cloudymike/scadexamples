@@ -37,7 +37,8 @@ translate([plate_edge,slot_y_pos,wheel_margin]) wireguide(outer_radius=8.86/2,in
 translate([plate_edge,slot_y_pos,plate_top]) rotate([90,0,180]) slotholder(height=total_slot_height,length=plate_length,width=slot_width);
 
 //For checking positioning
-//translate([plate_edge+wheel_spacer,0,0]) rotate([0,90,0]) winch_wheel(flangesRadius=wheel_radius);
+//translate([plate_edge+wheel_spacer,0,0]) rotate([0,90,0]) 
+//winch_wheel(flangesRadius=wheel_radius);
 
 
 module slotholder(
