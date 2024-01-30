@@ -168,6 +168,4 @@ module BackPlate(plate_thickness=3,tab=true,screw_radius=1.75)
       }
 }
 
-
-BackPlate(plate_thickness=5, tab=true, screw_radius=2.5);
-//MicroGearMotorMount();
+MicroGearMotorMount();
