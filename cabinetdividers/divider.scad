@@ -6,6 +6,7 @@ ridge_top_length=42;
 ridge_full_length=52;
 plate_height = 0.65;
 plate_length=69;
+screwhead_radius=2.7;
 
 tolerance=0.2;
 
@@ -13,7 +14,7 @@ module countersink()
 {
   
   //assume a 90 degree angle. For US inch screws it is probably 82 degrees
-  radius=2.75;
+  radius=screwhead_radius;
   depth=2.75;
   rotate_extrude($fn=200)
   polygon(points=[[0,0],[radius,0],[0,depth]], paths=[[0,1,2]]);
@@ -60,8 +61,9 @@ module screwstrip(ridges=2)
       if ((step % 5) == 0)
       {
         ridge_x_pos = step*(ridge_width+valley_width);
-        translate([ridge_x_pos,0,ridge_height/2]) rotate([180,0,0])countersink();
-        translate([ridge_x_pos,0,ridge_height/2]) cylinder(d=3.2,h=100,center=true,$fn=64);
+        translate([ridge_x_pos,0,ridge_height/2-0.5]) rotate([180,0,0])countersink();
+        translate([ridge_x_pos,0,ridge_height/2]) cylinder(r=screwhead_radius,h=1,center=true,$fn=64);
+        translate([ridge_x_pos,0,ridge_height/2]) cylinder(r=1.6,h=100,center=true,$fn=64);
       }
      }
     
