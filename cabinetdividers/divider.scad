@@ -58,7 +58,7 @@ module screwstrip(ridges=2)
     strip(ridges);
     for (step = [0:ridges-1])
     {
-      if ((step % 5) == 0)
+      if ((step % 7) == 0)
       {
         ridge_x_pos = step*(ridge_width+valley_width);
         translate([ridge_x_pos,0,ridge_height/2-0.5]) rotate([180,0,0])countersink();
@@ -70,6 +70,6 @@ module screwstrip(ridges=2)
   }
 }
 
-// 16 is probably max length for printing
-screwstrip(1);
+// 15 is right length for cabinets
+screwstrip(15);
 
