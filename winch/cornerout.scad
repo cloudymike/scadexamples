@@ -25,7 +25,7 @@ low_thickness=3;
 original_thickness=5;
 
 plate_thickness=low_thickness+original_thickness;
-screw_radius=1.75;
+screw_radius=2.5;
 corner_radius=40;
 
 sqr2=1.4142;
