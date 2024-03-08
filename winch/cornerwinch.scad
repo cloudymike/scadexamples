@@ -43,6 +43,7 @@ difference() {
   rotate([45,0,0])cube([plate_width,plate_thickness*sqr2,plate_thickness*sqr2],center=true);
   translate([0,-plate_width/2,-plate_center-plate_thickness/2])
   rotate([45,0,0])cube([plate_width,plate_thickness*sqr2,plate_thickness*sqr2],center=true);
+  //cube([20,200,200],center=true); // debug cube
 }
 
 //  translate([0,plate_width/2,-plate_center-plate_thickness/2])rotate([45,0,0])cube([plate_width,plate_thickness*sqr2,plate_thickness*sqr2],center=true);
