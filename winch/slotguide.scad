@@ -64,6 +64,34 @@ module wireguide(
   
 }
 
-wireguide(outer_radius=8.86/2,inner_radius=1,height=3,steps=3);
+module holster(
+  outer_radius=4.43,
+  inner_radius=1,
+  height=3,
+  steps=3,
+  spacer_column=1
+)
+{
+  
+  wall=2;
+  space=0.5;
+  
+  difference() {
+    cylinder(r=outer_radius+space+wall,h=2*height*steps,center=true, $fn=64);
+    cylinder(r=outer_radius+space,h=2*height*steps,center=true, $fn=64);
+    translate([-(outer_radius+3)/2,0,0])cube([outer_radius+3,outer_radius-inner_radius+2,2*height*steps],center=true);     
+  }
+  translate([0,0,height*steps+wall/2])
+  difference() {
+    cylinder(r=outer_radius+space+wall,h=wall,center=true, $fn=64);
+    cylinder(r=inner_radius,h=wall,center=true,$fn=64);
+    translate([-(outer_radius+space+wall)/2,0,0])cube([outer_radius+space+wall,inner_radius,wall],center=true);
+  }
+}
+
+
+//wireguide(outer_radius=8.86/2,inner_radius=1,height=3,steps=3);
 //halfring();
 //onestep(outer_radius=4,inner_radius=1,height=2);
+
+#translate([5.5,0,12])holster(outer_radius=8.86/2,height=3,steps=3);
