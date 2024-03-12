@@ -114,7 +114,8 @@ module MicroGearMotorMount(
 
 module BackPlate(plate_thickness=3,tab=true,screw_radius=1.75)
 	{
-      tab_height = plate_thickness+2;
+      tongue_thickness=2;
+      tab_height = tongue_thickness+2;
       tab_width = 5;
       tab_thickness = 1.5;
 
@@ -157,15 +158,41 @@ module BackPlate(plate_thickness=3,tab=true,screw_radius=1.75)
         translate([0.4*plate_length,-tab_width/2, 0]) cube([plate_length,1,plate_thickness+1], center=true);
         
         // If the tongue needs to be thinner
-        translate([0.4*plate_length,0, -plate_thickness/2]) cube([plate_length,tab_width,2], center=true);
+        translate([0.4*plate_length,0, -tongue_thickness]) cube([plate_length,tab_width,plate_thickness], center=true);
       }
 	
 
 	   //gearbox tab ... stops motor from sliding forward
       if (tab)
       {
-        translate([plate_length/2+tab_thickness/2,0,(tab_height-plate_thickness)/2]) cube([tab_thickness,tab_width,tab_height], center=true);
+        translate([plate_length/2+tab_thickness/2,0,plate_thickness/2]) cube([tab_thickness,tab_width-1,tab_height], center=true);
+        
+        //Print a very thin support that will break, so tab can be printed in upright rotation
+        support_thickness=0.1;
+        translate([plate_length/2,(tab_width-1)/2,plate_thickness/2])rotate([0,0,180])prism(support_thickness,tab_height-tongue_thickness,tab_height-tongue_thickness);
+        translate([plate_length/2,-(tab_width-1)/2+support_thickness,plate_thickness/2])rotate([0,0,180])prism(support_thickness,tab_height-tongue_thickness,tab_height-tongue_thickness);
       }
+}
+
+//Draw a prism based on a 
+//right angled triangle
+//l - length of prism
+//w - width of triangle
+//h - height of triangle
+//From https://github.com/orionrobots/openscad_parts_library/blob/master/prism.scad
+module prism(l, w, h) {
+       polyhedron(points=[
+               [0,0,h],           // 0    front top corner
+               [0,0,0],[w,0,0],   // 1, 2 front left & right bottom corners
+               [0,l,h],           // 3    back top corner
+               [0,l,0],[w,l,0]    // 4, 5 back left & right bottom corners
+       ], faces=[ // points for all faces must be ordered clockwise when looking in
+               [0,2,1],    // top face
+               [3,4,5],    // base face
+               [0,1,4,3],  // h face
+               [1,2,5,4],  // w face
+               [0,3,5,2],  // hypotenuse face
+       ]);
 }
 
 MicroGearMotorMount();
