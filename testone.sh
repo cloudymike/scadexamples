@@ -1,7 +1,8 @@
 #!/bin/bash
 FILE=$1
 IGNOREFILES="./worktable/dimple_vectors.scad ./electrocookie/parameters.scad ./drawer/TOUL.scad"
-IGNOREDIRS="./Write.scad ./scad-utils"
+# Do not test external libraries imported as submodules
+IGNOREDIRS="./Write.scad ./scad-utils ./gridfinity-rebuilt-openscad"
 
 DIR="$(dirname "${FILE}")"
 BASE="$(basename "${FILE}")"
