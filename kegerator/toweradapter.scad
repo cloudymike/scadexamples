@@ -19,7 +19,7 @@ hole_diameter=30.5;
 oldscrewhole_diameter=5.5;
 oldscrewhole_distance=77.5/2;
 
-newscrewhole_distance=87.32/2;
+newscrewhole_distance=83.31/2;
 newscrewhole_diameter=6.5;
 
 nut_diameter=12;
@@ -50,14 +50,14 @@ difference()
   rotate([0,0,-135])translate([oldscrewhole_distance,0,-full_height/2+m5_well])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
   
   //Cutout for testing screw holes, comment out later
-  rotate([0,0,45])translate([oldscrewhole_distance,0,0]) donutmask();
+  //rotate([0,0,45])translate([oldscrewhole_distance,0,0]) donutmask();
   //rotate([0,0,0])translate([newscrewhole_distance,0,0]) donutmask();
   
   //Cutout for ring size
   //translate([0,0,-3]) cylinder(h=full_height,d=120,center=true);
   
   //Cutout for top
-  //translate([0,0,2]) cylinder(h=full_height,d=120,center=true);
+  translate([0,0,2]) cylinder(h=full_height,d=120,center=true);
 }
 
 
