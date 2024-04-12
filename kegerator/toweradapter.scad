@@ -1,28 +1,28 @@
 
-socket_height=9;
-oldgasket_height=1;
+socket_height=7.5;
+oldgasket_height=0;
 newgasket_height=3.5;
 nut_height=5;
 m6_length=16;
 m5_length=16;
 m5_countersink_depth=2.9;
-m5_countersink_top_diameter=9;
+m5_countersink_top_diameter=9.2;
 
 top_height=m6_length-newgasket_height;
 
 full_height=top_height+socket_height+oldgasket_height;
 
-new_diameter=98.5;
-socket_diameter=89;
+new_diameter=104;
+socket_diameter=90;
 hole_diameter=30.5;
 
-oldscrewhole_diameter=6;
+oldscrewhole_diameter=5.5;
 oldscrewhole_distance=77.5/2;
 
 newscrewhole_distance=87.32/2;
 newscrewhole_diameter=6.5;
 
-nut_diameter=9.80;
+nut_diameter=12;
 
 difference()
 {
@@ -48,6 +48,16 @@ difference()
   rotate([0,0,-45])translate([oldscrewhole_distance,0,-full_height/2+m5_well])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
   rotate([0,0,135])translate([oldscrewhole_distance,0,-full_height/2+m5_well])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
   rotate([0,0,-135])translate([oldscrewhole_distance,0,-full_height/2+m5_well])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
+  
+  //Cutout for testing screw holes, comment out later
+  rotate([0,0,45])translate([oldscrewhole_distance,0,0]) donutmask();
+  //rotate([0,0,0])translate([newscrewhole_distance,0,0]) donutmask();
+  
+  //Cutout for ring size
+  //translate([0,0,-3]) cylinder(h=full_height,d=120,center=true);
+  
+  //Cutout for top
+  //translate([0,0,2]) cylinder(h=full_height,d=120,center=true);
 }
 
 
@@ -67,4 +77,21 @@ module countersink(top_radius, hole_radius, sink_depth)
       polygon([[0,0],[top_radius,0],[hole_radius,sink_depth],[0,sink_depth]]);
 }
 
+module donutmask()
+{
+  difference()
+  {
+    cylinder(r=120,h=40,center=true);
+    cylinder(d=20,h=40,center=true);
+  }
+}
+
+
+// Test designs, remove later
+///////////////////////////////////////////
+
+// Countersink test
 //translate([60,0,0]) countersink(4.5,2.5,2.9);
+
+// nut sizing
+//cylinder(d=nut_diameter,h=10,center=true,$fn=6);translate([0,0,10])cylinder(d=nut_diameter,h=10,center=true,$fn=128);
