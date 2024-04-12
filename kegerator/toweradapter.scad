@@ -57,7 +57,7 @@ difference()
   //translate([0,0,-3]) cylinder(h=full_height,d=120,center=true);
   
   //Cutout for top
-  translate([0,0,2]) cylinder(h=full_height,d=120,center=true);
+  //translate([0,0,1]) cylinder(h=full_height,d=120,center=true);
 }
 
 
