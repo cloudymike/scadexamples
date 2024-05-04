@@ -1,4 +1,5 @@
 *.stl
 *.gcode
+*.png
 dumplicate.csv
 *.default
