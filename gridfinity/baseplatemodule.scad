@@ -25,7 +25,7 @@ n_screws = 1; // [1:3]
 // where to align extra space along x
 fitx = -1; // [-1:0.1:1]
 // where to align extra space along y
-fity = 0; // [-1:0.1:1]
+fity = -1; // [-1:0.1:1]
 
 
 /* [Styles] */
