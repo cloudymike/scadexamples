@@ -16,7 +16,7 @@ module m3knurl_ring(knurl_depth = 5)
 
     difference() {   
         cylinder(h=knurl_depth, r=knurl_radius+knurl_wall,center=true);
-        m3knurl_pocket(knurl_depth = 5);
+        m3knurl_pocket(knurl_depth = knurl_depth);
     }
     
 }
