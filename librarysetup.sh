@@ -12,3 +12,13 @@ rm -f v${BOSLVERSION}.tar.gz
 rm -rf BOSL
 mv BOSL-${BOSLVERSION} BOSL
 popd
+
+# Install MCAD library
+MCADVERSION="2019.05"
+pushd ${LIBRARYDIR}
+wget https://github.com/openscad/MCAD/archive/refs/tags/openscad-${MCADVERSION}.tar.gz
+tar xvzf openscad-${MCADVERSION}.tar.gz
+rm -f openscad-${MCADVERSION}.tar.gz
+rm -rf MCAD
+mv MCAD-openscad-${MCADVERSION} MCAD
+popd
