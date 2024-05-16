@@ -50,4 +50,4 @@ jobs:
         run: source librarysetup.sh
 
       - name: Run test
-        run: source testparallel.sh
+        run: source testserial.sh
