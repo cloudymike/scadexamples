@@ -11,7 +11,7 @@ height7=4;
 height = height7*7;
 interval = 7;
 diameter=5.5+2*OverExtrusion;
-leadDiameter=0.5+2*OverExtrusion;
+leadDiameter=0.7+2*OverExtrusion;
 LEDdepth=2;
 
 BoxUnits=42;
