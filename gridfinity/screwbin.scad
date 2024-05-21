@@ -15,7 +15,7 @@ module Mscrewbin(
   $fn=120;
   OverExtrusion = 0.2;
   theanswer=42;
-  height7=6;
+  height7=5;
   height = height7*7;
   interval = 16.5;
   diameter=14.2+2*OverExtrusion;
@@ -62,4 +62,4 @@ module Mscrewbin(
   
 }
 
-Mscrewbin("M3",8);
+Mscrewbin("M3",10);
