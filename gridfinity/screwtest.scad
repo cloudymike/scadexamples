@@ -52,7 +52,7 @@ module TestHoleCutout(Msize, length)
 
 //Calculate Z position based on top of existing module and length of test screw
 function TopLevel(length, currentTop) = currentTop-length/2;
-
+function sideOffset(Msize) = (selector(Msize, ClearanceD)+2*wall)/2;
 
 // Test and example of usage. The test cube is assumed to be an existing module.
 testType="M3";
