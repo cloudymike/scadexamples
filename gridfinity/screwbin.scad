@@ -65,5 +65,5 @@ module Mscrewbin(
   
 }
 
-Mscrewbin("M3",6);
+Mscrewbin("M3",4);
 
