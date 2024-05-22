@@ -34,20 +34,47 @@ wall=1;
 
 //Create a test hole with a wall of "wall" size
 // Make the hole 0.5 mm shorter than actual screw to make scre just bottom out.
-module TestHole(Msize, length)
+module oldTestHole(Msize, length, height)
 {
   HoleD=selector(Msize, ClearanceD);
   difference() {
-    cylinder(h=length,d=HoleD+2*wall,center=true, $fn=64);
-    translate([0,0,0.5]) cylinder(h=length,d=HoleD,center=true, $fn=64);
+    translate([0,0,height/2])cylinder(h=height,d=HoleD+2*wall,center=true, $fn=64);
+    translate([0,0,TopLevel(length, height)+0.5]) cylinder(h=length,d=HoleD,center=true, $fn=64);
   }
 }
 
-//Create a cylinder slightly smaller than test hole to allow a cutout in existing module
-module TestHoleCutout(Msize, length)
+//Create a test hole with a wall of "wall" size
+// Make the hole 0.5 mm shorter than actual screw to make scre just bottom out.
+module TestHole(Msize, length, height)
 {
   HoleD=selector(Msize, ClearanceD);
-    cylinder(h=length,d=HoleD+2*wall-0.1,center=true, $fn=64);
+  h=height-5;
+  difference() {
+    translate([0,0,TopLevel(h,height)])cylinder(h=h,d=HoleD+2*wall,center=true, $fn=64);
+    translate([0,0,TopLevel(length, height)+0.5]) cylinder(h=length,d=HoleD,center=true, $fn=64);
+  }
+}
+
+//Create a test hole with a wall of "wall" size
+// Make the hole 0.5 mm shorter than actual screw to make scre just bottom out.
+module clearanceCylinder(Msize, length, height)
+{
+  HoleD=selector(Msize, ClearanceD);
+  translate([0,0,TopLevel(length, height)+0.5]) cylinder(h=length,d=HoleD,center=true, $fn=64);
+}
+
+module wallCylinder(Msize, length, height)
+{
+  HoleD=selector(Msize, ClearanceD);
+  h=height-5;
+  translate([0,0,TopLevel(h,height)])cylinder(h=h,d=HoleD+2*wall,center=true, $fn=64);
+}
+
+//Create a cylinder slightly smaller than test hole to allow a cutout in existing module
+module TestHoleCutout(Msize, length, height)
+{
+  HoleD=selector(Msize, ClearanceD);
+  translate([0,0,TopLevel(length, height)])cylinder(h=length,d=HoleD+2*wall-0.1,center=true, $fn=64);
 }
 
 //Calculate Z position based on top of existing module and length of test screw
@@ -56,13 +83,13 @@ function sideOffset(Msize) = (selector(Msize, ClearanceD)+2*wall)/2;
 
 // Test and example of usage. The test cube is assumed to be an existing module.
 testType="M3";
-testLength=6;
-testCubeSize=7;
+testLength=12;
+testCubeSize=20;
 xPos=testCubeSize/2;
 yPos=testCubeSize/2;
 
-difference () {
-cube([testCubeSize,testCubeSize,testCubeSize]);
-translate([xPos,yPos,TopLevel(testLength,testCubeSize)])TestHoleCutout(testType,testLength);
-}
-translate([xPos,yPos,TopLevel(testLength,testCubeSize)])TestHole(testType,testLength);
+//difference () {
+//  cube([testCubeSize,testCubeSize,testCubeSize]);
+//  translate([xPos,yPos,0])TestHoleCutout(testType,testLength, testCubeSize);
+//}
+translate([xPos,yPos,0])TestHole(testType,testLength,testCubeSize);

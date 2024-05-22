@@ -53,9 +53,9 @@ module Mscrewbin(
         style_hole=StyleHole 
       );
     }
-    translate([18-sideOffset(Mtype),18-sideOffset(Mtype),TopLevel(screwLength,height)])TestHoleCutout(Mtype,screwLength);
+    translate([18-sideOffset(Mtype),18-sideOffset(Mtype),0])TestHoleCutout(Mtype,screwLength, height);
     }
-    translate([18-sideOffset(Mtype),18-sideOffset(Mtype),TopLevel(screwLength,height)])TestHole(Mtype,screwLength);
+    translate([18-sideOffset(Mtype),18-sideOffset(Mtype),1])TestHole(Mtype,screwLength, height);
   
   labelString=str(Mtype," ",screwLength,"mm");
   labelHeight=6;
@@ -65,4 +65,5 @@ module Mscrewbin(
   
 }
 
-Mscrewbin("M3",12);
+Mscrewbin("M3",6);
+
