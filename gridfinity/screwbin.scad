@@ -58,8 +58,11 @@ module Mscrewbin(
     translate([18-sideOffset(Mtype),18-sideOffset(Mtype),TopLevel(screwLength,height)])TestHole(Mtype,screwLength);
   
   labelString=str(Mtype," ",screwLength,"mm");
-  translate([-16,12,height])write(labelString);
+  labelHeight=6;
+  labelThickness=2;
+  labelFont="Letters.dxf";
+  translate([-17,7,height])write(labelString, h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
   
 }
 
-Mscrewbin("M3",10);
+Mscrewbin("M3",12);
