@@ -8,7 +8,7 @@ use <../Write/Write.scad>
 
 
 module labelbin(
-  label=" "
+  label=" ", size=1
   )
 {
   $fn=120;
@@ -27,14 +27,14 @@ module labelbin(
   
   /* [Features] */
   // the type of tabs
-  style_tab = 1; //[0:Full,1:Auto,2:Left,3:Center,4:Right,5:None]
+  style_tab = 0; //[0:Full,1:Auto,2:Left,3:Center,4:Right,5:None]
   // how should the top lip act
   style_lip = 0; //[0: Regular lip, 1:remove lip subtractively, 2: remove lip and retain height]
   // scoop weight percentage. 0 disables scoop, 1 is regular scoop. Any real number will scale the scoop.
   scoop = 1; //[0:0.1:1]
   
   BoxUnits=42;
-  BoxLengthUnits=1;
+  BoxLengthUnits=size;
   BoxWidthUnits=1;
   StyleHole=4; // [0:no holes, 1:magnet holes only, 2: magnet and screw holes - no printable slit, 3: magnet and screw holes - printable slit, 4: Gridfinity Refined hole - no glue needed]
   WallAdjust = 2;
@@ -54,12 +54,12 @@ module labelbin(
   
   
   labelString=str(label);
-  labelHeight=6;
+  labelHeight=5;
   labelThickness=2;
   labelFont="Letters.dxf";
   translate([-17,9,height])write(labelString, h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
   
 }
 
-labelbin("M3 nut");
+labelbin("M3 45mm",size=2);
 
