@@ -7,8 +7,7 @@ use <../Write/Write.scad>
 // Does not try to make it symmetric
 
 
-module labelbin(
-  label="", 
+module labelbin(  label="", 
   label2="",
   size=1,
   textsize = 5
@@ -65,4 +64,3 @@ module labelbin(
 }
 
 labelbin("Knurled nut",label2="M3x4x5 ",size=1, textsize=3);
-
