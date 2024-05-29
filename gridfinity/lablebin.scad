@@ -8,8 +8,11 @@ use <../Write/Write.scad>
 
 
 module labelbin(
-  label=" ", size=1
-  )
+  label="", 
+  label2="",
+  size=1,
+  textsize = 5
+ )
 {
   $fn=120;
   OverExtrusion = 0.2;
@@ -53,13 +56,13 @@ module labelbin(
   }
   
   
-  labelString=str(label);
-  labelHeight=5;
+  labelHeight=textsize;
   labelThickness=2;
   labelFont="Letters.dxf";
-  translate([-17,9,height])write(labelString, h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+  translate([-17,17-textsize,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+  if (label2!="") translate([-17,10-textsize,height])write(str(label2), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
   
 }
 
-labelbin("M3 45mm",size=2);
+labelbin("Knurled nut",label2="M3x4x5 ",size=1, textsize=3);
 
