@@ -9,10 +9,9 @@ use <../Write/Write.scad>
 
 module labelbin(  label="", 
   label2="",
-  size=1,
-  textsize = 5
- )
+  size=1 )
 {
+  textsize = 5; //Smaller requires high res printing
   $fn=120;
   OverExtrusion = 0.2;
   theanswer=42;
@@ -58,9 +57,38 @@ module labelbin(  label="",
   labelHeight=textsize;
   labelThickness=2;
   labelFont="Letters.dxf";
-  translate([-17,17-textsize,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
-  if (label2!="") translate([-17,10-textsize,height])write(str(label2), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
-  
+  if (label2!="") 
+  {
+    translate([-17,17-textsize,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+    translate([-17,11-textsize,height])write(str(label2), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+  }
+  else
+    translate([-17,15-textsize,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+    
 }
 
-labelbin("Knurled nut",label2="M3x4x5 ",size=1, textsize=3);
+
+module labletest(
+  label="", 
+  label2="",
+  size=1
+)
+{
+  textsize = 5; //Smaller requires high res printing
+  height=1;
+  cube([38,13,height]);
+  labelHeight=textsize;
+  labelThickness=2;
+  labelFont="Letters.dxf";
+  if (label2!="") 
+  {
+    translate([textsize/2,6-textsize,height])write(str(label2), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+    translate([textsize/2,12-textsize,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+  }
+  else
+        translate([textsize/2,10-textsize,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+
+}
+labelbin("M3x50mm",label2="",size=2);
+
+//labletest("M3 spring",label2="washer",size=1);
