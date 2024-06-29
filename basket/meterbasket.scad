@@ -1,12 +1,12 @@
 use <basket_module.scad>
 
-basketheight = 60;
-basketwidth = 170;
+basketwidth = 80;
+basketlength = 170;
 basketdepth = 25;
 
 basket(
-  binDimensions = [ basketwidth, basketheight, basketdepth],
-  binWallThickness = 2,
+  binDimensions = [ basketlength, basketwidth, basketdepth],
+  binWallThickness = 3,
   binMaxGapSize = 15,
   screwSlotPositions = [
     [ 2,0 ],
