@@ -12,6 +12,7 @@ boardheight=4.85+printmargin;
 slotdepth=(boardwidth-USBCwidth)/2;
 wallheight = wall+slotdepth+boardheight+wall+2;
 
+frontwall=1;
 
 
 module boardslot()
@@ -40,15 +41,20 @@ module usbc_hole(wall=1)
 {
   height=3.14+2*printmargin;
   width=8.84+2*printmargin;
-  cube([width-height,height,wall],center=true);
-  translate([-(width-height)/2,0,0])cylinder(d=height,h=wall,center=true, $fn=64);
-  translate([(width-height)/2,0,0])cylinder(d=height,h=wall,center=true, $fn=64);
+  translate([0,height/2,0]) {
+    cube([width-height,height,wall],center=true);
+    translate([-(width-height)/2,0,0])cylinder(d=height,h=wall,center=true, $fn=64);
+    translate([(width-height)/2,0,0])cylinder(d=height,h=wall,center=true, $fn=64);
+  }
 }
 
 
-//boardslot();
 difference()
 {
-  cube([12,6,1],center=true);
-  usbc_hole();
+  union () {
+    boardslot();
+    translate([0,-boardlength/2-frontwall/2,wallheight/2]) cube([boardwidth+2*wall,1,wallheight],center=true);
+  }
+  usbZ=wall+2*boardthickness;
+  translate([0,0,usbZ])rotate([90,0,0]) usbc_hole(boardlength+2*frontwall);
 }
