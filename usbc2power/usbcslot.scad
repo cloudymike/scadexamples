@@ -2,13 +2,13 @@
 printmargin=0.2;
 
 wall=2;
-boardwidth=10.62;
+boardwidth=10.62+printmargin;
 USBCwidth=8.83;
 boardlength=16.3;
-boardthickness=1.68;
-boardheight=4.85;
+boardthickness=1.68+printmargin/2;
+boardheight=4.85+printmargin;
 slotdepth=(boardwidth-USBCwidth)/2;
-wallheight = wall+slotdepth+boardheight+wall+1;
+wallheight = wall+slotdepth+boardheight+wall+2;
 
 
 //bottom
