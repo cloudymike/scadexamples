@@ -1,3 +1,4 @@
+use <../Write/Write.scad>
 
 // Global variables
 printmargin=0.2;
@@ -48,13 +49,27 @@ module usbc_hole(wall=1)
   }
 }
 
-
-difference()
+module boardBox(label="20V")
 {
-  union () {
-    boardslot();
-    translate([0,-boardlength/2-frontwall/2,wallheight/2]) cube([boardwidth+2*wall,1,wallheight],center=true);
+
+  labelString=str(label);
+  labelHeight=6;
+  labelThickness=1;
+  labelFont="Letters.dxf";
+
+  difference()
+  {
+    union () {
+      boardslot();
+      translate([0,-boardlength/2-frontwall/2,wallheight/2]) cube([boardwidth+2*wall,1,wallheight],center=true);
+    }
+    usbZ=wall+2*boardthickness-printmargin;
+    translate([0,0,usbZ])rotate([90,0,0]) usbc_hole(boardlength+2*frontwall);
+    translate([labelHeight/2,-boardlength/2+1,wallheight-labelThickness])rotate([0,0,90])write(labelString, h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
   }
-  usbZ=wall+2*boardthickness;
-  translate([0,0,usbZ])rotate([90,0,0]) usbc_hole(boardlength+2*frontwall);
+
+
 }
+
+
+boardBox();
