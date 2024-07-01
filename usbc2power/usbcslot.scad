@@ -8,9 +8,11 @@ wall=2;
 boardwidth=10.62+printmargin;
 USBCwidth=8.83;
 boardlength=16.3;
+
 boardthickness=1.68+printmargin/2;
 boardheight=4.85+printmargin;
 slotdepth=(boardwidth-USBCwidth)/2;
+
 wallheight = wall+slotdepth+boardheight+wall+2;
 
 frontwall=1;
@@ -71,5 +73,28 @@ module boardBox(label="20V")
 
 }
 
+module endClip()
+{
+  cliplength = 5;
+  clipthick=0.5;
+  clipwidth=boardwidth-2*slotdepth;
+  cableD=2.5;
+  difference()
+  {
+    union () {
+      cube([boardwidth+2*wall, wallheight, wall],center=true);
+      translate([0,-wallheight/2+clipthick/2+wall,(wall+cliplength)/2])cube([clipwidth,clipthick,wall+cliplength],center=true);
+      translate([0,wallheight/2-clipthick/2-wall,(wall+cliplength)/2])cube([clipwidth,clipthick,wall+cliplength],center=true);
+    }
+    translate([0,-wallheight/2+cableD/2+wall*2*boardthickness-printmargin,0]){
+      translate([cableD/2,0,0])cylinder(d=cableD,h=wall,center=true, $fn=64);
+      translate([-cableD/2,0,0])cylinder(d=cableD,h=wall,center=true, $fn=64);
+      cube([cableD,cableD,wall],center=true);
+    }
+  }
+}
 
-boardBox();
+
+
+//boardBox();
+endClip();
