@@ -93,8 +93,10 @@ module endClip()
     }
   }
 }
+// Get size to other modules
+function boardBoxX()=boardwidth+2*wall;
+function boardBoxZ()=wallheight;
+function boardBoxY()=boardlength+frontwall;
 
-
-
-//boardBox();
-endClip();
+boardBox();
+//endClip();
