@@ -10,7 +10,7 @@ printmargin=0.2;
 
 screwradius = 1.75;
 
-contactdiameter=5;
+contactdiameter=5+2*printmargin;
 contactdistance=18.8;
 
 module topPlate()
@@ -31,7 +31,7 @@ difference ()
   topPlate();
   
   //controller hole
-  translate([0,10,plateThickness/2])cube([76,39,plateThickness+printmargin],center=true);
+  translate([0,10,plateThickness/2])cube([76,39.5+printmargin,plateThickness+printmargin],center=true);
   
   //contact holes
   translate([20,-23,0])contactholes();
