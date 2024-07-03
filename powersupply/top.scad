@@ -48,4 +48,4 @@ difference ()
 }
 
 // USBC board holder
-translate([-25,-25-boardBoxZ()/2,-boardBoxY()/2+plateThickness-0.5])rotate([-90,0,0]) boardBox();
+translate([-25,-25-boardBoxZ()/2,-boardBoxY()/2+plateThickness-0.5])rotate([-90,0,0]) boardBox("");

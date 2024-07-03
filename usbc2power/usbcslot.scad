@@ -67,7 +67,11 @@ module boardBox(label="20V")
     }
     usbZ=wall+2*boardthickness-printmargin;
     translate([0,0,usbZ])rotate([90,0,0]) usbc_hole(boardlength+2*frontwall);
-    translate([labelHeight/2,-boardlength/2+1,wallheight-labelThickness])rotate([0,0,90])write(labelString, h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+    
+    if (label != "")
+    {
+      translate([labelHeight/2,-boardlength/2+1,wallheight-labelThickness])rotate([0,0,90])write(labelString, h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+    }
   }
 
 
@@ -98,5 +102,5 @@ function boardBoxX()=boardwidth+2*wall;
 function boardBoxZ()=wallheight;
 function boardBoxY()=boardlength+frontwall;
 
-boardBox();
-//endClip();
+boardBox("");
+translate([20,0,0]) endClip();
