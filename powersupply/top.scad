@@ -16,7 +16,7 @@ contactdistance=18.8;
 module topPlate()
 {
   //translate([0,0,plateThickness/2])cube([83,83,plateThickness],center=true);
-  rounded_rectangle(l_grid*2, l_grid*2, plateThickness, 4);
+  rounded_rectangle(l_grid*2-0.6, l_grid*2-0.6, plateThickness, 4);
 }
 
 module contactholes()
@@ -31,7 +31,7 @@ difference ()
   topPlate();
   
   //controller hole
-  translate([0,10,plateThickness/2])cube([76,39.5+printmargin,plateThickness+printmargin],center=true);
+  translate([0,10,plateThickness/2])cube([75.5,39.5,plateThickness+printmargin],center=true);
   
   //contact holes
   translate([20,-23,0])contactholes();
