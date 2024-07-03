@@ -14,7 +14,8 @@ $fn=120;
 OverExtrusion = 0.2;
 theanswer=42;
 Unit=theanswer;
-height7=6;
+//height7=6;
+height7=7;
 heightmm = height7*7+9;
 gridz=height7;
 interval = 16.5;
@@ -51,7 +52,7 @@ difference() {
     );    
   }
   // Hole in box for components
-  translate([0,0,heightmm/2+5])
+  translate([0,0,heightmm/2+6])
     cube([SlotLength+2*OverExtrusion,SlotWidth+2*OverExtrusion,heightmm],center=true);
 
   // Holes for knurls
