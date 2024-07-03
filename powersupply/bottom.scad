@@ -14,8 +14,8 @@ $fn=120;
 OverExtrusion = 0.2;
 theanswer=42;
 Unit=theanswer;
-//height7=6;
 height7=7;
+//height7=1;
 heightmm = height7*7+9;
 gridz=height7;
 interval = 16.5;
@@ -56,10 +56,11 @@ difference() {
     cube([SlotLength+2*OverExtrusion,SlotWidth+2*OverExtrusion,heightmm],center=true);
 
   // Holes for knurls
-  knurldepth=12;
-  translate([-36,-36,heightmm/2+knurldepth/2+5])m3knurl_pocket(knurldepth);
-  translate([36,-36,heightmm/2+knurldepth/2+5])m3knurl_pocket(knurldepth);
-  translate([-36,36,heightmm/2+knurldepth/2+5])m3knurl_pocket(knurldepth);
-  translate([36,36,heightmm/2+knurldepth/2+5])m3knurl_pocket(knurldepth);
+  knurldepth=6;
+  knurlZ=height7*7-knurldepth/2;
+  translate([-36,-36,knurlZ])m3knurl_pocket(knurldepth);
+  translate([36,-36,knurlZ])m3knurl_pocket(knurldepth);
+  translate([-36,36,knurlZ])m3knurl_pocket(knurldepth);
+  translate([36,36,knurlZ])m3knurl_pocket(knurldepth);
 }
 
