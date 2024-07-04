@@ -37,7 +37,7 @@ difference ()
   translate([20,-23,0])contactholes();
   
   //slot for USB connector module
-  translate([-25,-25,plateThickness/2]) cube([boardBoxX(),boardBoxZ(),plateThickness],center=true); 
+  translate([-25,-22,plateThickness/2]) cube([boardBoxX(),boardBoxZ(),plateThickness],center=true); 
 
   // screw holes
   translate([-36,-36,plateThickness/2])cylinder(r=screwradius,h=plateThickness,center=true);
@@ -48,4 +48,4 @@ difference ()
 }
 
 // USBC board holder
-translate([-25,-25-boardBoxZ()/2,-boardBoxY()/2+plateThickness-0.5])rotate([-90,0,0]) boardBox("");
+translate([-25,-22-boardBoxZ()/2,-boardBoxY()/2+plateThickness-0.5])rotate([-90,0,0]) boardBox("");
