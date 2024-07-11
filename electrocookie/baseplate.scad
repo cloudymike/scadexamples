@@ -64,7 +64,7 @@ include <parameters.scad>
                 cylinder(r=cablehole_radius,h=4*wall_depth, center=true);
         }
         
-        //mounting holes on lightswitch disance
+        //mounting holes on lightswitch distance
         if (lightswitch_holes)
         {
           translate([96.5/2,0,0]) cylinder(d=3.5,h=base_height*2,center=true);
