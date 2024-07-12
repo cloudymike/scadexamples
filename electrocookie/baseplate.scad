@@ -2,6 +2,7 @@
 
 use <knurlpocket.scad>
 use <MCAD/boxes.scad>
+use <powerconnector.scad>
 
 
 //================Variables=========================
@@ -12,14 +13,12 @@ module baseplate(
     board_version,
     bottom_holes=[],
     top_holes=[],
-    lightswitch_holes=true // add mounting holes for lightswitch size and distance
+    lightswitch_holes=true, // add mounting holes for lightswitch size and distance
+    power_connector=false  //add power connector on side
     )
 {
 include <parameters.scad>
 
-    base_height = 2 * wall_depth;
-    base_length = box_length;
-    base_width = box_width;
     cablehole_radius = 2.5;
     cable_y_offset = wall_depth + cablehole_radius + 1;
     echo("baseplate size:",base_length,base_width,base_height);
@@ -93,12 +92,22 @@ include <parameters.scad>
         echo("PCP standoff from edge:", (base_length-m3_hole_distance)/2);
     }
     
+    if (power_connector)
+    {      
+      translate([base_length/2-wall_depth,0,pc_height/2+base_height/2])rotate([90,0,90])powerconnector();
+    }
+    
 }
 
 // Example instantiation
+
+difference() {
 baseplate(
     board_version="full",
-    bottom_holes=[1,31,32,33,63],
-    top_holes=[32],
-    lightswitch_holes=true
+    bottom_holes=[1,11],
+    top_holes=[22],
+    lightswitch_holes=true,
+    power_connector=true
 );
+    translate([-10,0,0]) cube([188,80,100],center=true);
+}

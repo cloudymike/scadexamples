@@ -33,15 +33,11 @@ module topbox(
     board_version,
     display_pin1_row=0,
     jack_pin1_row=0,
-    ESP32_pin1_column=""
+    ESP32_pin1_column="",
+    power_connector=false
     )
 {
 include <parameters.scad>
-    board_height = 17.25;
-    air_gap = 5.75; // space above top of board
-    top_height = 2*wall_depth + board_height + knurl_depth + air_gap;
-    top_length = box_length;
-    top_width = box_width;
     screw_radius = 1.75;
     echo("topbox size:",top_length,top_width,top_height);
 
@@ -210,6 +206,17 @@ include <parameters.scad>
             echo("jack center from bottom edge",jack_center_from_bottom);
 
         }
+      if (power_connector)
+        {
+
+          translate([top_length/2-wall_depth/2,0,0+wall_depth/2])cube([wall_depth,pc_width,pc_height],center=true);
+        }
+    }
+    if (power_connector)
+    {
+      topstrip=2;
+      printmargin=0.2;
+      translate([top_length/2-wall_depth/2-2*wall_depth-printmargin,0,-top_height/2+topstrip/2+wall_depth])cube([wall_depth,pc_width,topstrip],center=true);
     }
 }
 
@@ -219,14 +226,15 @@ include <parameters.scad>
 //roundedBox(size=[board_length,board_width,1],radius=5.1,sidesonly=true);
 // difference is for useful cuts to see internal. Do not use in final form
 
-//difference() {
+difference() {
 topbox(
-    board_version="half",
+    board_version="full",
     display_pin1_row = 20,
     jack_pin1_row = 16,
-    ESP32_pin1_column = "B"
+    ESP32_pin1_column = "B",
+    power_connector=true
 );
-//    cube([50,80,100],center=true);
-//    translate([60,0,0]) cube([40,80,100],center=true);
-//    translate([-40,0,0]) cube([40,80,100],center=true);
-//}
+    //cube([50,80,100],center=true);
+    //translate([60,0,0]) cube([40,80,100],center=true);
+    translate([-10,0,0]) cube([188,80,100],center=true);
+}
