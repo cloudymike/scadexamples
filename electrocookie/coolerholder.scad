@@ -1,12 +1,12 @@
 
 $fn=64;
-large_heatpipe=5.97;
+large_heatpipe=6.3;
 small_heatpipe=4.19;
 
 horizontal_distance = 21.8;
 vertical_distance = 62.3;
 
-vertical_shift = 11;
+vertical_shift = 8;
 
 bottom_distance = 10;
 side_distance=7;
