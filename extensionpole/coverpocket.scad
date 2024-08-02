@@ -5,7 +5,7 @@ module pocket(coverlength=10)
   wall=2;
   bottomwidth=43;
   topwidth=48;
-  pocketheight=60;
+  pocketheight=50;
   
   rotate([90,0,90])
   translate([-bottomwidth/2,wall,-coverlength/2])
