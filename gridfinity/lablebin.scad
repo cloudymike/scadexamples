@@ -59,36 +59,14 @@ module labelbin(  label="",
   labelFont="Letters.dxf";
   if (label2!="") 
   {
-    translate([-17,17-textsize,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
-    translate([-17,11-textsize,height])write(str(label2), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+    translate([-17-(size-1)*21,17-textsize,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+    translate([-17-(size-1)*21,11-textsize,height])write(str(label2), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
   }
   else
-    translate([-17,15-textsize,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+    translate([-17-(size-1)*21,15-textsize,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
     
 }
 
 
-module labletest(
-  label="", 
-  label2="",
-  size=1
-)
-{
-  textsize = 5; //Smaller requires high res printing
-  height=1;
-  cube([38,13,height]);
-  labelHeight=textsize;
-  labelThickness=2;
-  labelFont="Letters.dxf";
-  if (label2!="") 
-  {
-    translate([textsize/2,6-textsize,height])write(str(label2), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
-    translate([textsize/2,12-textsize,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
-  }
-  else
-        translate([textsize/2,10-textsize,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+labelbin("Heatsink TO-220",label2="",size=2);
 
-}
-labelbin("M3x50mm",label2="",size=2);
-
-//labletest("M3 spring",label2="washer",size=1);
