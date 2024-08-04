@@ -9,7 +9,6 @@ use <../Write/Write.scad>
 
 module labelbin(  label="", 
   label2="",
-  size=1,
   BoxLengthUnits=1,
   BoxWidthUnits=1,
   divx=1 )
