@@ -68,6 +68,4 @@ module labelbin(  label="",
     
 }
 
-
 labelbin("1N4004",label2="", BoxWidthUnits=2, divx=1);
-
