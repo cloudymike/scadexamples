@@ -9,7 +9,9 @@ use <../Write/Write.scad>
 
 module labelbin(  label="", 
   label2="",
-  size=1 )
+  BoxLengthUnits=1,
+  BoxWidthUnits=1,
+  divx=1 )
 {
   textsize = 5; //Smaller requires high res printing
   $fn=120;
@@ -22,7 +24,7 @@ module labelbin(  label="",
   
   /* [Linear Compartments] */
   // number of X Divisions (set to zero to have solid bin)
-  divx = 1;
+  //divx = 1;
   // number of Y Divisions (set to zero to have solid bin)
   divy = 1;
   
@@ -35,8 +37,7 @@ module labelbin(  label="",
   scoop = 1; //[0:0.1:1]
   
   BoxUnits=42;
-  BoxLengthUnits=size;
-  BoxWidthUnits=1;
+  //BoxWidthUnits=1;
   StyleHole=4; // [0:no holes, 1:magnet holes only, 2: magnet and screw holes - no printable slit, 3: magnet and screw holes - printable slit, 4: Gridfinity Refined hole - no glue needed]
   WallAdjust = 2;
   union () {
@@ -59,14 +60,12 @@ module labelbin(  label="",
   labelFont="Letters.dxf";
   if (label2!="") 
   {
-    translate([-17-(size-1)*21,17-textsize,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
-    translate([-17-(size-1)*21,11-textsize,height])write(str(label2), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+    translate([-17-(BoxLengthUnits-1)*21,17-textsize+(BoxWidthUnits-1)*theanswer/2,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+    translate([-17-(BoxLengthUnits-1)*21,11-textsize+(BoxWidthUnits-1)*theanswer/2,height])write(str(label2), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
   }
   else
-    translate([-17-(size-1)*21,15-textsize,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
+    translate([-17-(BoxLengthUnits-1)*21,15-textsize+(BoxWidthUnits-1)*theanswer/2,height])write(str(label), h=labelHeight, t=labelThickness, font=labelFont, center=false, bold=0, space=1.1);
     
 }
 
-
-labelbin("Heatsink TO-220",label2="",size=2);
-
+labelbin("1N4004",label2="", BoxWidthUnits=2, divx=1);
