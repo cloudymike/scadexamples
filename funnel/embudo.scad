@@ -4,9 +4,9 @@
 //define 3 heigths 
 //define thickness
 
-R1=20;
-R2=5;
-R3=4;
+R1=40;
+R2=15;
+R3=14;
 
 H0=5;
 H1desired=25;
