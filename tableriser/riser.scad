@@ -11,12 +11,24 @@ module riser(
   total_h=rise+leg_overlap;
   difference() 
   {
-    cylinder(d=outer_d,h=total_h, center=true, $fn=64);
+    translate([0,0,-total_h/2]) skirt((outer_d),(outer_d)/2,total_h);
+
+    //cylinder(d=outer_d,h=total_h, center=true, $fn=64);
     translate([0,0,total_h/2-leg_overlap/2])cylinder(d=leg_d,h=leg_overlap, center=true, $fn=64);
   }
   
 }
  
+module skirt(foot_radius, outer_radius, foot_height)
+{
 
-riser();
-  
+      rotate_extrude($fn=200) 
+      polygon([[0,0],[foot_radius,0],[outer_radius,foot_height],[0,foot_height]]);
+}
+
+
+difference()
+{
+  riser();
+  translate([0,0,-5])cube([90,90,70],center=true);
+}
