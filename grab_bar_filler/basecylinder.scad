@@ -1,4 +1,5 @@
 use <m5.scad>
+use <deckscrew.scad>
 
 diameter=77.33;
 
@@ -17,6 +18,14 @@ module basecylinder(height=90)
     translate([cos(-60)*screw_position_r,sin(-60)*screw_position_r,0]) screw_hole(height);
     translate([cos(120)*screw_position_r,sin(120)*screw_position_r,0]) screw_hole(height);
     translate([cos(-120)*screw_position_r,sin(-120)*screw_position_r,0]) screw_hole(height);
+    
+    if (height>40)
+    {
+      translate([0,0,height/3])deckscrew(diameter);
+      rotate([0,0,180]) translate([0,0,height/3])deckscrew(diameter);
+      translate([0,0,2*height/3])deckscrew(diameter);
+      rotate([0,0,180]) translate([0,0,2*height/3])deckscrew(diameter);
+    }
   }
 }
 
@@ -29,6 +38,6 @@ module sliver(offset=0, height=90)
   }
 }
 
-//basecylinder(5);
+//basecylinder();
 
-sliver(-12,1);
+sliver(-9.07,88.0);
