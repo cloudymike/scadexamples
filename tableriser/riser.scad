@@ -26,9 +26,6 @@ module skirt(foot_radius, outer_radius, foot_height)
       polygon([[0,0],[foot_radius,0],[outer_radius,foot_height],[0,foot_height]]);
 }
 
-
-difference()
-{
   riser();
-  translate([0,0,-5])cube([90,90,70],center=true);
-}
+  //translate([47,0,0])cube([90,90,72],center=true);
+  //translate([-47,0,0])cube([90,90,72],center=true);
