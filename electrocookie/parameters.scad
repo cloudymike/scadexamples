@@ -56,6 +56,25 @@ knurl_depth = 5;
 
 corner_screw_distance = 5;
 
+// Top parameters
+board_height = 17.25;
+air_gap = 5.75; // space above top of board
+top_height = 2*wall_depth + board_height + knurl_depth + air_gap;
+top_length = box_length;
+top_width = box_width;
+
+// Base parameters
+base_height = 2 * wall_depth;
+base_length = box_length;
+base_width = box_width;
+
+
+//power_connector parameters
+pc_overlap = 5;
+pc_width = base_width-4*corner_radius-2*pc_overlap;
+pc_height=top_height-wall_depth;
+
+
 // Custom features
 
 // OLED display
