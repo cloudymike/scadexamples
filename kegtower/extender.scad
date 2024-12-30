@@ -48,17 +48,17 @@ module overlapRing(
   wallThickness=4,
 )
 {
-  knurlDepth=8;
+  knurlDepth=6;
   knurlRingD=12;
   screwPosition=10;
 
   difference () {
     cylinder(d=kegTowerOD-2*wallThickness-0.4, h=sectionHeight,center=true, $fn=128);
-    cylinder(d=kegTowerOD-6*wallThickness,h=sectionHeight,center=true, $fn=128);
+    cylinder(d=kegTowerOD-5*wallThickness,h=sectionHeight,center=true, $fn=128);
     translate([-kegTowerOD/2+wallThickness+knurlDepth/2+0.2,0,sectionHeight/2-screwPosition])rotate([0,-90,0])m5knurl_pocket(knurlDepth);
     // camfer
     if (sectionHeight > 20)
-      translate([0,0,-sectionHeight+4*wallThickness-1])countersink((kegTowerOD-1.8*wallThickness)/2,(kegTowerOD-6*wallThickness)/2,4*wallThickness);
+      translate([0,0,-sectionHeight+4*wallThickness-1])countersink((kegTowerOD-1.8*wallThickness)/2,(kegTowerOD-5*wallThickness)/2,4*wallThickness);
 
   }
 }

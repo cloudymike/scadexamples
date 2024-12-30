@@ -8,8 +8,10 @@ m6_length=16;
 m5_length=16;
 m5_countersink_depth=2.9;
 m5_countersink_top_diameter=9.2;
+wallHeight=4;
 
-top_height=m6_length-newgasket_height;
+//top_height=m6_length-newgasket_height;
+top_height=wallHeight;
 
 full_height=top_height+socket_height+oldgasket_height;
 
@@ -30,54 +32,35 @@ kegTowerOD=3*25.4;
 wallThickness=4;
 overlap=20;
 
-/*
-translate([0,0,-(full_height+overlap)/2])
-difference () {
-  cylinder(d=kegTowerOD-2*wallThickness-0.4, h=overlap,center=true, $fn=128);
-  cylinder(d=kegTowerOD-4*wallThickness,h=overlap,center=true, $fn=128);
-}
-*/
+//Extra depth for the top of the m5 screw
+m5_well=1;
 
-translate([0,0,-(full_height+overlap)/2])overlapRing(overlap,kegTowerOD,wallThickness);
-
-
-difference()
+module foot()
 {
-  //outside
-  cylinder(d=new_diameter,h=full_height,center=true, $fn=128);
-  //Hole for tubing
-  cylinder(d=hole_diameter,h=full_height,center=true, $fn=128);
-  //Fit current socket on kegerator
-  translate([0,0,full_height/2-(socket_height+oldgasket_height)/2])cylinder(d=socket_diameter,h=socket_height+oldgasket_height,center=true, $fn=128);
   
-  // Holes for one tap tower
-  //4holes(newscrewhole_distance,newscrewhole_diameter);
-  //translate([0,0,full_height/2-(nut_height+socket_height+oldgasket_height)/2])
-  //4holes(newscrewhole_distance,nut_diameter,nut_height+socket_height+oldgasket_height,6);
+  translate([0,0,-(full_height+overlap)/2])overlapRing(overlap,kegTowerOD,wallThickness);
 
-  rotate([0,0,45])4holes(oldscrewhole_distance,oldscrewhole_diameter);
-  //Assuming that m5 goes to bottom of socket
-  m5_top = m5_length+m5_countersink_depth;
-  m5_well = full_height-m5_top;
-  rotate([0,0,45])translate([0,0,-full_height/2+m5_well/2])4holes(oldscrewhole_distance,m5_countersink_top_diameter,m5_well+0.1);
-
-  //countersinks
-  rotate([0,0,45])translate([oldscrewhole_distance,0,-full_height/2+m5_well])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
-  rotate([0,0,-45])translate([oldscrewhole_distance,0,-full_height/2+m5_well])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
-  rotate([0,0,135])translate([oldscrewhole_distance,0,-full_height/2+m5_well])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
-  rotate([0,0,-135])translate([oldscrewhole_distance,0,-full_height/2+m5_well])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
+  difference()
+  {
+    //outside
+    cylinder(d=new_diameter,h=full_height,center=true, $fn=128);
+    //Hole for tubing
+    cylinder(d=hole_diameter,h=full_height,center=true, $fn=128);
+    //Fit current socket on kegerator
+    translate([0,0,full_height/2-(socket_height+oldgasket_height)/2])cylinder(d=socket_diameter,h=socket_height+oldgasket_height,center=true, $fn=128);
   
-  //Cutout for testing screw holes, comment out later
-  //rotate([0,0,45])translate([oldscrewhole_distance,0,0]) donutmask();
-  //rotate([0,0,0])translate([newscrewhole_distance,0,0]) donutmask();
+    rotate([0,0,45])4holes(oldscrewhole_distance,oldscrewhole_diameter);
+    //Assuming that m5 goes to bottom of socket
+    rotate([0,0,45])translate([0,0,-full_height/2+m5_well/2])4holes(oldscrewhole_distance,m5_countersink_top_diameter,m5_well+0.2);
   
-  //Cutout for ring size
-  //translate([0,0,-3]) cylinder(h=full_height,d=120,center=true);
+    //countersinks
+    rotate([0,0,45])translate([oldscrewhole_distance,0,-full_height/2+m5_well])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
+    rotate([0,0,-45])translate([oldscrewhole_distance,0,-full_height/2+m5_well])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
+    rotate([0,0,135])translate([oldscrewhole_distance,0,-full_height/2+m5_well])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
+    rotate([0,0,-135])translate([oldscrewhole_distance,0,-full_height/2+m5_well])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
+  }
   
-  //Cutout for top
-  //translate([0,0,1]) cylinder(h=full_height,d=120,center=true);
 }
-
 
 module 4holes(distance, diameter, height=full_height, FN=128)
 {
@@ -104,12 +87,9 @@ module donutmask()
   }
 }
 
-
-// Test designs, remove later
-///////////////////////////////////////////
-
-// Countersink test
-//translate([60,0,0]) countersink(4.5,2.5,2.9);
-
-// nut sizing
-//cylinder(d=nut_diameter,h=10,center=true,$fn=6);translate([0,0,10])cylinder(d=nut_diameter,h=10,center=true,$fn=128);
+//difference()
+//{
+  foot();
+//  translate([0,0,2])cylinder(d=120,h=full_height,center=true);
+//}
+  
