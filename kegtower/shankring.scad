@@ -1,9 +1,9 @@
 use <edging.scad>
-module shankring() {
+use <extender.scad>
+module shankring(sectionHeight=40) {
   shankHole=23.4;
   kegTowerOD=3*25.4;
   wallThickness=4;
-  sectionHeight=36;
   nutSide=32;
   
   
@@ -19,13 +19,21 @@ module shankring() {
     rotate([0,90,45])cylinder(d=shankHole,h=kegTowerOD/2, $fn=64);
     rotate([0,90,-45])cylinder(d=shankHole,h=kegTowerOD/2, $fn=64);
   }
-  rotate([0,180,-45])translate([-kegTowerOD/2+wallThickness*1,-nutSide/2,nutSide/2+1*wallThickness])prism(nutSide,wallThickness,wallThickness);
+  rotate([0,180,-45])translate([-kegTowerOD/2+wallThickness*1,-nutSide/2,nutSide/2+0.0*wallThickness])prism(nutSide,wallThickness,wallThickness);
+  rotate([0,180,45])translate([-kegTowerOD/2+wallThickness*1,-nutSide/2,nutSide/2+0.0*wallThickness])prism(nutSide,wallThickness,wallThickness);
   
 }
 
-//difference ()
-//{
+module shanktube(totalHeight=60)
+{
+  overlap=20;
+  shankHeight=40;
   shankring();
-//  translate([0,-20,0])cube([80,40,34],center=true);
-//  translate([-20,0,0])cube([40,80,34],center=true);
-//}
+  tubeHeight=totalHeight-shankHeight;
+  assert(tubeHeight>=overlap);
+  translate([0,0,-(tubeHeight/2+shankHeight/2)])tubeOnly(tubeHeight);
+  
+}
+
+
+shanktube();
