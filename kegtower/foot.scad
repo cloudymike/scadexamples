@@ -1,3 +1,4 @@
+use <extender.scad>
 
 socket_height=7.5;
 oldgasket_height=0;
@@ -29,11 +30,17 @@ kegTowerOD=3*25.4;
 wallThickness=4;
 overlap=20;
 
+/*
 translate([0,0,-(full_height+overlap)/2])
 difference () {
   cylinder(d=kegTowerOD-2*wallThickness-0.4, h=overlap,center=true, $fn=128);
   cylinder(d=kegTowerOD-4*wallThickness,h=overlap,center=true, $fn=128);
 }
+*/
+
+translate([0,0,-(full_height+overlap)/2])overlapRing(overlap,kegTowerOD,wallThickness);
+
+
 difference()
 {
   //outside
