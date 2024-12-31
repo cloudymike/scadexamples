@@ -10,6 +10,12 @@ module cap()
 
   overlapRing(ringHeight,kegTowerOD,wallThickness);
   translate([0,0,-(ringHeight+capHeight)/2])cylinder(d=kegTowerOD,h=capHeight, center=true, $fn=128);
+
+  pegD=0.5;
+  translate([(kegTowerOD-2*wallThickness-pegD)/2,0,0])cylinder(d=pegD,h=ringHeight,center=true, $fn=64);
+  translate([-(kegTowerOD-2*wallThickness-pegD)/2,0,0])cylinder(d=pegD,h=ringHeight,center=true, $fn=64);
+  translate([0,(kegTowerOD-2*wallThickness-pegD)/2,0])cylinder(d=pegD,h=ringHeight,center=true, $fn=64);
+  translate([0,-(kegTowerOD-2*wallThickness-pegD)/2,0])cylinder(d=pegD,h=ringHeight,center=true, $fn=64);
   
 }
 
