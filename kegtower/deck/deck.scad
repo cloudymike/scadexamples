@@ -55,15 +55,20 @@ module decking()
 {
   //start from front (4 foot) and work backwards to end (-4 foot)
   //Step 6 inches at a time. There should be 0.5 inch gap between boards
-  for (boardY = [foot(3):-inch(6):-foot(3)+inch(3)]) 
+  for (boardY = [foot(3):-inch(6):-foot(3)]) 
   {
-    translate([0,boardY-inch(5.5)/2+nominal(2),(nominal(4)+deckThick())/2])deckBoard();
+    if (boardY > -foot(3)+1)
+      translate([0,boardY-inch(5.5)/2+nominal(2),(nominal(4)+deckThick())/2])deckBoard();
+    else
+      translate([0,boardY-inch(5.5)/2+nominal(2),(nominal(4)+deckThick())/2])deckStripped();
     for(raft= [foot(4):-inch(16):-foot(4)])
     {
       adjust = (raft < 0) ? nominal(2)/2 : (raft>1) ? -nominal(2)/2 : 0;
-      translate([raft+adjust,boardY+nominal(2)-inch(6),(nominal(4)+deckThick())/2])deckFastener();
+      if (boardY > -foot(3)+1)
+        translate([raft+adjust,boardY+nominal(2)-inch(5.75),(nominal(4)+deckThick())/2])deckFastener();
     }
   }
+  
   translate([0,foot(3)+nominal(2)+deckThick()/2,0])faciaFront();
   translate([foot(4)+deckThick()/2,deckThick()/2,0])faciaSide();
   translate([-foot(4)-deckThick()/2,deckThick()/2,0])faciaSide();
@@ -71,7 +76,7 @@ module decking()
 
 module footing()
 {
-  camoFooting();
+  adjustFooting();
   
 }
 module camoFooting()
@@ -90,6 +95,28 @@ module camoFooting()
   translate([1500,200,nominal(4)/2])rotate([0,90,0]) dimensions(length=myh,mytext=str(myhinch));
 
 }
+
+
+module adjustFooting()
+{
+
+    for(raft= [foot(4)-inch(16):-inch(16):-foot(4)+inch(16)])
+    {
+      adjust = (raft < 0) ? nominal(2)/2 : (raft>1) ? -nominal(2)/2 : 0;
+      translate([raft+adjust,foot(3)-inch(16),-nominal(4)/2])adjustFoot();
+      translate([raft+adjust,-foot(3)+inch(16),-nominal(4)/2])adjustFoot();
+      if (raft<-10 || raft > 10)
+      translate([raft+adjust,0,-nominal(4)/2])adjustFoot();
+      echo(raft);
+    }
+  
+
+  myh=round(inch(2)+nominal(4)+deckThick());
+  myhinch=round(myh/2.54)/10;
+  translate([1500,100,nominal(4)/2])rotate([0,90,0]) dimensions(length=myh,mytext=str(myh));
+  translate([1500,200,nominal(4)/2])rotate([0,90,0]) dimensions(length=myh,mytext=str(myhinch));
+}
+
 footing();
 framing();
 decking();

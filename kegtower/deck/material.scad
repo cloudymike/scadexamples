@@ -59,6 +59,19 @@ module deckBoard()
   echo("deckBoard");
 }
 
+module deckStripped()
+{
+  strippedWidth = 2*nominal(2);
+  //Center the strip to match full deck boards for easier spacing
+  centerPoint = (inch(5.5)-strippedWidth)/2;
+  translate([0,centerPoint,0])
+  color("LightGray")
+  {
+    cube([foot(8),strippedWidth,deckThick()],center=true);
+  }
+  echo("deckBoard");
+}
+
 module faciaFront()
 {
   color("Gray")
@@ -105,4 +118,15 @@ module camoBlock()
   echo("Footing Camo block");
 }
 
-camoBlock();
+module adjustFoot()
+{
+  color("DarkSlateGray")
+  {
+    translate([0,0,-inch(1)])cylinder(d=inch(3+5/32),h=inch(2),center=true);
+    translate([0,0,-inch(2)+5])cylinder(d=inch(6+3/8),h=10,center=true);
+    translate([nominal(2)/2+2,0,inch(1+1/32)/2])cube([4,inch(1+31/32),inch(1+1/32)],center=true);
+  }
+  echo("Adjustable foot");
+}
+
+adjustFoot();
