@@ -45,8 +45,10 @@ module framing()
   translate([0,foot(3)+nominal(2)/2,0])lumber8feet2x4();
   translate([0,-foot(3)-nominal(2)/2,0])lumber8feet2x4();
   
-  myl=foot(8);
+  myl=round(foot(8)+2*deckThick());
+  mylinch=round(myl/2.54)/10;
   translate([-foot(4),1000,0])dimensions(length=myl,mytext=str(myl));
+  translate([-foot(4),1100,0])dimensions(length=myl,mytext=str(mylinch));
 }
 
 module decking()
@@ -56,11 +58,38 @@ module decking()
   for (boardY = [foot(3):-inch(6):-foot(3)+inch(3)]) 
   {
     translate([0,boardY-inch(5.5)/2+nominal(2),(nominal(4)+deckThick())/2])deckBoard();
+    for(raft= [foot(4):-inch(16):-foot(4)])
+    {
+      adjust = (raft < 0) ? nominal(2)/2 : (raft>1) ? -nominal(2)/2 : 0;
+      translate([raft+adjust,boardY+nominal(2)-inch(6),(nominal(4)+deckThick())/2])deckFastener();
+    }
   }
   translate([0,foot(3)+nominal(2)+deckThick()/2,0])faciaFront();
   translate([foot(4)+deckThick()/2,deckThick()/2,0])faciaSide();
   translate([-foot(4)-deckThick()/2,deckThick()/2,0])faciaSide();
 }
 
+module footing()
+{
+  camoFooting();
+  
+}
+module camoFooting()
+{
+  
+  translate([0,foot(3)-inch(16),-nominal(2)/2])camoBlock();
+  translate([0,-foot(3)+inch(16),-nominal(2)/2])camoBlock();
+  translate([inch(32)-nominal(2)/2,foot(3)-inch(16),-nominal(2)/2])camoBlock();
+  translate([inch(32)-nominal(2)/2,-foot(3)+inch(16),-nominal(2)/2])camoBlock();
+  translate([-inch(32)+nominal(2)/2,foot(3)-inch(16),-nominal(2)/2])camoBlock();
+  translate([-inch(32)+nominal(2)/2,-foot(3)+inch(16),-nominal(2)/2])camoBlock();
+  
+  myh=round(inch(5.5)+deckThick());
+  myhinch=round(myh/2.54)/10;
+  translate([1500,100,nominal(4)/2])rotate([0,90,0]) dimensions(length=myh,mytext=str(myh));
+  translate([1500,200,nominal(4)/2])rotate([0,90,0]) dimensions(length=myh,mytext=str(myhinch));
+
+}
+footing();
 framing();
 decking();

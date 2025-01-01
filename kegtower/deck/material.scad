@@ -61,7 +61,7 @@ module deckBoard()
 
 module faciaFront()
 {
-  color("LightGray")
+  color("Gray")
   {
     cube([foot(8),deckThick(),inch(5.5)],center=true);
   }
@@ -70,7 +70,7 @@ module faciaFront()
 
 module faciaSide()
 {
-  color("LightGray")
+  color("DarkGray")
   rotate([0,0,90])
   {
     cube([foot(6)+2*nominal(2)+deckThick(),deckThick(),inch(5.5)],center=true);
@@ -78,5 +78,31 @@ module faciaSide()
   echo("faciaSide");
 }
 
+module deckFastener()
+{
+  color("black") cube([inch(0.5),inch(0.5),deckThick()],center=true);
+  echo("deck fasterner");
+}
 
-faciaSide();
+module camoBlock()
+{
+  side=inch(15.75);
+  height=inch(5.5)-nominal(4);
+  totalheight=inch(3.5);
+  slot=inch(1.625);
+  
+  translate([0,0,-height/2])
+  color("DarkSlateGray")
+  {
+    cube([side,side,height],center=true);
+    translate([0,0,(totalheight-height)/2+height/2])difference()
+    {
+      cube([side, side, totalheight-height],center=true);
+      cube([slot,1000,100],center=true);
+      cube([1000,slot,100,],center=true);
+    }
+  }
+  echo("Footing Camo block");
+}
+
+camoBlock();
