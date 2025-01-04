@@ -20,7 +20,8 @@ switch4_label="Fan";
 /* [ Plate Details ] */
 
 // The height, in mm, of the plate. The width is determined from the height on the basis of a 2-gang plate width matching the height.  Standard US plates are 114.3mm high.  Non-standard (oversized) plates come in different heights, and may include values such as 127, 139.7, etc. 127mm is a nice slightly oversized plate
-plate_height = 127;
+//plate_height = 127;
+plate_height = 114.3;
 
 // The depth of the plate is the distance between the wall and the outmost edge of the plate.  Standard US plates are 3.96875mm deep.  Oversized plates usually are a bit deeper.  The deeper plates allow for switches that don't mount quite perfectly flush with the wall or gang boxes that stick out slightly, but might require slightly longer mounting screws.
 plate_depth = 6.4; 
@@ -29,7 +30,7 @@ plate_depth = 6.4;
 plastic_thickness = 2; // [1.5:.2:4]
 
 // If set to emboss, any labels will be raised from the plate by 1mm.  If set to inset, the labels will be inset in the plate by 1mm.  The embossing usually extrudes nicer lettering, but requires that the plate be printed with the face up (and will require supports.)  If the labels are inset, the object can be flipped so the face prints against the print bed. (or, you can not use labels at all, in which case this setting has no effect.)
-emboss_or_inset_labels=1; // [0:inset,1:emboss]
+emboss_or_inset_labels=0; // [0:inset,1:emboss]
 
 
 /* [Advanced] */
