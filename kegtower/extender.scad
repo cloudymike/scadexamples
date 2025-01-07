@@ -58,10 +58,10 @@ module overlapRing(
     translate([-kegTowerOD/2+wallThickness+knurlDepth/2+0.2,0,sectionHeight/2-screwPosition])rotate([0,-90,0])m5knurl_pocket(knurlDepth);
     // camfer
     if (sectionHeight > 20)
-      translate([0,0,-sectionHeight+4*wallThickness-1])countersink((kegTowerOD-1.8*wallThickness)/2,(kegTowerOD-5*wallThickness)/2,4*wallThickness);
+      translate([0,0,-sectionHeight/2])countersink((kegTowerOD-1.8*wallThickness)/2,(kegTowerOD-5*wallThickness)/2,4*wallThickness);
 
   }
 }
 
 
-extender(32);
+extender(180);
