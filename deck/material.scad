@@ -129,4 +129,17 @@ module adjustFoot()
   echo("Adjustable foot");
 }
 
-adjustFoot();
+module concreteBlock()
+{
+  height=inch(2);
+  
+  translate([0,0,-height/2])
+  color("DarkSlateGray")
+  {
+    cube([inch(8),inch(16),height],center=true);
+  }
+  echo("Footing concrete block");
+}
+
+
+concreteBlock();

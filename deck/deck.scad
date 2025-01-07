@@ -76,7 +76,7 @@ module decking()
 
 module footing()
 {
-  adjustFooting();
+  concreteFooting();
   
 }
 module camoFooting()
@@ -88,6 +88,22 @@ module camoFooting()
   translate([inch(32)-nominal(2)/2,-foot(3)+inch(16),-nominal(2)/2])camoBlock();
   translate([-inch(32)+nominal(2)/2,foot(3)-inch(16),-nominal(2)/2])camoBlock();
   translate([-inch(32)+nominal(2)/2,-foot(3)+inch(16),-nominal(2)/2])camoBlock();
+  
+  myh=round(inch(2)+nominal(4)+deckThick());
+  myhinch=round(myh/2.54)/10;
+  translate([1500,100,nominal(4)/2])rotate([0,90,0]) dimensions(length=myh,mytext=str(myh));
+  translate([1500,200,nominal(4)/2])rotate([0,90,0]) dimensions(length=myh,mytext=str(myhinch));
+
+}
+module concreteFooting()
+{
+  
+  translate([0,foot(3)-inch(16),-inch(2)])concreteBlock();
+  translate([0,-foot(3)+inch(16),-inch(2)])concreteBlock();
+  translate([inch(32)-nominal(2)/2,foot(3)-inch(16),-inch(2)])concreteBlock();
+  translate([inch(32)-nominal(2)/2,-foot(3)+inch(16),-inch(2)])concreteBlock();
+  translate([-inch(32)+nominal(2)/2,foot(3)-inch(16),-inch(2)])concreteBlock();
+  translate([-inch(32)+nominal(2)/2,-foot(3)+inch(16),-inch(2)])concreteBlock();
   
   myh=round(inch(5.5)+deckThick());
   myhinch=round(myh/2.54)/10;
