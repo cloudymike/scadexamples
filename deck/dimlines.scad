@@ -232,7 +232,7 @@ module dimensions(length, line_width=DIM_LINE_WIDTH, loc=DIM_CENTER,
                   mytext="") {
 
     space = len(text_or_length(length, mytext)) * DIM_FONTSIZE;
-
+    color("DarkGreen")
     if (loc == DIM_CENTER) {
         line(length=length / 2 - space / 2, width=line_width, height=DIM_HEIGHT,
              left_arrow=true, right_arrow=false);

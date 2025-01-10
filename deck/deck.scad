@@ -40,7 +40,9 @@ module framing()
   
   //rafter measure
   rafterD=inch(16)-nominal(2)/2;
-  translate([0,800,0])dimensions(length=rafterD,mytext=str(rafterD));
+  rafterDinch=round(rafterD/2.54)/10;
+  translate([0,810,nominal(4)])dimensions(length=rafterD,mytext=str(rafterD));
+  translate([0,655,nominal(4)])dimensions(length=rafterD,mytext=str(rafterDinch));
   
   translate([0,foot(3)+nominal(2)/2,0])lumber8feet2x4();
   translate([0,-foot(3)-nominal(2)/2,0])lumber8feet2x4();
@@ -49,6 +51,11 @@ module framing()
   mylinch=round(myl/2.54)/10;
   translate([-foot(4),1000,0])dimensions(length=myl,mytext=str(myl));
   translate([-foot(4),1100,0])dimensions(length=myl,mytext=str(mylinch));
+
+  myFY=round(foot(6)+2*nominal(2)+deckThick());
+  myFYinch=round(myFY/2.54)/10;
+  translate([-1300,-myFY/2+deckThick()/2,0])rotate([0,0,90]) dimensions(length=myFY,mytext=str(myFY));
+  translate([-1400,-myFY/2+deckThick()/2,0])rotate([0,0,90]) dimensions(length=myFY,mytext=str(myFYinch));
 }
 
 module decking()
@@ -72,6 +79,8 @@ module decking()
   translate([0,foot(3)+nominal(2)+deckThick()/2,0])faciaFront();
   translate([foot(4)+deckThick()/2,deckThick()/2,0])faciaSide();
   translate([-foot(4)-deckThick()/2,deckThick()/2,0])faciaSide();
+
+
 }
 
 module footing()
@@ -110,6 +119,15 @@ module concreteFooting()
   translate([1500,100,nominal(4)/2])rotate([0,90,0]) dimensions(length=myh,mytext=str(myh));
   translate([1500,200,nominal(4)/2])rotate([0,90,0]) dimensions(length=myh,mytext=str(myhinch));
 
+  myFX=round(inch(32)-nominal(2)/2);
+  myFXinch=round(myFX/2.54)/10;
+  translate([0,-1100,nominal(4)/2])rotate([0,0,0]) dimensions(length=myFX,mytext=str(myFX));
+  translate([0,-1200,nominal(4)/2])rotate([0,0,0]) dimensions(length=myFX,mytext=str(myFXinch));
+
+  myFY2=round(nominal(2)+inch(16));
+  myFY2inch=round(myFY2/2.54)/10;
+  translate([-1500,-foot(3)+inch(16)-myFY2,0])rotate([0,0,90]) dimensions(length=myFY2,mytext=str(myFY2));
+  translate([-1600,-foot(3)+inch(16)-myFY2,0])rotate([0,0,90]) dimensions(length=myFY2,mytext=str(myFY2inch));
 }
 
 
@@ -136,3 +154,5 @@ module adjustFooting()
 footing();
 framing();
 decking();
+translate([0,-foot(3)-nominal(2)-nominal(2)/2,0])lumber10feet2x4();
+

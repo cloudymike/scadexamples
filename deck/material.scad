@@ -24,6 +24,12 @@ module lumber8feet2x4()
   echo("2x4 8 feet");
 }
 
+module lumber10feet2x4()
+{
+  color("brown")cube([foot(10),38,90],center=true);
+  echo("2x4 10 feet shed");
+}
+
 module joistHanger2x4()
 {
   color("steelblue")
