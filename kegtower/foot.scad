@@ -38,7 +38,7 @@ m5_well=1;
 module foot()
 {
   
-  translate([0,0,-(full_height+overlap)/2])overlapRing(overlap,kegTowerOD,wallThickness);
+  translate([0,0,-(full_height+overlap)/2])rotate([0,0,45])overlapRing(overlap,kegTowerOD,wallThickness);
 
   difference()
   {
