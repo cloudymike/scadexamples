@@ -27,9 +27,8 @@ module plate()
 }
 
 
-module peg()
+module peg(width=11)
 {
-  width=11;
   height=8;
   length=20;
   translate([-width/2,0,0])cube([width,height,length]);
@@ -40,8 +39,13 @@ module end_plate()
 {
   plate();
   translate([0,-base_width/2,base_height])peg();
+  
   translate([-24,-base_width/2,base_height])peg();
   translate([24,-base_width/2,base_height])peg();
+
+  translate([-48,-base_width/2,base_height])peg(8);
+  translate([48,-base_width/2,base_height])peg(8);
+  
 }
 
 end_plate();

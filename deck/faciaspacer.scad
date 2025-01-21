@@ -19,17 +19,18 @@ module faciaspacer()
   boardScrewDistance=inch(1.4);
   boardOffset=3;
   
+  spacing=inch(3/16);
+  //spacing=6;
+  
   
   difference()
   {
-    cube([nominal(4),inch(1),inch(3/16)],center=true);
-    cylinder(d=5,h=100,center=true, $fn=64);
-    countersink(screwHeadD, screwD, screwHeadH);
+    cube([nominal(4),inch(1),spacing],center=true);
+    cylinder(d=screwD,h=100,center=true, $fn=64);
+    translate([0,0,spacing/2])rotate([180,0,0])countersink(screwHeadD/2, screwD/2, screwHeadH);
     translate([boardScrewDistance+boardOffset/2,0,0])cylinder(d=trexScrewD*2,h=100, center=true, $fn=65);
     translate([-boardScrewDistance+boardOffset/2,0,0])cylinder(d=trexScrewD*2,h=100, center=true, $fn=65);
-
   }
-
 }
 
 faciaspacer();
