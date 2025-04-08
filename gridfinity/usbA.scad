@@ -23,7 +23,7 @@ module usbAholder(
   diameter=14.2+2*OverExtrusion;
   
   BoxUnits=42;
-  StyleHole=4; // [0:no holes, 1:magnet holes only, 2: magnet and screw holes - no printable slit, 3: magnet and screw holes - printable slit, 4: Gridfinity Refined hole - no glue needed]
+  StyleHole=0; // [0:no holes, 1:magnet holes only, 2: magnet and screw holes - no printable slit, 3: magnet and screw holes - printable slit, 4: Gridfinity Refined hole - no glue needed]
   gridz_define = 0; // [0:gridz is the height of bins in units of 7mm increments - Zack's method,1:gridz is the internal height in millimeters, 2:gridz is the overall external height of the bin in millimeters]
   height_internal = 0;
   // snap gridz height to nearest 7mm increment
@@ -46,7 +46,7 @@ module usbAholder(
         l=theanswer, 
         dx=0, 
         dy=0, 
-        style_hole=4 
+        style_hole=StyleHole 
       );    
   }
   
@@ -64,10 +64,10 @@ module usbAholder(
   
   //translate([0,0,heightmm+usbDepth/2-9])cube([usbWidth,usbThick,usbDepth],center=true);
   
-  translate([-BoxLengthUnits*BoxUnits/2,-BoxWidthUnits*BoxUnits/2,5])
+  translate([-BoxLengthUnits*BoxUnits/2,-BoxWidthUnits*BoxUnits/2,0])
     for (x=[intervalX/2+2*WallAdjust:intervalX:BoxUnits*BoxLengthUnits-intervalX/2])
       for (y=[intervalY/2+WallAdjust:intervalY:BoxUnits*BoxWidthUnits])
           translate([x,y,heightmm+usbDepth/2-9]) cube([usbWidth,usbThick,usbDepth],center=true);
 }
 
-usbAholder();
+usbAholder(2,2);
