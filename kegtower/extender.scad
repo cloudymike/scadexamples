@@ -1,6 +1,6 @@
-use <foot.scad>
+//use <foot.scad>
 use <knurlpocket.scad>
-
+use <../mscrew/countersinkhole.scad>
 
 module extender(  
   sectionHeight=30
@@ -36,22 +36,12 @@ module tubeOnly(
     cylinder(d=kegTowerOD,h=sectionHeight,center=true, $fn=128);
     cylinder(d=kegTowerOD-2*wallThickness, h=sectionHeight,center=true, $fn=128);
 
-
-    // screw hole
-    translate([-kegTowerOD/2,0,-sectionHeight/2+screwPosition])rotate([0,90,0])cylinder(d=m5_diameter,h=kegTowerOD/2, $fn=64);
-    translate([kegTowerOD/2,0,-sectionHeight/2+screwPosition])rotate([0,-90,0])cylinder(d=m5_diameter,h=kegTowerOD/2, $fn=64);
-
-    translate([0,-kegTowerOD/2,-sectionHeight/2+screwPosition])rotate([0,90,90])cylinder(d=m5_diameter,h=kegTowerOD/2, $fn=64);
-
-    translate([0,kegTowerOD/2,-sectionHeight/2+screwPosition])rotate([0,-90,90])cylinder(d=m5_diameter,h=kegTowerOD/2, $fn=64);
-
-    // countersink  hole
-    translate([-kegTowerOD/2,0,-sectionHeight/2+screwPosition])rotate([0,90,0])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
-    translate([kegTowerOD/2,0,-sectionHeight/2+screwPosition])rotate([0,-90,0])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
-    translate([0,-kegTowerOD/2,-sectionHeight/2+screwPosition])rotate([0,90,90])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
-   translate([0,kegTowerOD/2,-sectionHeight/2+screwPosition])rotate([0,-90,90])countersink(m5_countersink_top_diameter/2,2.5,m5_countersink_depth);
+    translate([-kegTowerOD/2+0.5,0,-sectionHeight/2+screwPosition])rotate([0,90,0])countersinkScrewHole(Msize=5,length=25);
+    translate([kegTowerOD/2-0.5,0,-sectionHeight/2+screwPosition])rotate([0,-90,0])countersinkScrewHole(Msize=5,length=25);
+    translate([0,-kegTowerOD/2+0.5,-sectionHeight/2+screwPosition])rotate([0,90,90])countersinkScrewHole(Msize=5,length=25);
+    translate([0,kegTowerOD/2-0.5,-sectionHeight/2+screwPosition])rotate([0,-90,90])countersinkScrewHole(Msize=5,length=25);
+    
   }
- 
 }
 
 module overlapRing(
@@ -80,6 +70,5 @@ module overlapRing(
 
   }
 }
-
 
 extender(30);
