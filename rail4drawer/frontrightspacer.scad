@@ -8,6 +8,8 @@ hole1Y=-railY/2+4.8;
 hole2Y=-railY/2+(4.5+7.5);
 frameThickness=1;
 
+module frontrightspacer()
+{
 difference() {
     cube([railX,railY,railZ],center=true);
     translate([holeX,hole1Y,0])cylinder(d=holeD,h=railZ,$fn=64,center=true);
@@ -18,5 +20,6 @@ difference() {
 translate([railX/2+frameThickness/2,0,frameThickness/2])cube([frameThickness,railY,railZ+frameThickness],center=true);
 translate([-railX/2-frameThickness/2,0,frameThickness/2])cube([frameThickness,railY,railZ+frameThickness],center=true);
 
+}
 
-
+frontrightspacer();
