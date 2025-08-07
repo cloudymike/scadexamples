@@ -13,6 +13,16 @@ rm -rf BOSL
 mv BOSL-${BOSLVERSION} BOSL
 popd
 
+# Install BOLS2 library
+BOSLVERSION="1.0.3"
+pushd ${LIBRARYDIR}
+wget https://github.com/BelfrySCAD/BOSL2/archive/refs/heads/master.zip
+unzip master.zip
+rm -f master.zip
+rm -rf BOSL2
+mv BOSL2-master BOSL2
+popd
+
 # Install MCAD library
 MCADVERSION="2019.05"
 pushd ${LIBRARYDIR}
