@@ -17,7 +17,7 @@ $fs = 0.25;
 
 /* [General Settings] */
 // number of bases along x-axis
-gridx = 1;
+//gridx = 1;
 // number of bases along y-axis
 gridy = 1;
 
@@ -39,9 +39,9 @@ distancex = 0;
 distancey = 0;
 
 // where to align extra space along x
-fitx = 0; // [-1:0.1:1]
+fitx = -1; // [-1:0.1:1]
 // where to align extra space along y
-fity = 0; // [-1:0.1:1]
+fity = -1; // [-1:0.1:1]
 
 
 /* [Styles] */
@@ -55,15 +55,46 @@ enable_magnet = true;
 // hole styles
 style_hole = 0; // [0:none, 1:countersink, 2:counterbore]
 
-
-// ===== IMPLEMENTATION ===== //
 screw_together = (style_plate == 3 || style_plate == 4);
 
-color("tomato")
-gridfinityBaseplate(gridx, gridy, l_grid, distancex, distancey, style_plate, enable_magnet, style_hole, fitx, fity);
+// ===== IMPLEMENTATION ===== //
 
+module myThickPlate(
+  gridx=1, 
+  gridy=1,
+  distancex=0,
+  distancey=0)
+{
+
+  color("tomato")
+  difference()
+  {
+    gridfinityBaseplate(gridx, gridy, l_grid, distancex, distancey, style_plate, enable_magnet, style_hole, fitx, fity);
+    //long screwholes to go through added space
+    my_cutter_screw_together(gridx, gridy, calculate_off(style_plate, enable_magnet, style_hole));
+  }
+
+}
+
+myThickPlate(1,1,0,0);
 
 // ===== CONSTRUCTION ===== //
+
+module my_cutter_screw_together(gx, gy, off) {
+
+    screw(gx, gy);
+    rotate([0,0,90])
+    screw(gy, gx);
+
+    module screw(a, b) {
+        copy_mirror([1,0,0])
+        translate([a*l_grid/2, 0, -off/2])
+        pattern_linear(1, b, 1, l_grid)
+        pattern_linear(1, n_screws, 1, d_screw_head + screw_spacing)
+        rotate([0,90,0])
+        cylinder(h=l_grid/2+42, d=d_screw, center = true);
+    }
+}
 
 module gridfinityBaseplate(gridx, gridy, length, dix, diy, sp, sm, sh, fitx, fity) {
 
