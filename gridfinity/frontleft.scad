@@ -1,4 +1,5 @@
-use <baseplatemodule.scad>
+//use <baseplatemodule.scad>
+use <thickbaseplatemodule.scad>
 use <../electrocookie/knurlpocket.scad>
 include <../gridfinity-rebuilt-openscad/standard.scad>
 module FrontLeft()
@@ -14,7 +15,8 @@ module FrontLeft()
     deltaY=sizeY-rowY*42;
   
     union() {
-      myBaseplate(4,3,sizeX,sizeY);
+      //myBaseplate(4,3,sizeX,sizeY);
+      myThickPlate(4,3,sizeX,sizeY);
       //translate([-rowX*42/2-deltaX,-(3*42)/2-deltaY-0.3,-11/2-1.25])cube([sizeX,3,11.15]);
     }
     notchX=1;
