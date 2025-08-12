@@ -1,4 +1,4 @@
-use <baseplatemodule.scad>
+use <thickbaseplatemodule.scad>
 
   sizeX=178;
   sizeY=136;
@@ -6,7 +6,7 @@ use <baseplatemodule.scad>
   rowX=4;
   rowY=3;
 
-  myBaseplate(4,3,0,136);
+  myThickPlate(4,3,0,136);
   
 
   
