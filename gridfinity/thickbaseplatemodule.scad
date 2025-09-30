@@ -261,7 +261,7 @@ module cutter_screwandnut(gx, gy, off) {
         //translate([0,0,-l_grid/6])cylinder(h=l_grid/5, d=d_screw+3, center = true);
         //translate([0,0,-l_grid/6])cylinder(h=l_grid/5, d=5.4, center = true, $fn=6);
         translate([0,0,-l_grid/6])cylinder(h=l_grid, d=d_screw, center = true);
-        translate([3,0,-l_grid/6])cube([100, 5.6,l_grid/5], center = true);
+        translate([0,0,-8])cube([100, 5.6,10], center = true);
         translate([2,0,-l_grid/3])cube([3, d_screw,l_grid/2], center = true);
         }
     }
