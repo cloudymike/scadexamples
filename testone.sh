@@ -2,7 +2,7 @@
 FILE=$1
 IGNOREFILES="./worktable/dimple_vectors.scad ./electrocookie/parameters.scad ./drawer/TOUL.scad"
 # Do not test external libraries imported as submodules
-IGNOREDIRS="./Write.scad ./scad-utils ./gridfinity-rebuilt-openscad"
+IGNOREDIRS="./Write.scad ./scad-utils ./gridfinity-rebuilt-openscad ./OpenSCAD_Dovetail"
 
 DIR="$(dirname "${FILE}")"
 BASE="$(basename "${FILE}")"

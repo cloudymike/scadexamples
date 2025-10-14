@@ -7,3 +7,6 @@
 [submodule "gridfinity-rebuilt-openscad"]
 	path = gridfinity-rebuilt-openscad
 	url = https://github.com/kennetek/gridfinity-rebuilt-openscad.git
+[submodule "OpenSCAD_Dovetail"]
+	path = OpenSCAD_Dovetail
+	url = https://github.com/hugokernel/OpenSCAD_Dovetail
