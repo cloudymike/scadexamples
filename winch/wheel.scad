@@ -34,6 +34,18 @@ module winch_wheel(
       // Tie hole
       translate([coreRadius+tieHoleRadius,0,wheelWidth/2])cylinder(r=tieHoleRadius,h=wheelWidth,center=true);
   }
+  // Handle
+  handleHeight=7;
+  handleWidth=2*axelRadius;
+  
+  // A 3.3mm gap should be fine to bridge. If not add difference
+  difference()
+  {
+    translate([0,0,handleHeight/2+wheelWidth])
+      cube([handleWidth,2*flangesRadius,handleHeight],center=true);
+    //translate([0,0,handleHeight/2+wheelWidth])
+    //  cube([handleWidth,axelRadius*2,handleHeight],center=true);
+  }
 }
 
 
