@@ -8,11 +8,11 @@ hole1Y=-railY/2+5;
 hole2Y=-railY/2+12.5;
 frameThickness=1;
 
-guardholeD=6.3;
+guardholeD=5.24;
 guardholeX=railX/2-(16.8+guardholeD/2);
 guardholeY=-railY/2+(32.2+guardholeD/2);
 
-module FReverbuilt()
+module FRpegEverbuilt()
 {
 difference() {
     cube([railX,railY,railZ],center=true);
@@ -27,4 +27,4 @@ translate([-railX/2-frameThickness/2,0,frameThickness/2])cube([frameThickness,ra
 
 }
 
-FReverbuilt();
+FRpegEverbuilt();
