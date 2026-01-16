@@ -30,14 +30,47 @@ use <MCAD/boxes.scad>
 // ESP32 board is DEVKIT, 30pin
 //=======================================================
 module topbox(
-    board_version,
+    board_length=300,
+    board_width=50,
+    jack_pins=[],
     display_pin1_row=0,
-    jack_pin1_row=0,
     ESP32_pin1_column="",
     power_connector=false
     )
 {
-include <../electrocookie/parameters.scad>
+//include <../electrocookie/parameters.scad>
+    
+        //Global rendering vars
+    $fa = 1;
+    $fs = 0.4;
+    
+    
+    //Common parameters
+    
+    board_buffer = 3;
+    wall_depth = 2.5;
+    
+    row_spacing = 2.54;
+    
+    
+    box_length = board_length +4*wall_depth + 2*board_buffer;
+    box_width = board_width + 4*wall_depth + 2*board_buffer;
+    corner_radius=5;
+    
+    knurl_depth = 5;
+    
+    corner_screw_distance = 5;
+
+    // Top parameters
+    board_height = 17.25;
+    air_gap = 5.75; // space above top of board
+    top_height = 2*wall_depth + board_height + knurl_depth + air_gap;
+    top_length = box_length;
+    top_width = box_width;
+
+    cablehole_radius = 2.5;
+    cable_y_offset = wall_depth + cablehole_radius + 1;
+
     screw_radius = 1.75;
     echo("topbox size:",top_length,top_width,top_height);
 
@@ -186,25 +219,33 @@ include <../electrocookie/parameters.scad>
             echo("usb bottom edge from bottom edge",usb_center_from_bottom-usb_height/2);
 
         }
-    // Jack hole if exist
-        if (jack_pin1_row != 0) {
+    // Jack holes if exist
+        if (jack_pins) {
 
             jack_radius = 6;
             jack_center_from_bottom = 12;
 
             // center_z is 12mm from bottom plate or top of this print
             center_z = top_height / 2 - jack_center_from_bottom;
-            // center_x is pin1 + 2 row_spacings
-            // add 1, 2 more -1 as as first pin is 1 not 0
-            board_x = first_row + (jack_pin1_row + 1) * row_spacing;
-            center_x = board_x - board_length/2;
-            translate([center_x, top_width/2, center_z])
-                rotate([90,0,0])
-                cylinder(r=jack_radius,h=4*wall_depth, center=true);
-            echo("Looking at outside, plate at bottom");
-            echo("jack center from box right edge",top_length/2-center_x);
-            echo("jack center from bottom edge",jack_center_from_bottom);
-
+            for (jack = jack_pins)
+            {
+                if (jack[1]>top_width)
+                    translate([jack[0], top_width/2, center_z])
+                        rotate([90,0,0])
+                        cylinder(r=jack_radius,h=4*wall_depth, center=true);
+                else if (jack[1]<-top_width)
+                    translate([jack[0], -top_width/2, center_z])
+                        rotate([90,0,0])
+                        cylinder(r=jack_radius,h=4*wall_depth, center=true);
+                else if (jack[0]>top_length)
+                    translate([top_length/2, jack[1], center_z])
+                        rotate([0,90,0])
+                        cylinder(r=jack_radius,h=4*wall_depth, center=true);
+                else if (jack[0]<-top_length)
+                    translate([-top_length/2, jack[1], center_z])
+                        rotate([0,90,0])
+                        cylinder(r=jack_radius,h=4*wall_depth, center=true);
+            }
         }
       if (power_connector)
         {
@@ -226,14 +267,13 @@ include <../electrocookie/parameters.scad>
 //roundedBox(size=[board_length,board_width,1],radius=5.1,sidesonly=true);
 // difference is for useful cuts to see internal. Do not use in final form
 
-difference() {
+// Uncomment for 2d for outline print
+//projection(cut=true) translate([0, 0, -0])
 topbox(
-    board_version="half",
-    display_pin1_row = 20,
-    jack_pin1_row = 16,
-    ESP32_pin1_column = "B",
-    power_connector=false
+  board_length=68.49986,
+  board_width=52.999919999999996,
+  jack_pins=[[20,999],[10,-999],[999,10],[-999,0]]
+//    display_pin1_row = 20,
+//    ESP32_pin1_column = "B",
+//    power_connector=false
 );
-    translate([0,0,14]) cube([400,100,20],center=true);
-    translate([0,0,-8]) cube([400,100,20],center=true);
-}
