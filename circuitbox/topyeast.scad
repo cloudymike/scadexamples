@@ -66,6 +66,7 @@ module topbox(
     // Top parameters
     board_height = 14;
     air_gap = 2; // space above top of board
+    
     top_height = 2*wall_depth + board_height + knurl_depth + air_gap;
     top_length = box_length;
     top_width = box_width;
@@ -92,7 +93,7 @@ module topbox(
     oled_bottom_space = 8;
     oled_pin1 = 10;
     oled_pin_from_top = 2;
-    display_indent=10;
+    display_indent=2;
     display_frame = 7;
     
     
@@ -333,6 +334,10 @@ topbox(
 
 // For test prints
 //translate([0,0,-43])cube([100,100,100],center=true);
-//translate([0,0,46])cube([100,100,100],center=true);
-//translate([0,0,-55])cube([100,100,100],center=true);
+    
+//translate([0,0,49])cube([100,100,100],center=true);
+//translate([0,0,-52])cube([100,100,100],center=true);
+    
+// translate([-45,0,0])cube([100,100,100],center=true);
+// translate([56,0,0])cube([100,100,100],center=true);
 }
