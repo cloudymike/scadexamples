@@ -35,6 +35,7 @@ module topbox(
     jack_pins=[],
     notches=[],
     oled_center_x=0,oled_center_y=0,oled_vertical=false,
+    ventingslots=false,
     ESP32_pin1_column="",
     power_connector=false
     )
@@ -63,8 +64,8 @@ module topbox(
     corner_screw_distance = 5;
 
     // Top parameters
-    board_height = 17.25;
-    air_gap = 5.75; // space above top of board
+    board_height = 14;
+    air_gap = 2; // space above top of board
     top_height = 2*wall_depth + board_height + knurl_depth + air_gap;
     top_length = box_length;
     top_width = box_width;
@@ -92,7 +93,7 @@ module topbox(
     oled_pin1 = 10;
     oled_pin_from_top = 2;
     display_indent=10;
-    display_frame = 10;
+    display_frame = 7;
     
     
     display_rotate= oled_vertical? 90 : 0;
@@ -217,6 +218,15 @@ module topbox(
 
 
         }
+        
+        // This needs som more work...
+        if (ventingslots)
+        {
+            roundedBox(size=[1,top_width-20,100],radius=0.5, sidesonly=true);
+            translate([-10,0,0])roundedBox(size=[1,top_width-30,100],radius=0.5, sidesonly=true);
+            translate([-20,0,0])roundedBox(size=[1,top_width-40,100],radius=0.5, sidesonly=true);
+            translate([-30,0,0])roundedBox(size=[1,top_width-50,100],radius=0.5, sidesonly=true);
+        }
 
     // USB hole if ESP32 exist
         if ((ESP32_pin1_column == "A") || (ESP32_pin1_column == "B")) {
@@ -296,6 +306,7 @@ module topbox(
       printmargin=0.2;
       translate([top_length/2-wall_depth/2-2*wall_depth-printmargin,0,-top_height/2+topstrip/2+wall_depth])cube([wall_depth,pc_width,topstrip],center=true);
     }
+    
 }
 
 
@@ -312,15 +323,16 @@ topbox(
   board_width=52.999919999999996,
   jack_pins=[[19.25,999,-3],[-999,4,2]],
   notches=[[-999,17]],
-  oled_center_x=17.75,oled_center_y=11,
-  oled_vertical=true
+  oled_center_x=19.75,oled_center_y=13,
+  oled_vertical=true,
+  ventingslots=true
 //    display_pin1_row = 20,
 //    ESP32_pin1_column = "B",
 //    power_connector=false
 );
 
 // For test prints
-translate([0,0,-43])cube([100,100,100],center=true);
+//translate([0,0,-43])cube([100,100,100],center=true);
 //translate([0,0,46])cube([100,100,100],center=true);
 //translate([0,0,-55])cube([100,100,100],center=true);
 }
