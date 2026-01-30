@@ -66,15 +66,15 @@ $fn                       = 80;   // [20:1:300]
 waterproofcase(
   BoardLength=50.9999,
   BoardWidth=50.999869999999994,
-  MountHoles=[[-8.144, 23.606], [-1.794, 48.244], [-46.752, 3.54], [-47.514, 49.641]]
-
+  MountHoles=[[15.982950000000002, 2.5209349999999944], [22.332950000000004, -22.117065], [-22.62505, 22.586934999999997], [-23.387050000000002, -23.514065]],
+  DownSideHoles=2
 );
 
 module waterproofcase(
   BoardLength=60,
   BoardWidth=60,
-  MountHoles=[]
-
+  MountHoles=[],
+  DownSideHoles=0
 )
 {
     /* [View settings] */
@@ -249,7 +249,7 @@ module waterproofcase(
     
     /* [Wall Holes settings side A (for cable gland cut)] */
     // Activate customizable holes for cable gland or similar
-    ShowSideWallHoles_A        = true;
+    ShowSideWallHoles_A        = false;
     // Count of holes, if there is an additional screw on X or Y side the hole in the middle is not showed
     CountOfSideWallHoles_A     = 2;     //[1:1:3]
     // Diameter of the holes
@@ -277,15 +277,15 @@ module waterproofcase(
     
     /* [Wall Holes settings side C (for cable gland cut)] */
     // Activate customizable holes for cable gland or similar
-    ShowSideWallHoles_C        = false;
+    ShowSideWallHoles_C        = (DownSideHoles != 0);
     // Count of holes, if there is an additional screw on X or Y side the hole in the middle is not showed
-    CountOfSideWallHoles_C     = 1;     //[1:1:3]
-    // Diameter of the holes
-    SideWallHoleDiameter_C     = 16.5;  //[1:0.1:80]
+    CountOfSideWallHoles_C     = DownSideHoles;     //[1:1:3]
+    // Diameter of the holes (1/2"NPT 20.9mm 1/4"NPT 13.2mm)
+    SideWallHoleDiameter_C     = 21;  //[1:0.1:80]
     // Add or decrease height position (up and down, 0 = centered)
     SideWallHoleOffset_Z_C     = 0;
     // Add or decrease distance between the holes
-    SideWallHoleDistance_C     = 20;
+    SideWallHoleDistance_C     = 1.5*SideWallHoleDiameter_C;
     // Add or decrease horizontal position of the holes (0 = centered)
     SideWallHolePosition_C     = 0;
     
