@@ -33,7 +33,9 @@ module topbox(
     board_length=300,
     board_width=50,
     jack_pins=[],
-    display_pin1_row=0,
+    notches=[],
+    oled_center_x=0,oled_center_y=0,oled_vertical=false,
+    ventingslots=false,
     ESP32_pin1_column="",
     power_connector=false
     )
@@ -62,8 +64,9 @@ module topbox(
     corner_screw_distance = 5;
 
     // Top parameters
-    board_height = 17.25;
-    air_gap = 5.75; // space above top of board
+    board_height = 14;
+    air_gap = 2; // space above top of board
+    
     top_height = 2*wall_depth + board_height + knurl_depth + air_gap;
     top_length = box_length;
     top_width = box_width;
@@ -82,6 +85,19 @@ module topbox(
     echo("Side wall width:",(top_length-inside_length)/2);
     echo("Top wall width:",top_height - inside_height);
 
+    // OLED display
+    oled_width = 27.40;
+    oled_display_width = oled_width;
+    oled_height = 28;
+    oled_display_height = 15;
+    oled_bottom_space = 8;
+    oled_pin1 = 10;
+    oled_pin_from_top = 2;
+    display_indent=2;
+    display_frame = 7;
+    
+    
+    display_rotate= oled_vertical? 90 : 0;
 
 
     difference() {
@@ -113,7 +129,8 @@ module topbox(
         cylinder(r=screw_radius + wall_depth,h=top_height, center=true);
 
     // display hole if exist
-        if (display_pin1_row != 0) {
+        if (oled_center_x != 0 && oled_center_y !=0) {
+            /*
             // Assume it is in column J
             oled_center_from_top = first_column+(oled_height/2-oled_pin_from_top);
             oled_top_space = oled_height - oled_display_height - oled_bottom_space;
@@ -124,11 +141,12 @@ module topbox(
             oled_pin1_from_left = first_row + (display_pin1_row-1)*row_spacing;
             oled_center_from_pin1 = oled_width/2 - oled_pin1;
             oled_center_x = (oled_pin1_from_left + oled_center_from_pin1) - board_length/2;
+            */
             echo("OLED center",oled_center_x, oled_center_y);
             echo("OLED left edge from box edge",box_length/2 + oled_center_x - oled_display_width/2);
             echo("OLED bottom edge from box edge",box_width/2 - oled_center_y - oled_display_height/2);
             translate([oled_center_x, oled_center_y, -top_height/2+wall_depth+display_indent/2])
-                cube([oled_display_width+display_frame*2,oled_display_height+display_frame*2,display_indent],center=true);
+                rotate([0,0,display_rotate])cube([oled_display_width+display_frame*2,oled_display_height+display_frame*2,display_indent],center=true);
             
             
             
@@ -157,8 +175,8 @@ module topbox(
 
 
     // display hole if exist
-        if (display_pin1_row != 0) {
-            // Assume it is in column J
+        if (oled_center_x != 0 && oled_center_y !=0) {
+            /*
             oled_center_from_top = first_column+(oled_height/2-oled_pin_from_top);
             oled_top_space = oled_height - oled_display_height - oled_bottom_space;
             y_offset = oled_bottom_space - oled_top_space;
@@ -168,11 +186,12 @@ module topbox(
             oled_pin1_from_left = first_row + (display_pin1_row-1)*row_spacing;
             oled_center_from_pin1 = oled_width/2 - oled_pin1;
             oled_center_x = (oled_pin1_from_left + oled_center_from_pin1) - board_length/2;
+            */
             echo("OLED center",oled_center_x, oled_center_y);
             echo("OLED left edge from box edge",box_length/2 + oled_center_x - oled_display_width/2);
             echo("OLED bottom edge from box edge",box_width/2 - oled_center_y - oled_display_height/2);
             translate([oled_center_x, oled_center_y, 0])
-                cube([oled_display_width,oled_display_height,top_height+1],center=true);
+                rotate([0,0,display_rotate])cube([oled_display_width,oled_display_height,top_height+1],center=true);
 //            translate([oled_center_x, oled_center_y, -top_height/2+display_indent/2])
 //                cube([oled_display_width+display_frame*2-1,oled_display_height+display_frame*2-1,display_indent+2*wall_depth-1],center=true);
 
@@ -196,9 +215,18 @@ module topbox(
        [6,7,3,2], //back
        [7,4,0,3]]; //left
 
-       translate([oled_center_x, oled_center_y, -top_height/2+display_indent/2]) polyhedron(points=trappoints,faces=trapfaces);
+       translate([oled_center_x, oled_center_y, -top_height/2+display_indent/2]) rotate([0,0,display_rotate])polyhedron(points=trappoints,faces=trapfaces);
 
 
+        }
+        
+        // This needs som more work...
+        if (ventingslots)
+        {
+            roundedBox(size=[1,top_width-20,100],radius=0.5, sidesonly=true);
+            translate([-10,0,0])roundedBox(size=[1,top_width-30,100],radius=0.5, sidesonly=true);
+            translate([-20,0,0])roundedBox(size=[1,top_width-40,100],radius=0.5, sidesonly=true);
+            translate([-30,0,0])roundedBox(size=[1,top_width-50,100],radius=0.5, sidesonly=true);
         }
 
     // USB hole if ESP32 exist
@@ -230,23 +258,43 @@ module topbox(
             for (jack = jack_pins)
             {
                 if (jack[1]>top_width)
-                    translate([jack[0], top_width/2, center_z])
+                    translate([jack[0], top_width/2, center_z-jack[2]])
                         rotate([90,0,0])
                         cylinder(r=jack_radius,h=4*wall_depth, center=true);
                 else if (jack[1]<-top_width)
-                    translate([jack[0], -top_width/2, center_z])
+                    translate([jack[0], -top_width/2, center_z-jack[2]])
                         rotate([90,0,0])
                         cylinder(r=jack_radius,h=4*wall_depth, center=true);
                 else if (jack[0]>top_length)
-                    translate([top_length/2, jack[1], center_z])
+                    translate([top_length/2, jack[1], center_z-jack[2]])
                         rotate([0,90,0])
                         cylinder(r=jack_radius,h=4*wall_depth, center=true);
                 else if (jack[0]<-top_length)
-                    translate([-top_length/2, jack[1], center_z])
+                    translate([-top_length/2, jack[1], center_z-jack[2]])
                         rotate([0,90,0])
                         cylinder(r=jack_radius,h=4*wall_depth, center=true);
             }
         }
+        if (notches)
+        {
+            notchlevel=top_height/2;
+            notchsize=4*wall_depth;
+            for (notch = notches)
+            {
+                 if (notch[1]>top_width)
+                    translate([notch[0], top_width/2, notchlevel])
+                        cube([notchsize,notchsize,notchsize/2 ], center=true);
+                else if (notch[1]<-top_width)
+                    translate([notch[0], -top_width/2, notchlevel])
+                        cube([notchsize,notchsize,notchsize/2 ], center=true);
+                else if (notch[0]>top_length)
+                    translate([top_length/2, notch[1], notchlevel])
+                        cube([notchsize,notchsize,notchsize/2 ], center=true);
+                else if (notch[0]<-top_length)
+                    translate([-top_length/2, notch[1], notchlevel])
+                        cube([notchsize,notchsize,notchsize/2 ], center=true);
+            }
+       }
       if (power_connector)
         {
 
@@ -259,6 +307,7 @@ module topbox(
       printmargin=0.2;
       translate([top_length/2-wall_depth/2-2*wall_depth-printmargin,0,-top_height/2+topstrip/2+wall_depth])cube([wall_depth,pc_width,topstrip],center=true);
     }
+    
 }
 
 
@@ -266,14 +315,29 @@ module topbox(
 //Do not include in design
 //roundedBox(size=[board_length,board_width,1],radius=5.1,sidesonly=true);
 // difference is for useful cuts to see internal. Do not use in final form
-
+difference()
+{
 // Uncomment for 2d for outline print
-//projection(cut=true) translate([0, 0, -0])
+//projection(cut=true) translate([0, 0, -33])rotate([90,0,0])
 topbox(
   board_length=68.49986,
   board_width=52.999919999999996,
-  jack_pins=[[20,999],[10,-999],[999,10],[-999,0]]
+  jack_pins=[[19.25,999,-3],[-999,4,2]],
+  notches=[[-999,17]],
+  oled_center_x=19.75,oled_center_y=13,
+  oled_vertical=true,
+  ventingslots=true
 //    display_pin1_row = 20,
 //    ESP32_pin1_column = "B",
 //    power_connector=false
 );
+
+// For test prints
+//translate([0,0,-43])cube([100,100,100],center=true);
+    
+//translate([0,0,49])cube([100,100,100],center=true);
+//translate([0,0,-52])cube([100,100,100],center=true);
+    
+// translate([-45,0,0])cube([100,100,100],center=true);
+// translate([56,0,0])cube([100,100,100],center=true);
+}
