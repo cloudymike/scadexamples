@@ -108,7 +108,7 @@ module waterproofcase(
     CaseWidth = BoardWidth + + 2*CaseRadius + 2*BoardBuffer;
     // Height of the case
     CaseHeight                = 40;
-    // Splitt the Case height into bottom and top, check for the needed screws in echo output (console)
+    // Split the Case height into bottom and top, check for the needed screws in echo output (console)
     CutFromTop                = 10.0;
     // Thickness for the bottom and top wall (vertical walls needs to be calculated)
     BottomTopThickness        = 3.0;
