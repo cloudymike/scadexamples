@@ -67,21 +67,23 @@ waterproofcase(
   BoardLength=50.9999,
   BoardWidth=50.999869999999994,
   MountHoles=[[15.982950000000002, 2.5209349999999944], [22.332950000000004, -22.117065], [-22.62505, 22.586934999999997], [-23.387050000000002, -23.514065]],
-  DownSideHoles=2
+  DownSideHoles=2,
+  ShowBottom=false
 );
 
 module waterproofcase(
   BoardLength=60,
   BoardWidth=60,
   MountHoles=[],
-  DownSideHoles=0
+  DownSideHoles=0,
+  ShowBottom=true
 )
 {
     /* [View settings] */
     // Shows the Bottom of the case
-    ShowBottom                = true;
+    //ShowBottom                = true;
     // Shows the top of the case
-    ShowTop                   = true;
+    ShowTop                   = !ShowBottom;
     // Distance between top and bottom (if both are side by side displayed)
     DistanceBetweenObjects    = 10;
     // Shows the housing assembled
@@ -336,41 +338,26 @@ module waterproofcase(
     //===============================================================================
     //                                    M A I N
     //===============================================================================
-    union()
+    if (ShowBottom)
     {
-        BodyBottom();
-        for (mountxy=MountHoles)
+    union()
         {
-            echo(mountxy);
-            translate([mountxy[0],mountxy[1],5])
-            m2knurl_ring();
-        }
-
-    }
-    /*
-    
-    // --> Show the bottom of the case
-    translate([X_ObjectPosition,0,0]) rotate([0,0,0]) difference(){
-        union(){
             BodyBottom();
-            // **** Add your bottom case additions here ****
-            //cylinder(h=20,d=15,center = true); // Example
-        }
-        // **** Add your bottom case cuts here ****
-        //cylinder(h=15,d=20,center = true); // Example
-    }
+            for (mountxy=MountHoles)
+            {
+                echo(mountxy);
+                translate([mountxy[0],mountxy[1],5])
+                m2knurl_ring();
+            }
     
-    // --> Show the top of the case
-    translate([-X_ObjectPosition,0,Z_TopHigh+0.03]) rotate([0,Y_TopRotation,0]) difference(){
-        union(){
+        }
+    }
+    else
+    {
             BodyTop();
-            // **** Add your bottom top additions here ****
-            //cylinder(h=18,d=10,center = true); // Example
-        }
-        // **** Add your top case cuts here ****
-        //cylinder(h=20,d=5,center = true); // Example
     }
-    
+
+    /*
     if (ShowGasket)
     {
         translate([-Caselength/2-Caselength-DistanceBetweenObjects,0,0]) Gasket();
