@@ -11,7 +11,7 @@ waterproofcase(
 );
 
 //translate([0,0,54]) cube([100,200,100],center=true);
-//translate([0,0,-48]) cube([100,200,100],center=true);
+//translate([0,0,-22]) cube([100,200,100],center=true);
 
 //translate([9,0,0]) cube([100,200,100],center=true);
     

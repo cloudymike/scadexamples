@@ -68,7 +68,7 @@ waterproofcase(
   BoardWidth=50.999869999999994,
   MountHoles=[[15.982950000000002, 2.5209349999999944], [22.332950000000004, -22.117065], [-22.62505, 22.586934999999997], [-23.387050000000002, -23.514065]],
   DownSideHoles=2,
-  ShowBottom=false
+  ShowBottom=true
 );
 
 module waterproofcase(
@@ -133,7 +133,7 @@ module waterproofcase(
     //2=m2/2.5=m2.5/3=m3/4=m4/5=m5   // max m5, larger sizes do not fit
     MetricScrewSize          = 3.0;     // [2:m2, 2.5: m2.5, 3: m3, 4: m4, 5: m5]
     // Chose your Screw head
-    ScrewHeadType            = 1;      // [1:1 Countersunk head screw, 2: 2 Round or hex screw head - Counterbore, 3: 3 Exposed head - No counter]
+    ScrewHeadType            = 2;      // [1:1 Countersunk head screw, 2: 2 Round or hex screw head - Counterbore, 3: 3 Exposed head - No counter]
     // for round or hex screw head select the height of the head
     ScrewHeadHeight  = 2.6;   // [0.0:0.1:10]
     // for round head screw select the diameter of the head, for hex screw select the diameter size of your Socket wrench diameter
@@ -153,7 +153,7 @@ module waterproofcase(
     
     /* [Hot melt copper nut settings (use for NutStyle 1) can also be used for self-tapping screws] */
     // Hole diameter for self-tapped screw or hot melt copper nut (Measure the diameter))
-    HoleDiaThread             = 3.2 ; //[1:0.1:10]
+    HoleDiaThread             = 4.9 ; //[1:0.1:10]
     // Length of the hot melt copper nut (Measure the length) - It is just used to calculate the min length of the screw to output in console
     HolelengthHotMeltNut      = 10 ; //[1:0.1:30]
     
