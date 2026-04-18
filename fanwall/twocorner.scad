@@ -30,5 +30,42 @@ module twocorner(angle=0)
     }
 }
 
-twocorner(30);
+module leg(angle=0,height=10)
+{
+   translate([0,0,-height])rotate([0,0,-angle/2])cube([tablength(),fanwidth(),height],center=false);
+   translate([0,0,-height])rotate([0,0,angle/2])mirror([1,0,0])cube([tablength(),fanwidth(),height],center=false);
+    
+    
+   if (angle > 0)
+    {       
+        translate([0,cos(angle/2)*fanwidth(),-height])rotate([90,0,0])prism(height,sin(angle/2)*fanwidth()+0.1,cos(angle/2)*fanwidth()+0.1);
+    }
+}
 
+module foot(height)
+{
+    footY=100;
+    footZ=2;
+    ribX=2;
+    ribZ=5;
+    translate([0,0,-height-footZ/2]) cube([tablength()*2+fanwidth()/2,footY,footZ],center=true);
+    
+    //Strengthening ribs
+    //translate([0,0,-height+ribZ/2]) cube([ribX,footY,ribZ],center=true);
+    //translate([fanwidth(),0,-height+ribZ/2]) cube([ribX,footY,ribZ],center=true);
+    //translate([-fanwidth(),0,-height+ribZ/2]) cube([ribX,footY,ribZ],center=true);
+}
+
+
+module stand(angle=0,height=100)
+{
+    twocorner(angle);
+    leg(angle,height);
+    foot(height);
+}
+
+//twocorner(30);
+stand(30,100);
+
+
+ 

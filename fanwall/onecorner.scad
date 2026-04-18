@@ -4,7 +4,7 @@ use <../threads/isothreads.scad>
 
 $fn=0;
 
-fullwidth=15.6;
+fullwidth=16.4;
 narrolength=23;
 
 // Functions to pass variables up to user of this module
