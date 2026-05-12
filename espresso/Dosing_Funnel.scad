@@ -1,8 +1,8 @@
 $fn = 180*1;
 
 // Base Outer diameter
-OD = 74;
-// OD = 74;  //Gaggia 58mm
+OD = 76;
+// OD = 76;  //Gaggia 58mm
 
 // Base Inner diameter
 ID = 60.5;
