@@ -19,9 +19,9 @@ module finger(fingerLength=10,fingerWidth=5)
 module twineHanger()
 {
     fingerLength=50;
-    fingerWidth=5;
+    fingerWidth=4;
     nutWidth=25;
-    extension_pole_nut();
+    extension_pole_nut(0);
 
     translate([fingerLength/2,nutWidth/2-fingerWidth/2,fingerWidth/2])
         rotate([-90,0,0])
