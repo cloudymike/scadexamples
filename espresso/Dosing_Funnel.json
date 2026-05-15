@@ -1,0 +1,35 @@
+{
+    "parameterSets": {
+        "GaggiaTestring": {
+            "FD": "76",
+            "FH": "3",
+            "ID": "60.5",
+            "LIP": "1",
+            "LUGH": "4",
+            "LUGL": "24",
+            "LUGT": "1",
+            "OD": "76",
+            "OH": "2",
+            "WALL": "2.8"
+        },
+        "Gaggia58mm": {
+            "FD": "90",
+            "FH": "24",
+            "ID": "60.5",
+            "LIP": "1",
+            "LUGH": "7",
+            "LUGL": "24",
+            "LUGT": "1",
+            "OD": "76",
+            "OH": "2",
+            "WALL": "2.8"
+        }
+    },
+    "fileFormatVersion": "1",
+    "parameterSets": "",
+    "parameterSets": "",
+    "parameterSets": "",
+    "parameterSets": "",
+    "parameterSets": "",
+    "parameterSets": ""
+}
