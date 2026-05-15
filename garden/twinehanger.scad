@@ -16,7 +16,7 @@ module finger(fingerLength=10,fingerWidth=5,fingerSupport=5)
     difference()
     {
         cube([fingerLength,fingerWidth,fingerWidth],center=true);
-        translate([fingerLength/2-twineDiameter*1,fingerWidth/2-twineDiameter*0.4,0])cylinder(d=twineDiameter,h=fingerWidth*2,center=true,$fn=64);
+        translate([fingerLength/2-twineDiameter*1.4,fingerWidth/2-twineDiameter*0.4,0])cylinder(d=twineDiameter,h=fingerWidth*2,center=true,$fn=64);
     }
     
     translate([-fingerLength/2,-fingerWidth/2,-fingerWidth/2])rotate([0,0,-90])right_angle_prism(fingerSupport,fingerLength,fingerWidth);
@@ -39,8 +39,8 @@ module twineHanger()
 
 }
 
-rotate([-90,0,0])finger(60,4,22);
+//rotate([-90,0,0])finger(60,4,22);
 
 //extension_pole_nut();
 
-//twineHanger();
+twineHanger();
