@@ -30,10 +30,10 @@ module twineHanger()
     nutHeight=27;
     extension_pole_nut(0);
 
-    translate([fingerLength/2-nutWidth*0.3,nutWidth/2+fingerWidth/2,fingerWidth/2+0.5])
+    translate([fingerLength/2-nutWidth*0.3,nutWidth/2+fingerWidth/2,fingerWidth/2])
         rotate([-90,0,0])
             finger(fingerLength,fingerWidth,nutHeight-fingerWidth-1);
-    translate([fingerLength/2-nutWidth*0.3,-(nutWidth/2+fingerWidth/2),fingerWidth/2+0.5])
+    translate([fingerLength/2-nutWidth*0.3,-(nutWidth/2+fingerWidth/2),fingerWidth/2])
         rotate([-90,0,0])
             finger(fingerLength,fingerWidth,nutHeight-fingerWidth-1);
 
