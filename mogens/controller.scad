@@ -1,8 +1,11 @@
 use <outlet.scad>
 
-    lip=5;
-    thickness=1;
-     height=27;
+function wallThickness()=1;
+function controllerHeight()=27;
+
+
+thickness=wallThickness();
+height=controllerHeight();
 
 
 
@@ -25,6 +28,7 @@ module controller(
     width=70;
     tabWidth=15;
     tabThick=2;
+    lip=5;
     
 
     difference() 
@@ -160,11 +164,9 @@ union()
 }
 
 
-difference()
-{
-    fanDuct(dH=30,dD=80);
-    translate([0,105,0])cube([200,200,200],center=true);
-    translate([0,-105,0])cube([200,200,200],center=true);
-}
+//difference(){
+//    fanDuct(dH=30,dD=80);
+//    translate([0,105,0])cube([200,200,200],center=true);
+//    translate([0,-105,0])cube([200,200,200],center=true);}
 
-//fanDuct();
+fanDuct();
