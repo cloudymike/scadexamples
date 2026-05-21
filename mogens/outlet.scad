@@ -1,10 +1,12 @@
 
+thickness=1;
+
+function ringHeight() = 10;
+function outerD() = 54.8;
+function outletD()= outerD()-2*thickness;
 
 module outlet()
 {
-    ringHeight=10;
-    outerD=54.8;
-    thickness=1;
     innerD=outerD-2*thickness;
 
     notchX=6;
@@ -15,14 +17,14 @@ module outlet()
     
     difference()
     {
-        cylinder(h=ringHeight,d=outerD,center=true, $fn=128);
-        cylinder(h=ringHeight,d=innerD,center=true, $fn=128);       
+        cylinder(h=ringHeight(),d=outerD(),center=true, $fn=128);
+        cylinder(h=ringHeight(),d=outletD(),center=true, $fn=128);       
     }
-    translate([0,outerD/2-thickness/2,notchOffset])cube([notchX,thickness,notchz],center=true);
-    translate([0,outerD/2+notchY/2,notchOffset])cube([notchX,notchY,notchz],center=true);
+    translate([0,outerD()/2-thickness/2,notchOffset])cube([notchX,thickness,notchz],center=true);
+    translate([0,outerD()/2+notchY/2,notchOffset])cube([notchX,notchY,notchz],center=true);
 
-    translate([0,-outerD/2+thickness/2,notchOffset])cube([notchX,thickness,notchz],center=true);
-    translate([0,-outerD/2-notchY/2,notchOffset])cube([notchX,notchY,notchz],center=true);
+    translate([0,-outerD()/2+thickness/2,notchOffset])cube([notchX,thickness,notchz],center=true);
+    translate([0,-outerD()/2-notchY/2,notchOffset])cube([notchX,notchY,notchz],center=true);
 }
 
 
