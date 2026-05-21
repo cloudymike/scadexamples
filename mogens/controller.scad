@@ -1,10 +1,12 @@
+use <outlet.scad>
 
-
-    width=70;
-    height=27;
-    depth=65;
     lip=5;
-    
+    thickness=1;
+     height=27;
+
+
+
+ 
 module right_angle_prism(l, w, h) {
     linear_extrude(height = h) {
         polygon(points=[[0,0],[l,0],[0,w]], paths=[[0,1,2]]);
@@ -14,20 +16,38 @@ module right_angle_prism(l, w, h) {
 
 
 
-module controller(thickness=1)
+module controller(
+    depth=65
+
+)
 {
     
+    width=70;
     tabWidth=15;
     tabThick=2;
     
+
     difference() 
     {
         union()
         {
             cube([depth,width,height],center=true);
         }
-        translate([-thickness,-thickness,thickness])cube([depth,width,height],center=true);
+        translate([-thickness,0,thickness])cube([depth,width-2*thickness,height],center=true);
         translate([-depth/2+tabWidth/2,-width/2,0])cube([tabWidth,tabThick,height+lip*2],center=true);
+
+        // outlet
+        //translate([0,-width/2,0])cube([depth,width,height-2*thickness],center=true);
+
+        inX=depth/2;
+        inZ=height;
+        translate([inX/2-2*thickness,-width/2,-height/2+inZ/2+thickness])cube([inX,width,inZ],center=true);
+
+        translate([-2*thickness,-width/2,-height/2+inZ/2+thickness])rotate([0,45,0])cube([inZ*sqrt(2)/2,width,inZ*sqrt(2)/2],center=true);
+        
+
+
+        //translate([-2*thickness,length/2,-height/2+inZ/2+thickness])rotate([0,45,0])cube([inZ*sqrt(2)/2,length,inZ*sqrt(2)/2],center=true);
     }
 
 
@@ -35,29 +55,115 @@ module controller(thickness=1)
     angleRight=(height-thickness/2);
     angleSide=angleRight*sqrt(2);
     
-    translate([-depth/2,-width/2+tabThick,-height/2])rotate([90,0,0])right_angle_prism(height,height, thickness);
-    translate([-depth/2,-width/2+tabThick,height/2])rotate([90,90,0])right_angle_prism(height,height, thickness);
+    // Hacks to provide space for the tab
+    translate([-depth/2,-width/2+tabThick+thickness,-height/2])rotate([90,0,0])right_angle_prism(height,height, thickness);
+    translate([-depth/2+tabWidth/2+thickness,-width/2+tabThick+thickness/2,0])cube([tabWidth+2*thickness,thickness,height],center=true);
+    translate([-depth/2+tabWidth+tabThick/2,-width/2+tabThick,0])cube([tabThick,tabThick,height],center=true);
     
+    // Sloping plane at top
     difference()
     {
         translate([(height)/2-depth/2,0,0])rotate([0,-45,0])cube([thickness,width,angleSide],center=true);
-        translate([-depth/2+tabWidth/2,-width/2,0])cube([tabWidth+thickness,tabThick,height+lip*2],center=true);       
+        translate([-depth/2+tabWidth/2,-width/2+tabThick/2,0])cube([tabWidth+thickness,tabThick,height+lip*2],center=true);       
     }
 
 
-            //lips
+    //lips
     translate([tabWidth/2,-width/2+thickness/2,height/2+lip/2])cube([depth-tabWidth,thickness+0.01,lip],center=true);
     translate([0,width/2-thickness/2,height/2+lip/2])cube([depth,thickness,lip],center=true);
 
-//translate([-depth/2+tabWidth/2,-width/2+tabThick-thickness/2,0])cube([tabWidth,thickness,height],center=true);
     
     
+}
+
+module ductNoholes(length=20,ductHeight=27,ductDepth=65)
+{
+    angleRight=(ductHeight-thickness/2);
+    angleSide=angleRight*sqrt(2);
+
+    difference() 
+    {
+        
+        cube([ductDepth,length,ductHeight],center=true);  
+        cube([ductDepth-2*thickness,length-2*thickness,ductHeight-2*thickness],center=true);
+
+        //back wall at 45 angle
+      translate([-ductDepth/2-ductHeight/2,length/2,-ductHeight/2])rotate([90,0,0])right_angle_prism(ductHeight,ductHeight, length);
+    translate([-ductDepth/2-ductHeight/2,length/2,ductHeight/2])rotate([90,90,0])right_angle_prism(ductHeight,ductHeight, length);
+ 
+  }
+   
+        
+
+
+   difference()
+   {
+        union()
+        {
+            translate([-ductDepth/2,0,0])rotate([0,-45,0])cube([thickness,length,angleSide],center=true);
+            translate([-ductDepth/2,0,0])rotate([0,45,0])cube([thickness,length,angleSide],center=true);
+        }
+        
+   translate([-ductDepth/2-angleRight/4+thickness/2,0,0])cube([angleRight/2,length,ductHeight+thickness],center=true);
+   translate([-ductDepth/2-angleRight/4-thickness,0,0])cube([angleRight/2,length,ductHeight+thickness],center=true);
+   }
+    
+}
+
+module duct(
+    length=20,
+    ductHeight=27,
+    outX=30,
+    outZ=0,
+    ductDepth=65,
+    )
+{
+    // Use a function call to get this number later
+    outletD=52.8;
+    
+    
+    difference()
+    {
+        ductNoholes(length,ductHeight,ductDepth);
+        //translate([ductHeight/2,2*thickness,-ductHeight/2+height/2+thickness])cube([ductDepth-ductHeight-2*thickness,length,height],center=true);
+        inX=ductDepth/2;
+        inZ=height;
+        translate([inX/2-2*thickness,length/2,-ductHeight/2+inZ/2+thickness])cube([inX,length,inZ],center=true);
+        
+        translate([-2*thickness,length/2,-ductHeight/2+inZ/2+thickness])rotate([0,45,0])cube([inZ*sqrt(2)/2,length,inZ*sqrt(2)/2],center=true);
+        
+        //outlet
+        translate([outX,-length/2,outZ])rotate([90,0,0])cylinder(h=length,d=outletD,center=true, $fn=128);
+    }
+    
+
+}
+
+
+module fanDuct(
+    dL=50,
+    dH=80,
+    dD=110,
+)
+{
+union()
+{
+    outletH=10;
+    // Use a function call to get this number later
+    OutletD=52.8;
+    outX=dD/2-OutletD/2-2;
+    translate([0,35,27/2-dH/2])controller(depth=dD);
+    translate([0,-dL/2,0])duct(length=dL,ductHeight=dH,ductDepth=dD,outX=outX);
+    //translate([outX,-(dL+outletH/2),0])rotate([90,90,0])outlet();
+}
+
 }
 
 
 difference()
 {
-    controller();
-    translate([27,0,0])cube([depth,width+10, height+10],center=true);
-    //translate([0,0,5])cube([depth,width,height],center=true);
+    fanDuct(dH=30,dD=80);
+    translate([0,105,0])cube([200,200,200],center=true);
+    translate([0,-105,0])cube([200,200,200],center=true);
 }
+
