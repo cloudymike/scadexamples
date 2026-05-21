@@ -7,7 +7,6 @@ function outletD()= outerD()-2*thickness;
 
 module outlet()
 {
-    innerD=outerD-2*thickness;
 
     notchX=6;
     notchY=1;
