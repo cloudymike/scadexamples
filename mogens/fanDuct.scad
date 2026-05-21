@@ -28,9 +28,9 @@ union()
 }
 
 
-//difference(){
-//    fanDuct(dH=30,dD=80);
-//    translate([0,105,0])cube([200,200,200],center=true);
-//    translate([0,-105,0])cube([200,200,200],center=true);}
+difference(){
+    fanDuct(dH=30,dD=80);
+    translate([0,105,0])cube([200,200,200],center=true);
+    translate([0,-105,0])cube([200,200,200],center=true);}
 
-fanDuct();
+//fanDuct();

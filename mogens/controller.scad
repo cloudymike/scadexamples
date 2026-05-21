@@ -22,7 +22,7 @@ module controller(
     
     width=70;
     tabWidth=15;
-    tabThick=2;
+    tabThick=3;
     lip=5;
     
 
