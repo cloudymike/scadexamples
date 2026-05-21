@@ -1,5 +1,6 @@
 use <outlet.scad>
 use <controller.scad>
+use <duct.scad>
 
 
 thickness=wallThickness();
