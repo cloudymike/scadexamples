@@ -5,7 +5,7 @@ function ringHeight() = 10;
 function outerD() = 54.8;
 function outletD()= outerD()-2*thickness;
 
-module outlet()
+module budOutlet()
 {
 
     notchX=6;
@@ -28,4 +28,31 @@ module outlet()
 
 
 
-outlet();
+module louveredOutlet()
+{
+    tabringD=54.5;
+    tabThick=1;
+    tubeD = 51;
+    tubeHeight=10;
+    innerD = tubeD-2*thickness;
+    narrowHeight=5;
+    difference()
+    {
+        union()
+        {
+            // tab ring
+            translate([0,0,-tubeHeight/2+tabThick/2])cylinder(h=tabThick,d=tabringD,center=true, $fn=128);
+            //match standard ring, not needed but nice
+            //translate([0,0,(tubeHeight-narrowHeight)/2])cylinder(h=tubeHeight-narrowHeight,d=outerD(),center=true,$fn=128);
+            // The main tube
+            cylinder(h=tubeHeight,d=tubeD,center=true, $fn=128);
+        }
+        cylinder(h=tubeHeight,d=innerD,center=true, $fn=128);
+        translate([0,0,-tubeHeight/2+tabThick/2])cube([tabringD,20,tabThick],center=true);
+    }
+}
+
+
+
+
+louveredOutlet();

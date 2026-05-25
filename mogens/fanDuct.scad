@@ -22,7 +22,7 @@ union()
     outX=dD/2-OutletD/2-2;
     translate([0,35,27/2-dH/2])controller(depth=dD);
     translate([0,-dL/2,0])duct(length=dL,ductHeight=dH,ductDepth=dD,outX=outX);
-    translate([outX,-(dL+outletH/2),0])rotate([90,90,0])outlet();
+    translate([outX,-(dL+outletH/2),0])rotate([90,90,0])budOutlet();
 }
 
 }
