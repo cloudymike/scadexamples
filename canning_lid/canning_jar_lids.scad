@@ -14,7 +14,7 @@
 // You'll need to change the path to work with your particular file system
 use <round_threads.scad>
 
-module canning_jar_lid (jar_size="narrow") {
+module canning_jar_lid (jar_size="narrow", top_thickness=1) {
 
     fast_computer = true;   // Simplify to save compute time
 
@@ -42,7 +42,6 @@ module canning_jar_lid (jar_size="narrow") {
     pitch = 0.25 * 25.4;  // Thread pitch
     thread_length = 16;   // Length of threaded section
     thickness = 1;        // Wall thickness
-    top_thickness = 1;        // Wall thickness
     rounding = 3;         // Bevel radius
     total_height = thread_length + top_thickness;
 
