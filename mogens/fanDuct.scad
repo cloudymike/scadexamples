@@ -29,7 +29,7 @@ union()
 
 
 difference(){
-    fanDuct(dH=30,dD=80);
+    fanDuct(dH=30,dD=40);
     translate([0,105,0])cube([200,200,200],center=true);
     translate([0,-105,0])cube([200,200,200],center=true);}
 
