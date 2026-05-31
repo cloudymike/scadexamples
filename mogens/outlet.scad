@@ -33,7 +33,7 @@ module louveredOutlet()
     tabringD=54.5;
     tabThick=1;
     tubeD = 51;
-    tubeHeight=10;
+    tubeHeight = ringHeight();
     innerD = tubeD-2*thickness;
     narrowHeight=5;
     difference()
@@ -43,7 +43,7 @@ module louveredOutlet()
             // tab ring
             translate([0,0,-tubeHeight/2+tabThick/2])cylinder(h=tabThick,d=tabringD,center=true, $fn=128);
             //match standard ring, not needed but nice
-            //translate([0,0,(tubeHeight-narrowHeight)/2])cylinder(h=tubeHeight-narrowHeight,d=outerD(),center=true,$fn=128);
+            translate([0,0,(tubeHeight-narrowHeight)/2])cylinder(h=tubeHeight-narrowHeight,d=outerD(),center=true,$fn=128);
             // The main tube
             cylinder(h=tubeHeight,d=tubeD,center=true, $fn=128);
         }
