@@ -51,7 +51,7 @@ module controller(
         }
         
     // knurl hole   
-    translate([-depth/2+7,-width/2+knurlDepth/2+tabThick,height/2-15])rotate([90,0,0])m5knurl_pocket(knurlDepth);
+    translate([-depth/2+6,-width/2+knurlDepth/2+tabThick,height/2-15])rotate([90,0,0])m5knurl_pocket(knurlDepth);
     }
 
     //lips
