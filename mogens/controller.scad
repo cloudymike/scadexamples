@@ -7,6 +7,7 @@ function controllerHeight()=27;
 
 thickness=wallThickness();
 height=controllerHeight();
+oozeMargin=0.2;
  
 module right_angle_prism(l, w, h) {
     linear_extrude(height = h) {
@@ -19,7 +20,7 @@ module controller(
     depth=65
 )
 {
-    width=70;
+    width=70+2*(thickness+oozeMargin);
     tabWidth=15;
     tabThick=3;
     lip=5;
