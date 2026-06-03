@@ -66,6 +66,7 @@ controller(80);
     //translate([0,30,0])cube([100,100,100],center=true);
     //translate([50,0,0])cube([100,100,100],center=true);
     //translate([34,0,50])cube([100,100,100],center=true);
+    translate([-20,0,0])cube([100,100,100],center=true);
 }
 
 

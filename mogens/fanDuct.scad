@@ -33,11 +33,26 @@ difference(){
     translate([0,105,0])cube([200,200,200],center=true);
     translate([0,-105,0])cube([200,200,200],center=true);}
 */
+/*
+difference(){
+    dL=50;
+fanDuct(
+    dL=dL,
+    dH=100,
+    dD=110
+);
+    translate([0,-dL/2-10,0])cube([200,dL,200],center=true);
+}
+*/
 
 difference(){
     dL=50;
-    fanDuct();
-    translate([0,-dL/2-10,0])cube([200,dL,200],center=true);
+fanDuct(
+    dL=dL,
+    dH=100,
+    dD=110
+);
+    translate([0,70,0])cube([200,200,200],center=true);
 }
 
 
