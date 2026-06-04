@@ -9,7 +9,7 @@ height=controllerHeight();
 
 
 module fanDuct(
-    dL=50,
+    dL=30,
     dH=80,
     dD=110,
 )
@@ -44,9 +44,9 @@ fanDuct(
     translate([0,-dL/2-10,0])cube([200,dL,200],center=true);
 }
 */
-
+/*
 difference(){
-    dL=50;
+    dL=30;
 fanDuct(
     dL=dL,
     dH=100,
@@ -54,6 +54,6 @@ fanDuct(
 );
     translate([0,70,0])cube([200,200,200],center=true);
 }
+*/
 
-
-//fanDuct();
+fanDuct();
