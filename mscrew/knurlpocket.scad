@@ -40,15 +40,4 @@ module Mknurl_pocket(knurl_depth = 5,Msize=5)
  }
 }
 
-module m5knurl_ring(knurl_depth = 5)
-{
-    Msize=5;
-    Mknurl_ring(knurl_depth, Msize);
-}
-module m5knurl_pocket(knurl_depth = 5)
-{
-    Msize=5;
-    Mknurl_pocket(knurl_depth, Msize);
-}
-
 Mknurl_ring(5,4);
