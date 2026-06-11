@@ -1,5 +1,5 @@
 use <outlet.scad>
-use <../kegtower/knurlpocket.scad>
+use <../mscrew/knurlpocket.scad>
 
 function wallThickness()=1;
 function controllerHeight()=27;
@@ -52,7 +52,7 @@ module controller(
         }
         
     // knurl hole   
-    translate([-depth/2+6.5,-width/2+knurlDepth/2+tabThick,height/2-15])rotate([90,0,0])m5knurl_pocket(knurlDepth);
+    translate([-depth/2+6.5,-width/2+knurlDepth/2+tabThick,height/2-15])rotate([90,0,0])Mknurl_pocket(knurlDepth,4);
     }
 
     //lips
@@ -66,7 +66,7 @@ controller(80);
     //translate([0,30,0])cube([100,100,100],center=true);
     //translate([50,0,0])cube([100,100,100],center=true);
     //translate([34,0,50])cube([100,100,100],center=true);
-    translate([-20,0,0])cube([100,100,100],center=true);
+    //translate([-20,0,0])cube([100,100,100],center=true);
 }
 
 

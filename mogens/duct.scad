@@ -6,7 +6,7 @@ thickness=wallThickness();
 height=controllerHeight();
 
 
-module ductNoholes(length=20,ductHeight=27,ductDepth=65)
+module ductAngleTop(length=20,ductHeight=27,ductDepth=65)
 {
     angleRight=(ductHeight-thickness/2);
     angleSide=angleRight*sqrt(2);
@@ -20,11 +20,7 @@ module ductNoholes(length=20,ductHeight=27,ductDepth=65)
         //back wall at 45 angle
       translate([-ductDepth/2-ductHeight/2,length/2,-ductHeight/2])rotate([90,0,0])right_angle_prism(ductHeight,ductHeight, length);
     translate([-ductDepth/2-ductHeight/2,length/2,ductHeight/2])rotate([90,90,0])right_angle_prism(ductHeight,ductHeight, length);
- 
   }
-   
-        
-
 
    difference()
    {
@@ -40,17 +36,33 @@ module ductNoholes(length=20,ductHeight=27,ductDepth=65)
     
 }
 
+module ductFlatTop(length=20,ductHeight=27,ductDepth=65)
+{
+    angleRight=(ductHeight-thickness/2);
+    angleSide=angleRight*sqrt(2);
+    assert(length<=35,"Length is to large to bridge");
+    tabCut=15;
+
+    translate([tabCut/2,0,0])cube([ductDepth-tabCut,length,ductHeight],center=true);   
+  }
+   
+
 module duct(
     length=20,
     ductHeight=27,
     outX=30,
     outZ=0,
     ductDepth=65,
+    top="flat"
     )
 {
     difference()
     {
-        ductNoholes(length,ductHeight,ductDepth);
+        if(top=="flat")
+            ductFlatTop(length,ductHeight,ductDepth);
+        else    
+            ductAngleTop(length,ductHeight,ductDepth);
+        
         inX=ductDepth/2;
         inZ=height;
         translate([inX/2-2*thickness,length/2,-ductHeight/2+inZ/2+thickness])cube([inX,length,inZ],center=true);
@@ -64,4 +76,8 @@ module duct(
 
 }
 
-duct(length=50,ductHeight=80,ductDepth=110,outX=55-outletD()/2-2);
+duct(length=30,ductHeight=80,ductDepth=110,outX=55-outletD()/2-2);
+//ductFlatTop(length=20,ductHeight=27,ductDepth=65);
+
+
+

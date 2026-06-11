@@ -1,7 +1,7 @@
 
 thickness=1;
 
-function ringHeight() = 10;
+function ringHeight() = 20;
 function outerD() = 54.8;
 function outletD()= outerD()-2*thickness;
 
@@ -11,7 +11,7 @@ module budOutlet()
     notchX=6;
     notchY=1;
     notchz=1.6;
-    notchOffset=0;
+    notchOffset=ringHeight()/2-5;
     
     
     difference()
@@ -53,6 +53,12 @@ module louveredOutlet()
 }
 
 
+module outlet(style="bud")
+{
+    if (style=="bud")
+        budOutlet();
+    else
+        louveredOutlet();
+}
 
-
-louveredOutlet();
+outlet();
