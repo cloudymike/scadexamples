@@ -6,6 +6,7 @@ thickness=wallThickness();
 height=controllerHeight();
 
 
+
 module ductAngleTop(length=20,ductHeight=27,ductDepth=65)
 {
     angleRight=(ductHeight-thickness/2);
@@ -38,12 +39,14 @@ module ductAngleTop(length=20,ductHeight=27,ductDepth=65)
 
 module ductFlatTop(length=20,ductHeight=27,ductDepth=65)
 {
-    angleRight=(ductHeight-thickness/2);
-    angleSide=angleRight*sqrt(2);
     assert(length<=35,"Length is to large to bridge");
     tabCut=15;
 
-    translate([tabCut/2,0,0])cube([ductDepth-tabCut,length,ductHeight],center=true);   
+    difference()
+    {
+        translate([tabCut()/2,0,0])cube([ductDepth-tabCut(),length,ductHeight],center=true);   
+        translate([tabCut()/2,0,0])cube([ductDepth-tabCut()-2*thickness,length-2*thickness,ductHeight-2*thickness],center=true);
+    }
   }
    
 
@@ -76,8 +79,54 @@ module duct(
 
 }
 
-duct(length=30,ductHeight=80,ductDepth=110,outX=55-outletD()/2-2);
-//ductFlatTop(length=20,ductHeight=27,ductDepth=65);
+module sleeve(
+    length=20,
+    ductDepth=27,
+    overlap=10)
+{
+    
+    difference()
+    {
+        union()
+        {
+            translate([tabCut()/2,0,-overlap/2])cube([ductDepth-tabCut()-thickness*2,length-thickness*2,overlap],center=true);   
+            translate([tabCut()/2,0,overlap/2])cube([ductDepth-tabCut(),length,overlap],center=true); 
+        }  
+        translate([tabCut()/2,0,0])cube([ductDepth-tabCut()-thickness*4,length-thickness*4,overlap*2],center=true);
+    }
+    // translate([tabCut()/2,length/2,-overlap/2])cube([ductDepth-tabCut()-thickness*2,thickness,0.2],center=true);
+}
 
+
+module splitDuct(
+    length=20,
+    ductHeight=180,
+    outX=0,
+    outZ=60,
+    ductDepth=110,
+    overlap=10,
+    top="flat",
+    splitSide="controller"
+    )
+{
+    largeCut=200;
+    splitX=ductDepth/2;
+    
+    difference()
+    {
+        duct(length, ductHeight, outX, outZ, ductDepth, top);
+        if (splitSide=="controller")
+            translate([0,0,ductHeight/2])cube([largeCut,largeCut,ductHeight,],center=true);
+        if (splitSide=="outlet")
+            translate([0,0,-ductHeight/2])cube([largeCut,largeCut,ductHeight,],center=true);
+
+    }
+    if (splitSide=="outlet")
+        translate([0,0,0])sleeve(length, ductDepth,10);          
+}
+//duct(length=30,ductHeight=80,ductDepth=110,outX=55-outletD()/2-2);
+//ductFlatTop(length=20,ductHeight=27,ductDepth=65);
+splitDuct(splitSide="outlet");
+//sleeve(20,110,10);
 
 
