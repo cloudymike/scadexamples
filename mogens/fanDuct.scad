@@ -22,7 +22,7 @@ module fanDuct(
         outletH=ringHeight();
         OutletD=outletD();
         outX=dD/2-OutletD/2-2;
-        outZ=dH/2-OutletD/2-2;
+        outZ=dH/2-OutletD/2-thickness;
         //translate([0,-dL/2,0])duct(length=dL,ductHeight=dH,ductDepth=dD,outX=outX, outZ=outZ);
         translate([0,-dL/2,0])splitDuct(length=dL,ductHeight=dH,ductDepth=dD,outX=outX, outZ=outZ,top="flat", splitSide=splitSide);
 
@@ -45,9 +45,9 @@ difference(){
 difference(){
 fanDuct(
     totalDuctLengthL=50,
-    dH=180,
-    dD=110,
-    splitSide="None"
+    dH=190,
+    dD=80,
+    splitSide="outlet"
 );
     //translate([-50,0,0])cube([200,200,200],center=true);
 }
