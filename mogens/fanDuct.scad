@@ -49,7 +49,7 @@ fanDuct(
     dD=80,
     splitSide="outlet"
 );
-    //translate([-50,0,0])cube([200,200,200],center=true);
+//    translate([-50,0,110])cube([200,200,200],center=true);
 }
 
 /*

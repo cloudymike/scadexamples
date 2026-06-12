@@ -89,7 +89,7 @@ module sleeve(
     {
         union()
         {
-            translate([tabCut()/2,0,-overlap/2])cube([ductDepth-tabCut()-thickness*2,length-thickness*2,overlap],center=true);   
+            translate([tabCut()/2,0,-overlap/2])cube([ductDepth-tabCut()-(thickness+oozeMargin())*2,length-(thickness+oozeMargin())*2,overlap],center=true);   
             translate([tabCut()/2,0,overlap/2])cube([ductDepth-tabCut(),length,overlap],center=true); 
         }  
         translate([tabCut()/2,0,0])cube([ductDepth-tabCut()-thickness*4,length-thickness*4,overlap*2],center=true);
