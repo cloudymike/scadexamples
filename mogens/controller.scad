@@ -5,6 +5,7 @@ function wallThickness()=1;
 function controllerHeight()=27;
 function oozeMargin()=0.2;
 function tabCut()=15;
+function controllerWidth()=70;
 
 thickness=wallThickness();
 height=controllerHeight();
@@ -22,7 +23,7 @@ module controller(
     depth=65
 )
 {
-    width=70+2*(thickness+oozeMargin);
+    width=controllerWidth()+2*(thickness+oozeMargin);
     
     tabThick=3;
     lip=5;

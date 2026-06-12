@@ -3,6 +3,7 @@
 use <controller.scad>
 
 function screwTabWidth()=16; 
+function screwTabThick()=2; 
  
 module right_angle_prism(l, w, h) {
     linear_extrude(height = h) {
@@ -14,7 +15,7 @@ module screwtab(tabHeight=20)
 {
     tabX=21;
     tabY=screwTabWidth();
-    tabThick=2;
+    tabThick=screwTabThick();
     screwD=5;
     screwHeadD=10;
 
@@ -29,6 +30,8 @@ module screwtab(tabHeight=20)
     
     translate([tabThick,tabY/2,tabThick])rotate([90,0,0])right_angle_prism(tabX-tabThick,tabHeight-tabThick,tabThick);
     translate([tabThick,-tabY/2+tabThick,tabThick])rotate([90,0,0])right_angle_prism(tabX-tabThick,tabHeight-tabThick,tabThick);
+
+    translate([tabX/2,0,tabThick-0.1])cube([tabX,tabY,0.2],center=true);
     
 }
 
