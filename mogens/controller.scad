@@ -3,11 +3,13 @@ use <../mscrew/knurlpocket.scad>
 
 function wallThickness()=1;
 function controllerHeight()=27;
-
+function oozeMargin()=0.2;
+function tabCut()=15;
 
 thickness=wallThickness();
 height=controllerHeight();
-oozeMargin=0.2;
+oozeMargin=oozeMargin();
+tabWidth=tabCut();
  
 module right_angle_prism(l, w, h) {
     linear_extrude(height = h) {
@@ -21,7 +23,7 @@ module controller(
 )
 {
     width=70+2*(thickness+oozeMargin);
-    tabWidth=15;
+    
     tabThick=3;
     lip=5;
     
