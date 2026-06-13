@@ -1,6 +1,7 @@
 use <outlet.scad>
 use <controller.scad>
 use <duct.scad>
+use <screwtab.scad>
 
 
 thickness=wallThickness();
@@ -16,23 +17,21 @@ module fanDuct(
 )
 {
     dL=totalDuctLengthL-ringHeight();
-    union()
-    {
-        // Use a function call to get this number later
-        outletH=ringHeight();
-        OutletD=outletD();
-        outX=dD/2-OutletD/2-2;
-        outZ=dH/2-OutletD/2-thickness;
-        //translate([0,-dL/2,0])duct(length=dL,ductHeight=dH,ductDepth=dD,outX=outX, outZ=outZ);
-        translate([0,-dL/2,0])splitDuct(length=dL,ductHeight=dH,ductDepth=dD,outX=outX, outZ=outZ,top="flat", splitSide=splitSide);
+    outletH=ringHeight();
+    OutletD=outletD();
+    outX=dD/2-OutletD/2-2;
+    outZ=dH/2-OutletD/2-thickness;
 
-        if (splitSide!="outlet")
-            translate([0,35,27/2-dH/2])controller(depth=dD);
+    translate([0,-dL/2,0])splitDuct(length=dL,ductHeight=dH,ductDepth=dD,outX=outX, outZ=outZ,top="flat", splitSide=splitSide);
 
-        if (splitSide!="controller")
-            translate([outX,-(dL+outletH/2),outZ])rotate([90,90,0])budOutlet();
-    }
+    if (splitSide!="outlet")
+        translate([0,controllerWidth()/2,27/2-dH/2])controller(depth=dD);
 
+    if (splitSide!="controller")
+        translate([outX,-(dL+outletH/2),outZ])rotate([90,90,0])budOutlet();
+
+    //Screw tabs
+    translate([-8-dD/2,controllerWidth()-screwTabThick()/2,screwTabWidth()/2-dH/2])rotate([90,0,90])screwtab();
 }
 
 /*
@@ -47,7 +46,7 @@ fanDuct(
     totalDuctLengthL=50,
     dH=190,
     dD=80,
-    splitSide="outlet"
+    splitSide="controller"
 );
 //    translate([-50,0,110])cube([200,200,200],center=true);
 }
