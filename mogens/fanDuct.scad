@@ -34,7 +34,8 @@ module fanDuct(
     //Screw tabs
     translate([-ABBbacktab-dD/2,controllerWidth(),0-dH/2+controllerHeight()/2])rotate([90,0,90])screwtab();
     tab2height=ABBbacktab+tabCut()+10;
-    translate([-dD/2-ABBbacktab,-dL+thickness,0])rotate([-90,0,-90])screwtab(tab2height);
+    //translate([-dD/2-ABBbacktab,-dL+thickness,0])rotate([-90,0,-90])screwtab(tab2height);
+    translate([-dD/2-ABBbacktab,-dL/2,dH/2-thickness])rotate([0,-90,180])screwtab(tab2height);
 }
 
 difference(){
