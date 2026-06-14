@@ -21,6 +21,7 @@ module fanDuct(
     OutletD=outletD();
     outX=dD/2-OutletD/2-thickness;
     outZ=dH/2-OutletD/2-thickness;
+    ABBbacktab=8;
 
     translate([0,-dL/2,0])splitDuct(length=dL,ductHeight=dH,ductDepth=dD,outX=outX, outZ=outZ,top="flat", splitSide=splitSide);
 
@@ -31,21 +32,15 @@ module fanDuct(
         translate([outX,-(dL+outletH/2),outZ])rotate([90,0,0])budOutlet();
 
     //Screw tabs
-    translate([-8-dD/2,controllerWidth(),0-dH/2+controllerHeight()/2])rotate([90,0,90])screwtab();
-    //translate([-8-dD/2,0,0])rotate([0,0,0])screwtab();
+    translate([-ABBbacktab-dD/2,controllerWidth(),0-dH/2+controllerHeight()/2])rotate([90,0,90])screwtab();
+    tab2height=ABBbacktab+tabCut()+10;
+    translate([-dD/2-ABBbacktab,-dL+thickness,0])rotate([-90,0,-90])screwtab(tab2height);
 }
-
-/*
-difference(){
-    fanDuct(dH=30,dD=40);
-    translate([0,105,0])cube([200,200,200],center=true);
-    translate([0,-105,0])cube([200,200,200],center=true);}
-*/
 
 difference(){
 fanDuct(
     totalDuctLengthL=50,
-    dH=190,
+    dH=200,
     dD=80,
     splitSide="None"
 );
@@ -55,7 +50,8 @@ fanDuct(
 /*
 fanDuct(
     totalDuctLengthL=50,
-    dH=150,
-    dD=110
+    dH=200,
+    dD=80,
+    splitSide="None"
 );
 */
