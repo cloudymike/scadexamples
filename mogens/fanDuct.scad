@@ -19,7 +19,7 @@ module fanDuct(
     dL=totalDuctLengthL-ringHeight();
     outletH=ringHeight();
     OutletD=outletD();
-    outX=dD/2-OutletD/2-2;
+    outX=dD/2-OutletD/2-thickness;
     outZ=dH/2-OutletD/2-thickness;
 
     translate([0,-dL/2,0])splitDuct(length=dL,ductHeight=dH,ductDepth=dD,outX=outX, outZ=outZ,top="flat", splitSide=splitSide);
@@ -28,10 +28,11 @@ module fanDuct(
         translate([0,controllerWidth()/2,27/2-dH/2])controller(depth=dD);
 
     if (splitSide!="controller")
-        translate([outX,-(dL+outletH/2),outZ])rotate([90,90,0])budOutlet();
+        translate([outX,-(dL+outletH/2),outZ])rotate([90,0,0])budOutlet();
 
     //Screw tabs
     translate([-8-dD/2,controllerWidth()-screwTabThick()/2,screwTabWidth()/2-dH/2])rotate([90,0,90])screwtab();
+    //translate([-8-dD/2,0,0])rotate([0,0,0])screwtab();
 }
 
 /*
@@ -46,7 +47,7 @@ fanDuct(
     totalDuctLengthL=50,
     dH=190,
     dD=80,
-    splitSide="controller"
+    splitSide="None"
 );
 //    translate([-50,0,110])cube([200,200,200],center=true);
 }
