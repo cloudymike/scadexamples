@@ -26,10 +26,12 @@ module screwtab(tabHeight=20)
         translate([tabX-1.5*screwD-screwHeadD/2,0,0])cylinder(d=screwHeadD,h=4*tabThick,center=true, $fn=64);
         translate([tabX-1.5*screwD,0,0])cube([screwD,screwD,4*tabThick],center=true);
     }
-    translate([tabThick/2,0,tabHeight/2])cube([tabThick,tabY,tabHeight],center=true);
     
-    translate([tabThick,tabY/2,tabThick])rotate([90,0,0])right_angle_prism(tabX-tabThick,tabHeight-tabThick,tabThick);
-    translate([tabThick,-tabY/2+tabThick,tabThick])rotate([90,0,0])right_angle_prism(tabX-tabThick,tabHeight-tabThick,tabThick);
+    //backwall
+    translate([wallThickness()/2,0,tabHeight/2])cube([wallThickness(),tabY,tabHeight],center=true);
+    
+    translate([wallThickness(),tabY/2,tabThick])rotate([90,0,0])right_angle_prism(tabX-wallThickness(),tabHeight-tabThick,tabThick);
+    translate([wallThickness(),-tabY/2+tabThick,tabThick])rotate([90,0,0])right_angle_prism(tabX-wallThickness(),tabHeight-tabThick,tabThick);
 
     translate([tabX/2,0,tabThick-0.1])cube([tabX,tabY,0.2],center=true);
     

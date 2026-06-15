@@ -1,7 +1,7 @@
 
 thickness=1;
 
-function ringHeight() = 20;
+function ringHeight() = 30;
 function outerD() = 54.8;
 function outletD()= outerD()-2*thickness;
 
