@@ -3,6 +3,8 @@ use <controller.scad>
 use <duct.scad>
 use <screwtab.scad>
 
+// Experimental, try turn outlet 2 degrees
+turnOutlet=false;
 
 thickness=wallThickness();
 height=controllerHeight();
@@ -29,7 +31,20 @@ module fanDuct(
         translate([0,controllerWidth()/2,controllerHeight()/2-dH/2])controller(depth=dD);
 
     if (splitSide!="controller")
-        translate([outX,-(dL+outletH/2),outZ])rotate([90,0,0])budOutlet();
+        if (turnOutlet)
+        {
+            difference ()
+            {
+                // Outlet with 2 degrees turn
+                translate([outX,-(dL+outletH/2)+1,outZ])rotate([90,0,-2])budOutlet();
+                //Shave off ring to get aligned with bottom
+                translate([outX+OutletD/2+thickness+1,0,0])cube([2,200,200],center=true);
+            }
+            //support strip
+            translate([outX+OutletD/2+thickness/2,-(dL+outletH/2),outZ])cube([thickness,outletH,0.2],center=true);
+        }
+        else
+           translate([outX,-(dL+outletH/2),outZ])rotate([90,0,0])budOutlet();
 
     //Screw tabs
     translate([-ABBbacktab-dD/2,controllerWidth(),0-dH/2+controllerHeight()/2])rotate([90,0,90])screwtab();
@@ -44,7 +59,8 @@ fanDuct(
     dD=80,
     splitSide="None"
 );
-//    translate([-50,0,110])cube([200,200,200],center=true);
+    translate([-80,0,0])cube([200,400,400],center=true);
+    translate([0,0,-180])cube([400,400,400],center=true);
 }
 
 /*
