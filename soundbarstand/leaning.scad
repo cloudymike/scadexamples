@@ -27,16 +27,18 @@ module foot()
 
 module supportWall()
 {
-    supportThickness=0.3;
+    supportThickness=0.4;
     translate([0,supportThickness/2,0])rotate([90,0,0])right_angle_prism(11*cos(leanDegree),11*sin(leanDegree),supportThickness);
     translate([11/2,0,-10])cube([11,supportThickness,20],center=true);
 }
-module leaningFoot()
+module leaningFoot(side="left")
 {
+    hangOffset = (side=="left") ? -12 : 12;
+        
     back();
     knobAdjust=5;
-    translate([hangHeight*sin(leanDegree)/2-knobAdjust,0,cos(leanDegree)*hangHeight])rotate([0,leanDegree-90,0])screwhang();
-    translate([hangHeight*sin(leanDegree)/2-15,0,cos(leanDegree)*hangHeight-2])supportWall();
+    translate([hangHeight*sin(leanDegree)/2-knobAdjust,hangOffset,cos(leanDegree)*hangHeight])rotate([0,leanDegree-90,0])screwhang();
+    translate([hangHeight*sin(leanDegree)/2-15,hangOffset,cos(leanDegree)*hangHeight-2])supportWall();
     foot();
     
 
@@ -44,7 +46,7 @@ module leaningFoot()
 
 difference()
 {
-leaningFoot();
+leaningFoot(side="right");
 //    translate([0,-102,0])cube([200,200,300],center=true);
 //    translate([0,100.2,0])cube([200,200,300],center=true);
 }
