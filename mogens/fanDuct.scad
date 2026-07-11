@@ -39,7 +39,7 @@ module fanDuct(
 
 difference(){
 fanDuct(
-    totalDuctLengthL=60,
+    totalDuctLengthL=52,
     dH=190,
     dD=80,
     splitSide="None"
