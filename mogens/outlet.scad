@@ -1,7 +1,7 @@
 
 thickness=1;
 
-function ringHeight() = 30;
+function ringHeight() = 22;
 function outerD() = 54.8;
 function outletD()= outerD()-2*thickness;
 
@@ -19,11 +19,13 @@ module budOutlet()
         cylinder(h=ringHeight(),d=outerD(),center=true, $fn=128);
         cylinder(h=ringHeight(),d=outletD(),center=true, $fn=128);       
     }
-    translate([0,outerD()/2-thickness/2,notchOffset])cube([notchX,thickness,notchz],center=true);
-    translate([0,outerD()/2+notchY/2,notchOffset])cube([notchX,notchY,notchz],center=true);
+    
+    //Notches
+    //translate([0,outerD()/2-thickness/2,notchOffset])cube([notchX,thickness,notchz],center=true);
+    //translate([0,outerD()/2+notchY/2,notchOffset])cube([notchX,notchY,notchz],center=true);
 
-    translate([0,-outerD()/2+thickness/2,notchOffset])cube([notchX,thickness,notchz],center=true);
-    translate([0,-outerD()/2-notchY/2,notchOffset])cube([notchX,notchY,notchz],center=true);
+    //translate([0,-outerD()/2+thickness/2,notchOffset])cube([notchX,thickness,notchz],center=true);
+    //translate([0,-outerD()/2-notchY/2,notchOffset])cube([notchX,notchY,notchz],center=true);
 }
 
 
