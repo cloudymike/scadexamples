@@ -43,4 +43,4 @@ module fanballcutout(length)
     translate([0,0,length])sphere(d=fanD);
 }
 
-fanball(10);
+fanring(10);
