@@ -19,4 +19,28 @@ module fancutout(length)
         cylinder(d=fanD, h=length);
 }
 
-fanring(5);
+module halfball()
+{
+    ballD=fanD;
+    difference()
+    {
+        sphere(d=ballD+2*thickness);
+        sphere(d=ballD);
+        translate([0,0,-100])cube([200,200,200],center=true);
+    }
+   
+}
+
+module fanball(length)
+{
+    fanring(length);
+    translate([0,0,length])halfball();
+}
+
+module fanballcutout(length)
+{
+    fancutout(length);
+    translate([0,0,length])sphere(d=fanD);
+}
+
+fanball(10);

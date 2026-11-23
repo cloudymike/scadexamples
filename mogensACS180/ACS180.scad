@@ -51,24 +51,25 @@ module screwFlap()
 module ACS180(ductLength=9)
 {
     sideLength=ductLength+ctrlNotch;
-
-    difference()
-    {
-        cube([ctrlWidth+2*thickness,fanHeight+2*thickness,sideLength],center=true);
-        
-        cube([ctrlWidth,fanHeight,sideLength],center=true);
-        translate([0,0,ductLength/2])cube([ctrlWidth,fanHeight+2*thickness,ctrlNotch],center=true);
-        translate([thickness,fanHeight/2-bottomNotch/2+thickness,ductLength/2])cube([ctrlWidth,bottomNotch,ctrlNotch],center=true);
-        
-    }
     
+    translate([0,0,sideLength/2])
+    union()
+    {
+        difference()
+        {
+            cube([ctrlWidth+2*thickness,fanHeight+2*thickness,sideLength],center=true);
+            
+            translate([0,0,thickness])cube([ctrlWidth,fanHeight,sideLength-thickness],center=true);
+            translate([0,0,ductLength/2])cube([ctrlWidth,fanHeight+2*thickness,ctrlNotch],center=true);
+            translate([thickness,fanHeight/2-bottomNotch/2+thickness,ductLength/2])cube([ctrlWidth,bottomNotch,ctrlNotch],center=true);   
+        }
     translate([ctrlWidth/2,fanHeight/2-bottomNotch/2-thickness,sideLength/2])screwFlap();
-
+    }
 }
 
-module boxcutout(Length=20)
+module ACS180cutout(Length=20)
 {
-   cube([ctrlWidth+2*thickness,fanHeight+2*thickness,Length],center=true);
+   translate([0,0,Length/2])cube([ctrlWidth+2*thickness,fanHeight+2*thickness,Length],center=true);
 }
 
 ACS180();

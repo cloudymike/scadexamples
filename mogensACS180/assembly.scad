@@ -3,7 +3,8 @@ use <funnel.scad>
 use <fanring.scad>
 
 boxL=50;
-ACS180L=50;
+ACS180L=100;
+fanringL=10;
 
 acsXoffset=19;
 acsYoffset=35;
@@ -13,25 +14,15 @@ Zadjust=8; //ctrlNotch
 
 thickness=1;
 
-module connectorbox(length=50)
-{
-    Xsize=110;
-    Ysize=130;
-    translate([0,0,length/2])
-    difference()
-    {
-        cube([Xsize,Ysize,length],center=true);
-        cube([Xsize-thickness*2,Ysize-thickness*2,length-thickness*2],center=true);
-    }
-}
-
 
 difference()
 {
-    connectorbox(boxL);
-    translate([fanXoffset,fanYoffset,0])fancutout();
-    translate([acsXoffset,acsYoffset,boxL])boxcutout();
+    translate([fanXoffset,fanYoffset,0])fanball(fanringL);
+    translate([acsXoffset,acsYoffset,0])ACS180cutout(ACS180L);
+}
+difference()
+{
+    translate([acsXoffset,acsYoffset,0])ACS180(ACS180L);
+    translate([fanXoffset,fanYoffset,0])fanballcutout(fanringL);
 }
 
-translate([fanXoffset,fanYoffset,0])fanring(10);
-translate([acsXoffset,acsYoffset,boxL+ACS180L/2])ACS180(ACS180L);
