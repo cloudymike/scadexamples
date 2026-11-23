@@ -3,7 +3,7 @@ $fn=64;
 
 thickness=1;
 //ductLength=50;
-ductLength=9;
+//ductLength=9;
 ctrlWidth=60.5;
 fanHeight=55.2;
 ctrlNotch=8;
@@ -11,7 +11,6 @@ bottomNotch=4.5;
 sideNotch=9;
 screwHoleD=5;
 
-sideLength=ductLength+ctrlNotch;
 
 //right angled triangle
 //l - length of prism
@@ -49,8 +48,9 @@ module screwFlap()
 
 
 
-module ACS180()
+module ACS180(ductLength=9)
 {
+    sideLength=ductLength+ctrlNotch;
 
     difference()
     {
@@ -64,6 +64,11 @@ module ACS180()
     
     translate([ctrlWidth/2,fanHeight/2-bottomNotch/2-thickness,sideLength/2])screwFlap();
 
+}
+
+module boxcutout(Length=20)
+{
+   cube([ctrlWidth+2*thickness,fanHeight+2*thickness,Length],center=true);
 }
 
 ACS180();
