@@ -1,5 +1,7 @@
 use <prism.scad>
 
+$fn=64;
+
 thickness=1;
 height=3.72-thickness;
 ctrlWidth=60.5;
@@ -11,7 +13,7 @@ barX=-9;
 plateWidth=ctrlWidth+2*thickness;
 
 
-module basemount(length=70)
+module bmx(length=70)
 {
     cube([plateWidth,length, height],center=true);
 
@@ -30,5 +32,9 @@ module basemount(length=70)
     translate([-plateWidth/2,barY-screwMargin/2,+height/2])rotate([90,180,0])prism(height,leftPrismX,leftPrismY);
 }
 
+module basemount(length=70)
+{
+    rotate([90,0,0])bmx(length);
+}
 
 basemount(100);
