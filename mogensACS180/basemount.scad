@@ -2,8 +2,10 @@ use <prism.scad>
 
 $fn=64;
 
+function baseHeight()=3.72+0.5;
+
 thickness=1;
-height=3.72-thickness;
+height=baseHeight();
 ctrlWidth=60.5;
 screwHole=5;
 screwMargin=2*screwHole;
@@ -40,5 +42,5 @@ module basemount(length=70)
 difference()
 {
     basemount(60);
-    translate([0,0,10])cube([100,100,62],center=true);
+    //translate([0,0,10])cube([100,100,62],center=true);
 }

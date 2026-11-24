@@ -3,11 +3,13 @@ use <prism.scad>
 
 $fn=64;
 
+function fanHeight()=53.2;
+
 thickness=1;
 //ductLength=50;
 //ductLength=9;
 ctrlWidth=60.5;
-fanHeight=55.2;
+fanHeight=fanHeight();
 ctrlNotch=8;
 bottomNotch=4.5;
 sideNotch=9;

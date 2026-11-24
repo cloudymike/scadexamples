@@ -13,9 +13,8 @@ fanXoffset=0;
 fanYoffset=-15;
 Zadjust=8; //ctrlNotch
 
-fanHeight=55.2;
-baseHeight=3.72-thickness;
-
+fanHeight=fanHeight();
+baseHeight=baseHeight();
 
 module fanAssembly()
 {
