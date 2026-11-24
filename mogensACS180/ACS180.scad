@@ -3,7 +3,7 @@ use <prism.scad>
 
 $fn=64;
 
-function fanHeight()=53.2;
+function fanHeight()=51;
 
 thickness=1;
 //ductLength=50;

@@ -2,7 +2,7 @@ use <prism.scad>
 
 $fn=64;
 
-function baseHeight()=3.72+0.5;
+function baseHeight()=3.72+0.5+0.8;
 
 thickness=1;
 height=baseHeight();

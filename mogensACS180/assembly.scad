@@ -40,7 +40,7 @@ difference()
     
    //X offset
    //translate([0,-96,0])cube([200,200,400],center=true);  
-   //translate([0,107.0,0])cube([200,200,400],center=true);  
+   //translate([0,108.0,0])cube([200,200,400],center=true);  
     
     
    //translate([0,0,101])cube([200,200,200],center=true);  //ringheight
