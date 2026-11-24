@@ -5,13 +5,14 @@ use <basemount.scad>
 thickness=1;
 
 ACS180L=109;
-fanringL=10;
+fanringL=20;
 
-acsXoffset=19;
+acsXoffset=15;
 acsYoffset=35;
 fanXoffset=0;
 fanYoffset=-15;
 Zadjust=8; //ctrlNotch
+
 
 fanHeight=fanHeight();
 baseHeight=baseHeight();
@@ -28,8 +29,12 @@ module fanAssembly()
         translate([acsXoffset,acsYoffset,0])ACS180(ACS180L);
         translate([fanXoffset,fanYoffset,0])fanballcutout(fanringL);
     }
+    difference()
+    {
+        translate([acsXoffset,acsYoffset+fanHeight/2+baseHeight/2+thickness,ACS180L/2])basemount(ACS180L);
+        translate([fanXoffset,fanYoffset,0])fanballcutout(fanringL);
+    }
     
-    translate([acsXoffset,acsYoffset+fanHeight/2+baseHeight/2+thickness,ACS180L/2])basemount(ACS180L);
 }
 
 

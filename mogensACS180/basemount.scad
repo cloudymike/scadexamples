@@ -1,4 +1,5 @@
 use <prism.scad>
+use <ACS180.scad>
 
 $fn=64;
 
@@ -34,13 +35,30 @@ module bmx(length=70)
     translate([-plateWidth/2,barY-screwMargin/2,+height/2])rotate([90,180,0])prism(height,leftPrismX,leftPrismY);
 }
 
+module bmx2(length=70)
+{
+    barY=length/2-barFromTop;  
+    antiwarpHeight=baseHeight()+fanHeight();  
+
+    difference()
+    {
+        translate([barX,0,0])cube([holeDistance+screwMargin,length, height],center=true);
+        translate([barX+50.5,barY,0])cylinder(d=screwHole,h=2*height,center=true);
+        translate([barX-50.5,barY,0])cylinder(d=screwHole,h=2*height,center=true);
+    }
+    translate([barX,-length/2+thickness/2,antiwarpHeight/2-thickness/2])cube([holeDistance+screwMargin,thickness,antiwarpHeight],center=true);
+}
+
+
 module basemount(length=70)
 {
-    rotate([90,0,0])bmx(length);
+    rotate([90,0,0])bmx2(length);
 }
 
 difference()
 {
-    basemount(60);
+    bmx2(80);
     //translate([0,0,10])cube([100,100,62],center=true);
 }
+
+

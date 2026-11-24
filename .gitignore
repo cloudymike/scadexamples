@@ -4,3 +4,4 @@
 *.tmp
 dumplicate.csv
 *.default
+.DS_Store
