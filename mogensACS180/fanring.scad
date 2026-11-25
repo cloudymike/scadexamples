@@ -1,15 +1,20 @@
 
 $fn=64;
 
-thickness=1;
+thickness=1.6;
 fanD=94;
+extraWall=6.8;
 
 
 module fanring(length)
 {
     difference()
     {
-        cylinder(d=fanD+2*thickness, h=length);
+        union()
+        {
+            cylinder(d=fanD+2*thickness, h=length);
+            cylinder(d=fanD+2*thickness+2*extraWall,h=thickness*2);
+        }
         cylinder(d=fanD, h=length);
     }
 }

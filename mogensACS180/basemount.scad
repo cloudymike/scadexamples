@@ -12,7 +12,7 @@ screwHole=5;
 screwMargin=2*screwHole;
 holeDistance=101;
 barFromTop=56;
-barX=-9;
+barX=-5;
 plateWidth=ctrlWidth+2*thickness;
 
 
@@ -46,7 +46,7 @@ module bmx2(length=70)
         translate([barX+50.5,barY,0])cylinder(d=screwHole,h=2*height,center=true);
         translate([barX-50.5,barY,0])cylinder(d=screwHole,h=2*height,center=true);
     }
-    translate([barX,-length/2+thickness/2,antiwarpHeight/2-thickness/2])cube([holeDistance+screwMargin,thickness,antiwarpHeight],center=true);
+    translate([barX,-length/2+thickness,antiwarpHeight/2-thickness/2])cube([holeDistance+screwMargin,2*thickness,antiwarpHeight],center=true);
 }
 
 
